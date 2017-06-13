@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "That will be an another one watir-webdriver wrap"
   spec.description   = "It's nothing to describe now."
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/sseleznevqa/marta"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) } + Dir.glob("lib/marta/data/*")
