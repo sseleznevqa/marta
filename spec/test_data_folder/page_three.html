@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h1 class='element to find' id='element1' style='color: green' name='findme'>Hello World!</h1>
+    <label class='element for fun' id='element2' style='color: blue' name='findme'>Really, dude.</label>
+    <iframe id='iframe'></iframe>
+    <script>
+      setTimeout(function() { clickById('marta_confirm'); }, 1000);
+      setTimeout(function() { clickById('marta_confirm'); }, 2000);
+      function clickById(id){
+        document.getElementById(id).click()
+      }
+    </script>
+  </body>
+</html>

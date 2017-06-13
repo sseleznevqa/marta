@@ -1,0 +1,10 @@
+{"meths":{
+  "raise_raise":{"granny":{},"options":{"collection":false,"granny":"a","pappy":"b","self":"c"},"pappy":{},"self":{"class":["d","e","f","g","h","i","j","k","l","m","n","o","p","q","r"],"id":"x"}},
+  "iframe":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"IFRAME"},"pappy":{},"self":{"id":"iframe"}},
+  "correct":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","to","find"],"id":"element1"}},
+  "correct_collection":{"granny":{},"options":{"collection":true,"granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","to","find"],"id":"element1"}},
+  "xpath":{"options":{"collection":false,"xpath":"//h1"}},
+  "xpath_collection":{"options":{"collection":true,"xpath":"//h1"}},
+  "broken":{"granny":{},"options":{"collection":false,"granny":"UNKNOWN","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","UNKNOWN","find"],"id":"UNKNOWN"}},
+  "broken_collection":{"granny":{},"options":{"collection":true,"granny":"UNKNOWN","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","UNKNOWN","find"],"id":"UNKNOWN"}}
+},"vars":{"new_var":"!"}}

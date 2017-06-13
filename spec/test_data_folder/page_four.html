@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <h1 class='element to find' id='element1'>Hello World!</h1>
+    <label class='element for fun' id='element2'>Really, dude.</label>
+    <script>
+      setTimeout(function() { clickById('marta_more_fields'); }, 6000);
+      setTimeout(function() { setValueById('marta_name1', 'hello'); }, 7000);
+      setTimeout(function() { setValueById('marta_default_value1', 'world'); }, 8000);
+      setTimeout(function() { clickById('marta_confirm'); }, 9000);
+      function clickById(id){
+        document.getElementById(id).click()
+      }
+      function setValueById(id,value){
+        document.getElementById(id).value = value;
+        document.getElementById(id).change();
+      }
+    </script>
+  </body>
+</html>

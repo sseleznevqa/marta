@@ -1,0 +1,26 @@
+require 'spec_helper'
+
+describe Marta::SmartPage, :need_browser do
+
+  before(:all) do
+    @name = 'Page'
+    @full_name = "./spec/test_data_folder/test_pageobjects/#{@name}.json"
+    @data, @data['meths'], @data['vars'] = Hash.new, Hash.new, Hash.new
+    @page_four_url = "file://#{Dir.pwd}/spec/test_data_folder/page_four.html"
+    FileUtils.rm_rf(@full_name)#To be sure that we have no precreated file
+  end
+
+  it 'can perform basic page creation user story' do
+    @browser.goto @page_four_url
+    marta_fire(:page_edit, @name, @data)
+    expect(File.exists?(@full_name)).to be true
+    file = File.read(@full_name)
+    data_hash = JSON.parse(file)
+    expect(data_hash["vars"]["hello"]).to eq "world"
+    expect(Page.new.hello).to eq "world"
+  end
+
+  after(:each) do
+    FileUtils.rm_rf(@full_name)
+  end
+end

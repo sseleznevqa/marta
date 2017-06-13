@@ -1,0 +1,22 @@
+<div id=marta_s_everything martaclass=marta_smthing>
+
+  <div id=marta_s_text martaclass=marta_smthing>
+    <h2 id=marta_main_title martaclass=marta_smthing></h2>
+    <p martaclass=marta_smthing>You are about to write your own xpath.</p>
+    <p martaclass=marta_smthing>Use it when element is: invisible, not present, should be found by exact xpath, marta fails to find it.</p>
+    <p martaclass=marta_smthing>Marta will highlight the elements targeted by your xpath. Sometimes it will even show hidden elements.</p>
+    <p martaclass=marta_smthing>Beware! Anything will be accepted when you will click Confirm. But maybe it will not work :)</p>
+  </div>
+  <div id=marta_s_content martaclass=marta_smthing>
+    <div martaclass=marta_smthing class=label id=marta_element_label>What we are looking for (one element or group?)</div>
+    <label martaclass=marta_smthing><input type=checkbox id=marta_array martaclass=marta_smthing>Collection</label>
+    <input type=button martaclass=marta_smthing id=marta_try_again onclick=marta_try_again(); value="Try again" />
+    <input type=button martaclass=marta_smthing id=marta_confirm onclick=marta_confirm(); value=Confirm />
+  </div>
+  <div id=xpath_field martaclass=marta_smthing>
+    <div martaclass=marta_smthing class=label id=marta_xpath_label>Set XPATH here and hit Enter.</div>
+    <span martaclass=marta_smthing>XPATH: <input onchange=marta_look(); type=text id=marta_user_xpath martaclass=marta_smthing value=>
+    </span>
+  </div>
+</hr>
+</div>

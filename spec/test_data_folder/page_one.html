@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <h1 class='element to find' id='element1'>Hello World!</h1>
+    <label class='element for fun' id='element2'>Really, dude.</label>
+    <script>
+      setTimeout(function() { clickById('element2'); }, 1000);
+      setTimeout(function() { clickById('marta_confirm'); }, 2000);
+      setTimeout(function() { clickById('marta_try_again'); }, 3000);
+      setTimeout(function() { clickById('element2'); }, 4000);
+      setTimeout(function() { clickById('marta_confirm'); }, 5000);
+      setTimeout(function() { clickById('marta_set_by_hand'); }, 6000);
+      setTimeout(function() { clickById('marta_try_again'); }, 7000);
+      setTimeout(function() { clickById('element1'); }, 8000);
+      setTimeout(function() { clickById('marta_confirm'); }, 9000);
+      setTimeout(function() { clickById('marta_confirm'); }, 10000);
+      function clickById(id){
+        document.getElementById(id).click()
+      }
+    </script>
+  </body>
+</html>
