@@ -3,6 +3,7 @@ require 'marta/x_path'
 require 'marta/lightning'
 require 'marta/injector'
 require 'marta/public_methods'
+
 module Marta
 
   #
@@ -28,6 +29,9 @@ module Marta
         @data = data
         @title = class_name+  '.' + method_name.to_s
         @requestor = requestor
+        @found = 0
+        @attrs = @data['meths'][@method_name]
+        @mass = Array.new
       end
 
       # Standart question
@@ -35,15 +39,29 @@ module Marta
         inject(what, title, data)
       end
 
+      # Was something stated by user?
+      def attrs_exists?
+        if !@attrs.nil?
+          @attrs != Hash.new
+        else
+          false
+        end
+      end
+
       # Main method. All the dialog logic is here
       def dialog
         while !finished? do
-          @attrs = ask_for_elements
-          @mass = get_elements_by_attrs
-          @styles = mass_highlight_turn @mass
-          @result = ask_confirmation
-          mass_highlight_turn(@mass, false, @styles)
+          if attrs_exists?
+            @mass = get_elements_by_attrs
+            mass_highlight_turn @mass
+          end
+          @result = ask_for_elements
+          if @result.class == Hash
+            @attrs = @result
+          end
+          mass_highlight_turn(@mass, false)
         end
+
         if @result == '1'
           standart_meth_merge
         else
@@ -53,7 +71,7 @@ module Marta
 
       # Asking: "What are you looking for?"
       def ask_for_elements
-        ask 'element', @title, @data['meths'][@method_name]
+        ask 'element', "Found #{@found} elements for #{@title}", @attrs
       end
 
       # Creating data to save when it is a basically defined element
@@ -74,8 +92,14 @@ module Marta
 
       # Finding out what was selected
       def get_elements_by_attrs
-        xpath = XPathFactory.new(@attrs, @requestor).generate_xpath
-        engine.elements(xpath: xpath)
+        if @attrs['options']['xpath'].nil?
+          xpath = XPathFactory.new(@attrs, @requestor).generate_xpath
+        else
+          xpath = @attrs['options']['xpath']
+        end
+        result = engine.elements(xpath: xpath)
+        @found = result.length
+        result
       end
 
       # Asking: "Are you sure?"
@@ -97,10 +121,24 @@ module Marta
         if @result == '1'
           true
         elsif @result == '3'
-          @result = ask_xpath
-          (@result != '2') ? true : false
+          xpath_way
         else
           false
+        end
+      end
+
+      # When user selects xpath way. Marta is doing some work before finish
+      def xpath_way
+        @result = ask_xpath
+        if @result == '2'
+          false
+        else
+          @attrs['options'] = @result
+          @mass = get_elements_by_attrs
+          mass_highlight_turn @mass
+          @result = ask_confirmation
+          mass_highlight_turn(@mass, false)
+          finished?
         end
       end
 

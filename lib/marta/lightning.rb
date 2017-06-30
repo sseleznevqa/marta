@@ -7,30 +7,25 @@ module Marta
 
     # We can highlight an element
     def highlight(element)
-      orig_style = element.attribute_value("style")
-      engine.execute_script("arguments[0].setAttribute(arguments[1],"\
-                            " arguments[2])", element, "style",
-                            "animation: marta_found 6s infinite;")
-      orig_style
+      engine.execute_script("arguments[0].setAttribute"\
+                            "('martaclass','foundbymarta')", element)
     end
 
     # We can unhighlight an element
-    def unhighlight(element, style)
-      engine.execute_script("arguments[0].setAttribute(arguments[1],"\
-                            " arguments[2])", element, "style", style)
+    def unhighlight(element)
+      engine.execute_script("arguments[0].removeAttribute('martaclass')",
+                            element)
     end
 
     # We can highlight\unhighlight tons of elements at once
-    def mass_highlight_turn(mass, turn_on = true, styles = nil)
-      result = Array.new
+    def mass_highlight_turn(mass, turn_on = true)
       mass.each_with_index do |element, i|
         if turn_on
-          result[i] = highlight(element)
+          highlight element
         else
-          unhighlight(element, styles[i])
+          unhighlight element
         end
       end
-      result
     end
   end
 end
