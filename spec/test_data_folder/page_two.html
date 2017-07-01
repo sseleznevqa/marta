@@ -4,11 +4,10 @@
     <label class='element for fun' id='element2'>Really, dude.</label>
     <script>
       setTimeout(function() { clickById('element2'); }, 1000);
-      setTimeout(function() { clickById('marta_confirm'); }, 2000);
-      setTimeout(function() { clickById('marta_set_by_hand'); }, 3000);
-      setTimeout(function() { setValueById('marta_user_xpath', '//Fancy/xpath'); }, 4000);
+      setTimeout(function() { clickById('marta_set_by_hand'); }, 2000);
+      setTimeout(function() { setValueById('marta_user_xpath', '//Fancy/xpath'); }, 3000);
+      setTimeout(function() { clickById('marta_confirm'); }, 4000);
       setTimeout(function() { clickById('marta_confirm'); }, 5000);
-      setTimeout(function() { clickById('marta_confirm'); }, 6000);
       function clickById(id){
         document.getElementById(id).click()
       }
