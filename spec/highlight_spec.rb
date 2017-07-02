@@ -12,36 +12,31 @@ describe Marta::SmartPage, :need_browser do
   end
 
   it 'can highlight element' do
-    style = marta_fire(:highlight, @browser.element(id:"element1"))
-    expect(style).to eq "color: green;"
-    installed_style = @browser.element(id:"element1").attribute_value("style")
-    expect(installed_style).to eq "animation: marta_found 6s infinite;"
+    marta_fire(:highlight, @browser.element(id:"element1"))
+    martaclass = @browser.element(id:"element1").attribute_value("martaclass")
+    expect(martaclass).to eq "foundbymarta"
   end
 
   it 'can unhighlight element' do
-    marta_fire(:unhighlight, @browser.element(id:"element1"), "color: black;")
-    installed_style = @browser.element(id:"element1").attribute_value("style")
-    expect(installed_style).to eq "color: black;"
+    marta_fire(:unhighlight, @browser.element(id:"element1"))
+    martaclass = @browser.element(id:"element1").attribute_value("martaclass")
+    expect(martaclass.nil?).to be true
   end
 
   it 'can perform a massive highlight' do
     mass = @browser.elements(name: "findme")
-    styles = marta_fire(:mass_highlight_turn, mass)
+    marta_fire(:mass_highlight_turn, mass)
     mass.each do |item|
-      style = item.attribute_value("style")
-      expect(style).to eq "animation: marta_found 6s infinite;"
-    end
-    styles.each do |style|
-      expect((style == 'color: blue;')||(style == 'color: green;')).to be true
+      martaclass = item.attribute_value("martaclass")
+      expect(martaclass).to eq "foundbymarta"
     end
   end
 
   it 'can perform a massive unhighlight' do
     mass = @browser.elements(name: "findme")
-    styles =['color: black;','color: black;']
-    styles = marta_fire(:mass_highlight_turn, mass, false, styles)
+    marta_fire(:mass_highlight_turn, mass, false)
     mass.each do |item|
-      expect(item.attribute_value("style")).to eq "color: black;"
+      expect(item.attribute_value("martaclass")).to eq nil
     end
   end
 end

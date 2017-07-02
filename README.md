@@ -1,6 +1,6 @@
 # Marta
 
-Marta is a pretty new way to write selenium tests for WEB applications using Watir. Main idea is very similar to cucumber. In Cucumber you are writing test and then defining a code behind it. In Marta you are writing code and then defining classes/pageobjects and methods/elements behind it thru your browser window.
+Marta was planned as an element locating tool for Watir tests. But now Marta is also a pretty new way to write selenium tests for WEB applications using Watir. Main idea is very similar to cucumber. In Cucumber you are writing test and then defining a code behind it. In Marta you are writing code and then defining classes/pageobjects and methods/elements behind it thru your browser window.
 
 Also Marta is providing a little more stability when locating elements on the page.
 
@@ -193,7 +193,7 @@ g_page.search "I am in love with selenium."
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.26150 only. And I am not a professional developer. But I am training her on new tricks.*
+*A: Nothing. Marta is under development. Her version is 0.28017 only. And I am not a professional developer. But I am training her on new tricks.*
 
 ## Internal Design
 

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["s_seleznev_qa@hotmail.com"]
 
   spec.summary       = "That will be an another one watir-webdriver wrap"
-  spec.description   = "It's nothing to describe now."
+  spec.description   = "Element location tool for your watir autotests"
   spec.homepage      = "https://github.com/sseleznevqa/marta"
   spec.license       = "MIT"
 
@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
+  spec.add_development_dependency "simplecov"
   spec.add_dependency "watir"
   #spec.add_dependency "fileutils"
   spec.add_dependency "json"

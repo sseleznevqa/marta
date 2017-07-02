@@ -81,7 +81,7 @@ div#marta_s_everything *, div#marta_s_everything {
   empty-cells : show;
   float : none;
   font : normal;
-  font-family : inherit;
+  font-family : sans-serif;
   font-size : medium;
   font-style : normal;
   font-variant : normal;
@@ -206,4 +206,8 @@ div#marta_s_everything input[type=checkbox]
             background-repeat:no-repeat;
             background-position: 0 0;
             font-size:16px;
-            vertical-align:middle;}
+            vertical-align:middle;
+}
+[martaclass=foundbymarta]
+  {animation: marta_found 6s infinite;
+}
