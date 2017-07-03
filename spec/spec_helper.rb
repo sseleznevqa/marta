@@ -9,7 +9,13 @@ RSpec.configure do |config|
   config.before do |example|
     include Marta
     if example.metadata[:need_browser]
-      @browser = Watir::Browser.new :chrome
+      while @browser.nil?
+        begin
+          @browser = Watir::Browser.new :chrome
+        rescue
+          @browser = nil
+        end
+      end
     else
       @browser = "We do not need real browser for the test"
     end

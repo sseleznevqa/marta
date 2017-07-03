@@ -1,10 +1,30 @@
 require 'marta/options_and_paths'
+require 'pry'
 module Marta
 
   # Methods that user can use out of the box in SmartPage
   module PublicMethods
 
     include OptionsAndPaths
+
+    # User can create pageobject class using SmartPage.new
+    def initialize(my_data = nil, my_class_name = nil, will_edit = nil)
+      #binding.pry
+      @data ||= my_data
+      @class_name ||= my_class_name
+      @edit_mark ||= will_edit
+      if !will_edit.nil?
+        build_content my_data
+        if will_edit
+          page_edit my_class_name, my_data
+        end
+        # We need optimization here very much!
+        build_content my_data
+      else
+        warn "SmartPage was created without any data. So it will"\
+        " not work normally. Unless you know exactly what are you doing."
+      end
+    end
 
     # User can define a method for example in a middle of a debug session
     def method_edit(name)

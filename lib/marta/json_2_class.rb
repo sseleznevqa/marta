@@ -43,17 +43,10 @@ module Marta
       # useles while not constructed like that. It will be fixed.
       def self.create(class_name, data, edit)
         c = Class.new(SmartPage) do
+          alias_method :old_init, :initialize
           define_method :initialize do |my_data=data, my_class_name=class_name,
                                         will_edit=edit|
-            @data = my_data
-            @class_name = class_name
-            @edit_mark = will_edit
-            build_content my_data
-            if will_edit
-              page_edit my_class_name, my_data
-            end
-            # We need optimization here very much!
-            build_content my_data
+            old_init(my_data, class_name, will_edit)
           end
         end
         # We are vanishing previous version of class
