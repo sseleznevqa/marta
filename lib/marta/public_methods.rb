@@ -7,23 +7,34 @@ module Marta
 
     include OptionsAndPaths
 
+
+    #
     # User can create pageobject class using SmartPage.new
-    def initialize(my_data = nil, my_class_name = nil, will_edit = nil)
-      #binding.pry
+    #
+    # SmartPage can be created withoud all the data. But in that case
+    # it will be pretty useless until values are provided
+    #
+    # The first argument is a class name. It is a constant like string like
+    # "MyClass". All data provided will be tored in MyClass.json
+    # Also later you will get the posibility to call it like MyClass.new
+    # That argument is totally necessary one
+    #
+    # The second argument is a marta's special data hash. The minimum =
+    # {"vars":{},"meths":{}}. You can take an existing json as well.
+    #
+    # Third parameter is about to show or not default page creation dialog.
+    # So it can be true or false
+    def initialize(my_class_name, my_data = ({"vars" => {},"meths" => {}}),
+                   will_edit = true)
       @data ||= my_data
       @class_name ||= my_class_name
       @edit_mark ||= will_edit
-      if !will_edit.nil?
-        build_content my_data
-        if will_edit
-          page_edit my_class_name, my_data
-        end
-        # We need optimization here very much!
-        build_content my_data
-      else
-        warn "SmartPage was created without any data. So it will"\
-        " not work normally. Unless you know exactly what are you doing."
+      build_content my_data
+      if will_edit
+        page_edit my_class_name, my_data
       end
+      # We need optimization here very much!
+      build_content my_data
     end
 
     # User can define a method for example in a middle of a debug session

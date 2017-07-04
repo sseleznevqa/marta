@@ -31,5 +31,5 @@ RSpec.configure do |config|
 end
 
 def marta_fire(what, *args)
-  Marta::SmartPage.new.send(what, *args)
+  Marta::SmartPage.new("Dummy", ({"vars" => {},"meths" => {}}), false).send(what, *args)
 end

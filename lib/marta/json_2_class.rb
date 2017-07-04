@@ -36,17 +36,15 @@ module Marta
       include OptionsAndPaths, ReadWrite
 
       #
-      # Main class creation method. SmartPage method is only working with
-      # a proper initialization.
+      # Main class creation method.
       #
-      # By default SmartPage has no initialization which is making it almost
-      # useles while not constructed like that. It will be fixed.
+      # SmartPage can be initialized with user data as well
       def self.create(class_name, data, edit)
         c = Class.new(SmartPage) do
           alias_method :old_init, :initialize
           define_method :initialize do |my_data=data, my_class_name=class_name,
                                         will_edit=edit|
-            old_init(my_data, class_name, will_edit)
+            old_init(class_name, my_data, will_edit)
           end
         end
         # We are vanishing previous version of class
@@ -88,8 +86,8 @@ module Marta
     end
 
     def build_content(data)
-      build_methods(data['meths'])
-      build_vars(data['vars'])
+      build_methods(data['meths']) if !data['meths'].nil?
+      build_vars(data['vars']) if !data['vars'].nil?
     end
 
     def build_methods(methods)
@@ -115,7 +113,7 @@ module Marta
     end
 
     def build_var(name, content)
-      if !self.methods.include?(name.to_sym) and (@data['meths'][name] == nil)
+      if !self.methods.include?(name.to_sym) and (@data['meths'][name].nil?)
         self.singleton_class.send(:attr_accessor, name.to_sym)
         instance_variable_set("@#{name}", process_string(content))
       else
