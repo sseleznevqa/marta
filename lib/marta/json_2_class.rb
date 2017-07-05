@@ -86,8 +86,8 @@ module Marta
     end
 
     def build_content(data)
-      build_methods(data['meths']) if !data['meths'].nil?
-      build_vars(data['vars']) if !data['vars'].nil?
+      build_methods(data['meths'])
+      build_vars(data['vars'])
     end
 
     def build_methods(methods)
