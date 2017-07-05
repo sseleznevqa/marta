@@ -1,5 +1,4 @@
 require 'marta/options_and_paths'
-require 'pry'
 module Marta
 
   # Methods that user can use out of the box in SmartPage

@@ -3,7 +3,6 @@ require 'marta/x_path'
 require 'marta/lightning'
 require 'marta/injector'
 require 'marta/public_methods'
-require 'pry'
 
 module Marta
 
