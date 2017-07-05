@@ -3,6 +3,7 @@ require 'marta/x_path'
 require 'marta/lightning'
 require 'marta/injector'
 require 'marta/public_methods'
+require 'pry'
 
 module Marta
 
@@ -59,7 +60,7 @@ module Marta
           mass_highlight_turn(@mass, false)
           if @result.class == Hash
             @attrs = @result
-          else
+          elsif @result != '1'
             xpath_way
           end
         end

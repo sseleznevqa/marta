@@ -64,6 +64,20 @@ describe Marta::SmartPage do
     expect{Json2Class.new}.to_not raise_error
   end
 
+  it 'can create class with default info' do
+    Marta::SmartPage.new("TestClass")
+  end
+
+  it 'can create correct SmartPgae class by user data' do
+    page = Marta::SmartPage.new("TestClass",
+                      ({"meths"=>{"megameths"=>{"granny"=>{},
+                       "options"=>{"collection"=>false,"granny"=>"HTML",
+                       "pappy"=>"BODY","self"=>"H1"},"pappy"=>{},
+                       "self"=>{}}},"vars"=>{"test"=>"100"}}), false)
+    expect(page.methods.include?(:megameths)).to be true
+    expect(page.test).to eq "100"
+  end
+
   context 'is creating class with some features like: ' do
     before(:all) do
     end
