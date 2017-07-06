@@ -56,12 +56,13 @@ module Marta
             mass_highlight_turn @mass
           end
           @result = ask_for_elements
+          mass_highlight_turn(@mass, false)
           if @result.class == Hash
             @attrs = @result
+          elsif @result != '1'
+            xpath_way
           end
-          mass_highlight_turn(@mass, false)
         end
-
         if @result == '1'
           standart_meth_merge
         else
@@ -85,7 +86,7 @@ module Marta
       # Creating data to save when user suggests a custom xpath
       def xpath_meth_merge
         temp = temp_hash
-        temp['meths'][@method_name]['options'] = @result
+        temp['meths'][@method_name]['options'] = @attrs['options']
         @data['meths'].merge!(temp['meths'])
         @data
       end
@@ -118,10 +119,8 @@ module Marta
       # JS returning '1' when it's done. That is not good
       # and should be rewrited as soon as possible
       def finished?
-        if @result == '1'
+        if @result == '1' or @result == '4'
           true
-        elsif @result == '3'
-          xpath_way
         else
           false
         end
@@ -130,15 +129,13 @@ module Marta
       # When user selects xpath way. Marta is doing some work before finish
       def xpath_way
         @result = ask_xpath
-        if @result == '2'
-          false
-        else
+        if @result != '2'
+          @attrs = Hash.new
           @attrs['options'] = @result
           @mass = get_elements_by_attrs
           mass_highlight_turn @mass
           @result = ask_confirmation
           mass_highlight_turn(@mass, false)
-          finished?
         end
       end
 

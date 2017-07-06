@@ -107,9 +107,9 @@ module Marta
 
     # Defining the place for files to inject to browser
     def gem_libdir
-      t = ["#{File.dirname(File.expand_path($0))}/../lib/#{Marta::NAME}",
+      t = ["#{Dir.pwd}/lib/#{Marta::NAME}",
            "#{Gem.dir}/gems/#{Marta::NAME}-#{Marta::VERSION}/lib/#{Marta::NAME}"]
-      t.each {|i| return i if File.readable?(i) }
+      File.readable?(t[0])? t[0] : t[1]
     end
 
     # Marta knows does she learn or not.

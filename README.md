@@ -95,6 +95,19 @@ dance_with learn: true or false
 your_page.method_edit('newelementname')
 ```
 
+**Q: And what if I want to create page and define element without learn mode? For example in the middle of a debug session.**
+
+*A Code in learn mode =*
+```ruby
+test_page = TestPage.new # Will show page creation dialog
+test_page.magic_button # Will show magic_button locating dialog
+```
+*is totally identical to code without learn mode =*
+```ruby
+test_page = SmartPage.new("TestPage")
+test_page.method_edit("magic_button")
+```
+
 **Q: Sometimes Marta is looking for lost element for too long. What can I do about it?**
 
 *A: You can set tolerancy parameter. Larger = longer*
@@ -193,7 +206,7 @@ g_page.search "I am in love with selenium."
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.28017 only. And I am not a professional developer. But I am training her on new tricks.*
+*A: Nothing. Marta is under development. Her version is 0.28675 only. And I am not a professional developer. But I am training her on new tricks.*
 
 ## Internal Design
 

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["s_seleznev_qa@hotmail.com"]
 
   spec.summary       = "That will be an another one watir-webdriver wrap"
-  spec.description   = "Element location tool for your watir autotests"
+  spec.description   = "Element location tool for your watir autotests."
   spec.homepage      = "https://github.com/sseleznevqa/marta"
   spec.license       = "MIT"
 

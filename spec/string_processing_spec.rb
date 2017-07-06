@@ -5,7 +5,7 @@ describe Marta::SmartPage do
     class Mock < Marta::SmartPage
       attr_accessor :a, :b, :c
     end
-    @mock = Mock.new
+    @mock = Mock.new("Dummy", ({"vars" => {},"meths" => {}}), false)
     @mock.a = "Hello"
     @mock.b = "World!"
     @mock.c = '#{@b}'
