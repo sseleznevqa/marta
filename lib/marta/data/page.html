@@ -1,24 +1,25 @@
 <div id=marta_s_everything martaclass=marta_smthing>
   <div id=marta_s_text>
-    <h2 id=marta_main_title></h2>
-    <p>If you cannot see all the elements try to move menu down using a button below</p>
-    <input type=button martaclass=marta_smthing id=marta_down onclick=marta_down(); value=DOWN />
-    <p>You are about to add some vars to the page_object</p>
-    <p>Please use only valid names for ruby vars (no <b>CROCO</b>, <b>special symbols</b>, just <b>some_var</b> or <b>anotherVar</b>)</p>
-    <p>You can use variable in the other one adding: <b>#{@your_var}</b> just like in ruby</p>
-    <p>Note that @ will be added to your var name automatically.</p>
-    <p>So if you have defined <b>something</b> and you wanna use the value of it in the other var you should write <b>#{@something}</b></p>
-    <p>You should set a var with the <b>url</b> name if you are gonna use <b>your_page.open_page</b> method later</p>
-    <p>Your values provided here will be default for your page_object but you can change it like <b>your_page.your_var = newvalue</b></p>
-</div>
-<div id=marta_s_content>
-    <input type=button martaclass=marta_smthing id=marta_more_fields onclick=marta_add_field(); value=Add More />
-    <input type=button martaclass=marta_smthing id=marta_confirm onclick=marta_confirm(); value=Confirm />
-<div id=vars_fileds>
-    <div class=label>Custom vars:</div>
-    <div class=content>
+    <div martaclass=marta_smthing martastyle=header>
+      <h2 id=marta_main_title></h2>
+      <input type=button martaclass=marta_smthing martastyle=down_button id=marta_down onclick=marta_down(); value=DOWN />
+      <input type=button martaclass=marta_smthing nartastile=hide_button id=marta_hide onclick=marta_hide(); value=HIDE />
     </div>
-</div>
-</div>
-</hr>
+    <div martaclass=marta_smthing martastyle=hint>
+      <p>You are about to add some vars to the page_object</p>
+      <p>Please use only valid names for ruby vars (no <b>CROCO</b>, <b>special symbols</b>, just <b>some_var</b> or <b>anotherVar</b>)</p>
+      <p>You can use variable in the other one adding: <b>#{@your_var}</b> just like in ruby</p>
+      <p>Note that @ will be added to your var name automatically.</p>
+      <p>So if you have defined <b>something</b> and you wanna use the value of it in the other var you should write <b>#{@something}</b></p>
+      <p>You should set a var with the <b>url</b> name if you are gonna use <b>your_page.open_page</b> method later</p>
+      <p>Your values provided here will be default for your page_object but you can change it like <b>your_page.your_var = newvalue</b></p>
+    </div>
+  </div>
+<div id=marta_s_content martastyle=main_content>
+  <input type=button martastyle=action_button martaclass=marta_smthing id=marta_more_fields onclick=marta_add_field(); value=Add More />
+  <input type=button martastyle=confirm_button martaclass=marta_smthing id=marta_confirm onclick=marta_confirm(); value=Confirm />
+  <div id=vars_fileds martastyle=user_fields>
+    <div class=label>Custom vars:</div>
+    <div class=content></div>
+  </div>
 </div>

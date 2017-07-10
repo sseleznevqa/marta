@@ -154,8 +154,11 @@ div#marta_s_everything *, div#marta_s_everything {
 
 }
 div#marta_s_everything h2 {
-  text-align: center;
-  font-size: 20px;}
+    text-align: left;
+    font-size: 20px;
+    background-color: #487dfb;
+    color: white;
+}
 div[martaclass=marta_div] {
   position : relative;
   z-index : 150000;
