@@ -56,7 +56,6 @@ module Marta
             mass_highlight_turn @mass
           end
           @result = ask_for_elements
-          #puts @result
           mass_highlight_turn(@mass, false)
           if @result.class == Hash
             @attrs = @result
@@ -73,7 +72,6 @@ module Marta
 
       # Asking: "What are you looking for?"
       def ask_for_elements
-        #puts @attrs
         ask 'element', "Found #{@found} elements for #{@title}", @attrs
       end
 

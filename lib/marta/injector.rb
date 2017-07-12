@@ -1,4 +1,3 @@
-require 'pry'
 module Marta
 
   #
@@ -98,9 +97,6 @@ module Marta
     def inject(what, title = 'Something important', data = Hash.new)
       syringe = Syringe.new(engine, what, title, data, gem_libdir)
       syringe.actual_injection
-      if what=='element'
-        binding.pry
-      end
       syringe.get_result
     end
   end
