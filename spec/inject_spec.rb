@@ -10,7 +10,7 @@ describe Marta::SmartPage, :need_browser do
   before(:each) do
     @browser.goto @page_five_url
     @syring = Marta::Injector::Syringe.new(@browser, 'for_test', 'title',
-                                          'data', marta_fire(:gem_libdir))
+                                          'nil||data', marta_fire(:gem_libdir))
   end
 
   # If it is failed. Are u sure that rake install was performed?
