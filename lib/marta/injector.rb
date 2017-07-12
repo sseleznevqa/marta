@@ -1,4 +1,3 @@
-require 'pry'
 module Marta
 
   #
@@ -75,9 +74,6 @@ module Marta
                                                            gsub('nil','null'),
                        false)
         @engine.execute_script("marta_add_data();")
-        if @what == 'element'
-        #  binding.pry
-        end
       end
 
       # Retrieving result if js var = marta_confirm_mark is true
@@ -101,7 +97,6 @@ module Marta
     def inject(what, title = 'Something important', data = Hash.new)
       syringe = Syringe.new(engine, what, title, data, gem_libdir)
       syringe.actual_injection
-      #binding.pry
       syringe.get_result
     end
   end

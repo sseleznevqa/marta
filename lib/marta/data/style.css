@@ -6,7 +6,7 @@
   80% {border: 4px dashed #DDA0DD}
   100% {border: 4px dashed #6495ED;}}
 
-div#marta_s_everything *, div#marta_s_everything {
+div[martaclass=marta_div] * {
   animation : none;
   animation-delay : 0;
   animation-direction : normal;
@@ -123,7 +123,6 @@ div#marta_s_everything *, div#marta_s_everything {
   page-break-inside : auto;
   perspective : none;
   perspective-origin : 50% 50%;
-
   right : auto;
   tab-size : 8;
   table-layout : auto;
@@ -153,67 +152,148 @@ div#marta_s_everything *, div#marta_s_everything {
   word-spacing : normal;
 
 }
-div#marta_s_everything h2 {
-    text-align: left;
-    font-size: 20px;
-    background-color: #487dfb;
-    color: white;
+div[martaclass=marta_div] {
+    border: 2px solid black;
+    outline: 2px solid #bbbbbb;
+    background-color: lightgray;
 }
+
+div div[martastyle=header] {
+    background: linear-gradient(to right, blue , lightblue);
+    padding: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    color: white;
+    display: flex;
+}
+
+div[martastyle=icons_holder] {
+  margin-left: auto;
+}
+
+input[martastyle=icon_button] {
+    color: black;
+    background-color: lightgrey;
+    border: 1px solid black;
+}
+
+h2#marta_main_title {
+    font-size: 20px;
+}
+
 div[martaclass=marta_div] {
   position : relative;
   z-index : 150000;
   padding: 0;
   margin: 0px 0px 0px 0px;
-  border: 4px solid rgb(115,115,100);
-  font-size: 14px;
-  text-align: left;
-  background-color: rgb(230,230,200);
-  color: black;
 }
 
 div[martastyle=down] {
   margin: 100% 0px 0px 0px;
 }
-div#marta_s_everything p {text-align: left;
-  margin-left: 20px;}
-div#marta_s_everything p b {color: red;}
-div#marta_s_everything input[type=button] {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-}
-div#marta_s_everything input[type=text] {
-  width: 50%;
-  border-radius: 4px;
-  padding: 6px 8px;
-  font-size: 14px;
-  background-color: rgb(200,230,230);
-}
-div#marta_s_everything input[type=text][martaclass=martanamefield],
-div#marta_s_everything input[type=text].marta_s_name_field{
-  width: 20%;
+
+div[martastyle=hint] {
+    background-color: #F6F5D7;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    z-index: 1;
+    display: table;
+    margin: 0 auto;
 }
 
-div#marta_s_everything div.label,
-div#marta_s_everything label {
-  text-decoration: underline;
-  font-size: 16px;
+div[martaclass=marta_div] b {
+    color: red;
 }
-div#marta_s_everything input[type=checkbox]
-  {					padding-left:5px;
-            height:16px;
-            display:inline-block;
-            line-height:16px;
-            background-repeat:no-repeat;
-            background-position: 0 0;
-            font-size:16px;
-            vertical-align:middle;
+
+div[martastyle=buttons_holder] {
+    margin-top: 10px;
+    text-align: center;
 }
+
+input[martastyle=action_button], input[martastyle=confirm_button],
+input[martastyle=cancel_button] {
+    border-style: solid;
+    border-width: 1px;
+    background: linear-gradient(lightgrey , grey);
+    border-radius: 3px;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+input[martastyle=action_button]:hover {
+    background: linear-gradient(lightblue , blue);
+    border-color: blue;
+}
+
+input[martastyle=confirm_button]:hover {
+    background: linear-gradient(lightgreen , green);
+    border-color: green;
+}
+
+input[martastyle=cancel_button]:hover {
+    background: linear-gradient(pink , red);
+    border-color: red;
+}
+
+div[martastyle=field_line] {
+  margin-left: 10px;
+}
+
+div[martastyle=table_headers] {
+  margin-left: 10px;
+  display: flex;
+}
+
+input[martaclass=marta_smthing][type=text] {
+    width: 50%;
+    padding: 6px 8px;
+    font-size: 14px;
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+
+input[type=text][martastyle=name_field] {
+    width: 20%;
+}
+
+div[martastyle=options_holder] {
+    margin-left: 10px;
+    display: table;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+input[martastyle=name_field]:disabled, input[martastyle=value_field]:disabled{
+    background: linear-gradient(to right, lightgrey , white);
+}
+
+input[martaclass=marta_smthing][type=checkbox] {
+    -webkit-appearance: none;
+    background-color: white;
+    border: 3px solid white;
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+}
+
+input[martaclass=marta_smthing][type=checkbox]:checked {
+    background-color: darkgrey;
+    border: 3px solid white;
+    color: #99a1a7;
+}
+
+
 [martaclass=foundbymarta]
   {animation: marta_found 6s infinite;
 }
