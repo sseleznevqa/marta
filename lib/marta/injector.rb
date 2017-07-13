@@ -69,7 +69,9 @@ module Marta
         files_to_page
         @data ||= Hash.new
         insert_to_page('script', "var marta_what = \"#{@title}\"", false)
-        insert_to_page('script', "var old_marta_Data = #{@data}".gsub('=>',':'),
+        insert_to_page('script',
+                       "var old_marta_Data = #{@data}".gsub('=>',':').
+                                                           gsub('nil','null'),
                        false)
         @engine.execute_script("marta_add_data();")
       end

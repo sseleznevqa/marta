@@ -1,23 +1,34 @@
 <div id=marta_s_everything martaclass=marta_smthing>
-
   <div id=marta_s_text martaclass=marta_smthing>
-    <h2 id=marta_main_title martaclass=marta_smthing></h2>
-    <p martaclass=marta_smthing>If you cannot see all the elements try to move menu down using a button below</p>
-    <input type=button martaclass=marta_smthing id=marta_down onclick=marta_down(); value=DOWN />
-    <p martaclass=marta_smthing>You are about to write your own xpath.</p>
-    <p martaclass=marta_smthing>Use it when element is: invisible, not present, should be found by exact xpath, marta fails to find it.</p>
-    <p martaclass=marta_smthing>Marta will highlight the elements targeted by your xpath. Sometimes it will even show hidden elements.</p>
-    <p martaclass=marta_smthing>Beware! Anything will be accepted when you will click Confirm. But maybe it will not work :)</p>
+    <div martaclass=marta_smthing martastyle=header>
+      <h2 id=marta_main_title martaclass=marta_smthing></h2>
+      <div martastyle=icons_holder martaclass=marta_smthing>
+        <input type=button martaclass=marta_smthing martastyle=icon_button id=marta_hide onclick=marta_hide(); value=&#x21E8; />
+      </div>
+    </div>
+    <div martaclass=marta_smthing martastyle=hint>
+      <p martaclass=marta_smthing>You are about to write your own xpath.</p>
+      <p martaclass=marta_smthing>Use it when element is: invisible, not present, should be found by exact xpath, marta fails to find it.</p>
+      <p martaclass=marta_smthing>Marta will highlight the elements targeted by your xpath. Sometimes it will even show hidden elements.</p>
+      <p martaclass=marta_smthing>Beware! Anything will be accepted when you will click Confirm. But maybe it will not work :)</p>
+    </div>
   </div>
   <div id=marta_s_content martaclass=marta_smthing>
-    <div martaclass=marta_smthing class=label id=marta_element_label>What we are looking for (one element or group?)</div>
-    <label martaclass=marta_smthing><input type=checkbox id=marta_array martaclass=marta_smthing>Collection</label>
-    <input type=button martaclass=marta_smthing id=marta_try_again onclick=marta_try_again(); value="Try again" />
-    <input type=button martaclass=marta_smthing id=marta_confirm onclick=marta_confirm(); value=Confirm />
+    <div id=marta_s_element_type martaclass=marta_smthing martastyle=options_holder>
+      <div martaclass=marta_smthing class=label id=marta_element_label>What we are looking for (one element or group?)</div>
+      <label martaclass=marta_smthing>
+        <input type=checkbox id=marta_array martaclass=marta_smthing>Collection
+      </label>
+    </div>
+    <div martastyle=buttons_holder martaclass=marta_smthing>
+      <input type=button martaclass=marta_smthing id=marta_try_again martastyle=action_button onclick=marta_try_again(); value="Try again" />
+      <input type=button martaclass=marta_smthing id=marta_confirm martastyle=confirm_button onclick=marta_confirm(); value=Confirm />
+    </div>
   </div>
   <div id=xpath_field martaclass=marta_smthing>
     <div martaclass=marta_smthing class=label id=marta_xpath_label>Set XPATH here and hit Enter.</div>
-    <span martaclass=marta_smthing>XPATH: <input onchange=marta_look(); type=text id=marta_user_xpath martaclass=marta_smthing value=>
+    <span martaclass=marta_smthing>XPATH:
+      <input onchange=marta_look(); type=text id=marta_user_xpath martaclass=marta_smthing value=//>
     </span>
   </div>
 </hr>

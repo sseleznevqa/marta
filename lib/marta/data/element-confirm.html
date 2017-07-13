@@ -1,20 +1,26 @@
 <div id=marta_s_everything martaclass=marta_smthing>
   <div id=marta_s_text martaclass=marta_smthing>
-    <h2 id=marta_main_title martaclass=marta_smthing></h2>
-    <p martaclass=marta_smthing>If you cannot see all the elements try to move menu down using a button below</p>
-    <input type=button martaclass=marta_smthing id=marta_down onclick=marta_down(); value=DOWN />
-    <p martaclass=marta_smthing>You are about to confirm element selection</p>
-    <p martaclass=marta_smthing>Marta highlights elements right now</p>
-    <p martaclass=marta_smthing>If something wrong was found - maybe it is time to talk to the developer?</p>
-    <p martaclass=marta_smthing>Also you could try to set your own xpath</p>
-    <p martaclass=marta_smthing>Or you could try to find element in a basic way once again</p>
+    <div martaclass=marta_smthing martastyle=header>
+      <h2 id=marta_main_title martaclass=marta_smthing></h2>
+      <div martastyle=icons_holder martaclass=marta_smthing>
+        <input type=button martaclass=marta_smthing martastyle=icon_button id=marta_hide onclick=marta_hide(); value=&#x21E8; />
+      </div>
+    </div>
+    <div martaclass=marta_smthing martastyle=hint>
+      <p martaclass=marta_smthing>You are about to confirm element selection</p>
+      <p martaclass=marta_smthing>Marta highlights elements right now</p>
+      <p martaclass=marta_smthing>If something wrong was found - maybe it is time to talk to the developer?</p>
+      <p martaclass=marta_smthing>Also you could try to set your own xpath</p>
+      <p martaclass=marta_smthing>Or you could try to find element in a basic way once again</p>
+    </div>
   </div>
   <div id=marta_s_content martaclass=marta_smthing>
-    <input type=button martaclass=marta_smthing id=marta_confirm onclick=marta_confirm(); value=Confirm />
-    <input type=button martaclass=marta_smthing id=marta_try_again onclick=marta_try_again(); value="Try again" />
-    <input type=button martaclass=marta_smthing id=marta_set_by_hand onclick=marta_set_by_hand(); value="Set by hand" />
+    <div martastyle=buttons_holder martaclass=marta_smthing>
+      <input type=button martaclass=marta_smthing martastyle=confirm_button id=marta_confirm onclick=marta_confirm(); value=Confirm />
+      <input type=button martaclass=marta_smthing martastyle=cancel_button id=marta_try_again onclick=marta_try_again(); value="Try again" />
+      <input type=button martaclass=marta_smthing martastyle=action_button id=marta_set_by_hand onclick=marta_set_by_hand(); value="Set by hand" />
+    </div>
   </div>
   <div id=attr_fields martaclass=marta_smthing>
   </div>
-</hr>
 </div>
