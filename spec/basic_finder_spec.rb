@@ -6,7 +6,8 @@ def newclass(what)
   file = File.read(donor_name)
   temp_hash = JSON.parse(file)
   meth = temp_hash['meths'][what]
-  Marta::SimpleElementFinder::BasicFinder.new(meth, @browser, nil)
+  Marta::SimpleElementFinder::BasicFinder.new(meth,
+    Marta::SmartPage.new('Dummy', ({"vars" => {},"meths" => {}}), false))
 end
 
 describe Marta::SimpleElementFinder::BasicFinder do

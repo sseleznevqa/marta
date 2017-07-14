@@ -10,12 +10,12 @@ module Marta
     #
     # User can create pageobject class using SmartPage.new
     #
-    # SmartPage can be created withoud all the data. But in that case
+    # SmartPage can be created without all the data. But in that case
     # it will be pretty useless until values are provided
     #
-    # The first argument is a class name. It is a constant like string like
+    # The first argument is a class name. It is a constant-like string like
     # "MyClass". All data provided will be stored in MyClass.json
-    # Once created that way you can call it like MyClass.new.
+    # Once it is created that way you can call it like MyClass.new.
     # That argument is totally necessary one
     #
     # The second argument is a marta's special data hash. By default =

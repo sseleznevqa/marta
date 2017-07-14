@@ -18,11 +18,11 @@ module Marta
 
       include XPath
 
-      def initialize(meth, engine, requestor)
+      def initialize(meth, requestor)
         @requestor = requestor
         @meth = meth
         @xpath = xpath_by_meth
-        @engine = engine
+        @engine = requestor.engine
       end
 
       # Maybe our element is defined as a collection?
@@ -77,7 +77,7 @@ module Marta
 
     # We can simply find something
     def marta_simple_finder(meth)
-      finder = BasicFinder.new(meth, engine, self)
+      finder = BasicFinder.new(meth, self)
       finder.find
     end
   end
