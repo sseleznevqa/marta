@@ -16,7 +16,8 @@ describe Marta::SmartPage, :need_browser do
 
   it 'can perform basic element selection user story' do
     @browser.goto @page_one_url
-    marta_fire(:user_method_dialogs, "Dialogs", "hello_world", @data)
+    page = Marta::SmartPage.new(@name, ({"vars" => {},"meths" => {}}), false)
+    page.send(:user_method_dialogs, "hello_world")
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)
     data_hash = JSON.parse(file)
@@ -26,7 +27,8 @@ describe Marta::SmartPage, :need_browser do
 
   it "can save element by xpath" do
     @browser.goto @page_two_url
-    marta_fire(:user_method_dialogs, "Dialogs", "hello_world", @data)
+    page = Marta::SmartPage.new(@name, ({"vars" => {},"meths" => {}}), false)
+    page.send(:user_method_dialogs, "hello_world")
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)
     data_hash = JSON.parse(file)
@@ -36,8 +38,9 @@ describe Marta::SmartPage, :need_browser do
   it 'finds predefined element' do
     page_3 = Page_three.new
     @browser.goto @page_three_url
-    marta_fire(:user_method_dialogs, "Page_three",
-      "hello_world", JSON.parse(File.read(@page_3_name)))
+    page = Marta::SmartPage.new("Page_three",
+                                JSON.parse(File.read(@page_3_name)), false)
+    page.send(:user_method_dialogs, "hello_world")
     expect(File.exists?(@page_3_name)).to be true
     file = File.read(@page_3_name)
     data_hash = JSON.parse(file)

@@ -18,11 +18,13 @@ describe Marta::SimpleElementFinder::BasicFinder do
 
     class Helper
       def newclass(what)
-        donor_name = './spec/test_data_folder/test_pageobjects/Page_three_all.json'
+        donor_name =
+               './spec/test_data_folder/test_pageobjects/Page_three_all.json'
         file = File.read(donor_name)
         temp_hash = JSON.parse(file)
         meth = temp_hash['meths'][what]
-        Marta::BlackMagic::MagicFinder.new(meth, @browser, 1024, nil)
+        Marta::BlackMagic::MagicFinder.new(meth, 1024,
+          Marta::SmartPage.new('Dummy', ({"vars" => {},"meths" => {}}), false))
       end
     end
     @helper = Helper.new

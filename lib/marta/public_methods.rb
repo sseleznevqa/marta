@@ -41,7 +41,7 @@ module Marta
     def method_edit(name)
       method_name = correct_name(name)
       exact_name = method_name.to_s + "_exact"
-      data = user_method_dialogs(@class_name, method_name, @data)
+      data = user_method_dialogs(method_name)
       define_singleton_method method_name.to_sym do |meth_content=@data['meths'][method_name]|
         marta_magic_finder(meth_content)
       end
