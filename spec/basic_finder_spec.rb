@@ -6,11 +6,12 @@ describe Marta::SimpleElementFinder::BasicFinder do
   before(:all) do
     @xpath = "//HTML/BODY/H1[contains(@class,'element')]"\
             "[contains(@class,'to')][contains(@class,'find')][@id='element1']"
-    @page_three_url = "file://#{Dir.pwd}" +
-              "/spec/test_data_folder/page_three.html"
+    @page_three_url = "file://#{Dir.pwd}/spec/test_data_folder/page_three.html"
+    @page_six_url = "file://#{Dir.pwd}/spec/test_data_folder/page_six.html"
     class Helper
       def newclass(what)
-        donor_name = './spec/test_data_folder/test_pageobjects/Page_three_all.json'
+        donor_name =
+                './spec/test_data_folder/test_pageobjects/Page_three_all.json'
         file = File.read(donor_name)
         temp_hash = JSON.parse(file)
         meth = temp_hash['meths'][what]
@@ -71,5 +72,10 @@ describe Marta::SimpleElementFinder::BasicFinder do
     finder = @helper.newclass('correct')
     element = finder.find
     expect(element.class).to eq Watir::Heading
+  end
+
+  it 'finds all the invisible elements', :need_browser do
+    @browser.goto @page_three_url
+    expect(@helper.newclass('correct').find_invisibles.length).to eq 3
   end
 end

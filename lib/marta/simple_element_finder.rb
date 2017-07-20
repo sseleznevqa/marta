@@ -73,6 +73,25 @@ module Marta
           subtype_of prefind
         end
       end
+
+      # Sometimes we need to find out what were hidden
+      def find_invisibles
+        result = Array.new
+        all = @engine.elements
+        all.each do |element|
+          if element.exists? and !element.visible?
+            result.push element
+          else
+            x, y = element.wd.location.x + 1, element.wd.location.y + 1
+            element_on_point = @engine.
+                 execute_script "return document.elementFromPoint(#{x}, #{y})"
+            if element_on_point != element
+              result.push element
+            end
+          end
+        end
+        return result
+      end
     end
 
     # We can simply find something
