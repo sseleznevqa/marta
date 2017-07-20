@@ -75,7 +75,7 @@ describe Marta::SimpleElementFinder::BasicFinder do
   end
 
   it 'finds all the invisible elements', :need_browser do
-    @browser.goto @page_three_url
-    expect(@helper.newclass('correct').find_invisibles.length).to eq 3
+    @browser.goto @page_six_url
+    expect(@helper.newclass('correct').find_invisibles.length).to eq 4
   end
 end
