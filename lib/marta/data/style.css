@@ -226,7 +226,11 @@ div[martastyle=html_content] div {
 }
 
 div[martastyle=html_content] div span {
-display: block;
+  display: block;
+  position: relative;
+  left: 30px;
+  text-align: left;
+  cursor: pointer;
 }
 
 div[martaclass=marta_div] b {
