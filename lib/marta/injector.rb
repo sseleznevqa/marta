@@ -50,17 +50,17 @@ module Marta
 
       # Taking a correct js file to inject
       def js
-        File.read(@folder + "/data/#{@what}.js").gsub("\n",'')
+        File.read(@folder + "/data/#{@what}.js")
       end
 
       # Taking a correct html file to inject
       def html
-        File.read(@folder + "/data/#{@what}.html").gsub("\n",'')
+        File.read(@folder + "/data/#{@what}.html")
       end
 
       # Taking a correct css file to inject
       def style
-        File.read(@folder + "/data/style.css").gsub("\n",'')
+        File.read(@folder + "/data/style.css")
       end
 
       # Injecting everything to the page

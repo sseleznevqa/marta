@@ -21,11 +21,15 @@
     <div martastyle=buttons_holder martaclass=marta_smthing>
       <input type=button martaclass=marta_smthing id=marta_confirm martastyle=confirm_button onclick=marta_end_loop(); value=Confirm />
       <input type=button martaclass=marta_smthing id=marta_set_by_hand martastyle=action_button onclick=marta_set_by_hand(); value="Set by hand" />
+      <input type=button martaclass=marta_smthing id=marta_show_html martastyle=action_button onclick=marta_show_html(); value="Find in html" />
     </div>
   </div>
   <div id=marta_s_element_type martaclass=marta_smthing martastyle=options_holder>
     <div martaclass=marta_smthing class=label id=marta_element_label>What we are looking for (one element or group?)</div>
     <label martaclass=marta_smthing><input type=checkbox id=marta_array martaclass=marta_smthing>Collection</label>
+  </div>
+  <div martaclass=marta_smthing martastyle=html_content>
+    <div martaclass=marta_smthing id=marta_s_html_holder readonly=true>Enable HTML selector by Find in html button. NOTE: It is highly experimental.</div>
   </div>
   <div martastyle=table_headers martaclass=marta_smthing>
     <input type=text martaclass=marta_smthing martastyle=name_field value=attribute_name disabled=disabled;>

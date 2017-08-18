@@ -21,7 +21,7 @@ module Marta
       def initialize(meth, requestor)
         @requestor = requestor
         @meth = meth
-        @xpath = xpath_by_meth
+        @xpath = xpath_by_meth if !@meth.nil?
         @engine = requestor.engine
       end
 
@@ -74,7 +74,7 @@ module Marta
         end
       end
 
-      # Sometimes we need to find out what were hidden
+      # Sometimes we need to find out what is hidden
       def find_invisibles
         result = Array.new
         all = @engine.elements

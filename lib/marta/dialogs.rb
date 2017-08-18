@@ -21,7 +21,7 @@ module Marta
     # @note It is believed that no user will use it
     class MethodSpeaker
 
-      include XPath, Lightning, Injector, PublicMethods
+      include XPath, Lightning, Injector, PublicMethods, SimpleElementFinder
 
       def initialize(method_name, requestor)
         @class_name = requestor.class_name
@@ -35,8 +35,8 @@ module Marta
       end
 
       # Standart question
-      def ask(what, title = 'Some title', data = Hash.new)
-        inject(what, title, data)
+      def ask(what, title = 'Some title', data = Hash.new, vars = Array.new)
+        inject(what, title, data, vars)
       end
 
       # Was something stated by user?
@@ -69,7 +69,7 @@ module Marta
           xpath_meth_merge
         end
       end
-
+      
       # Asking: "What are you looking for?"
       def ask_for_elements
         ask 'element', "Found #{@found} elements for #{@title}", @attrs

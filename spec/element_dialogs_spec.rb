@@ -11,6 +11,8 @@ describe Marta::SmartPage, :need_browser do
     @page_two_url = "file://#{Dir.pwd}" + "/spec/test_data_folder/page_two.html"
     @page_three_url = "file://#{Dir.pwd}" +
       "/spec/test_data_folder/page_three.html"
+    @page_seven_url = "file://#{Dir.pwd}" +
+      "/spec/test_data_folder/page_seven.html"
     FileUtils.rm_rf(@full_name)#To be sure that we have no precreated file
   end
 
@@ -46,6 +48,16 @@ describe Marta::SmartPage, :need_browser do
     data_hash = JSON.parse(file)
     expect(data_hash["meths"]["hello_world"]["self"]["class"].length).to eq(3)
     expect(data_hash["meths"]["hello_world"]["self"]["id"]).to eq("element1")
+  end
+
+  it 'can find invisible elements by html' do
+    @browser.goto @page_seven_url
+    page = Marta::SmartPage.new(@name, ({"vars" => {},"meths" => {}}), false)
+    page.send(:user_method_dialogs, "invisible")
+    expect(File.exists?(@full_name)).to be true
+    file = File.read(@full_name)
+    data_hash = JSON.parse(file)
+    expect(data_hash["meths"]["invisible"]["self"]["class"][0]).to eq("found")
   end
 
   it 'treats a collection mark' do

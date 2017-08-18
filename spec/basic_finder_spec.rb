@@ -78,4 +78,10 @@ describe Marta::SimpleElementFinder::BasicFinder do
     @browser.goto @page_six_url
     expect(@helper.newclass('correct').find_invisibles.length).to eq 4
   end
+
+  it 'can be created with nil instead of meth data' do
+    expect{Marta::SimpleElementFinder::BasicFinder.new(nil,
+      Marta::SmartPage.new('Dummy', ({"vars" => {},"meths" => {}}), false))}.
+        to_not raise_error
+  end
 end
