@@ -25,6 +25,9 @@ module Marta
   include OptionsAndPaths, ReadWrite, Json2Class
 
   class SmartPage
+
+    attr_accessor :data, :class_name, :edit_mark
+
     include BlackMagic, XPath, SimpleElementFinder, ClassesCreation,
             PublicMethods, Dialogs, Injector, Lightning, OptionsAndPaths,
             Json2Class, ReadWrite, UserValuePrework

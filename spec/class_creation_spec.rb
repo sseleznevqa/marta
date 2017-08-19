@@ -15,12 +15,12 @@ describe Marta::SmartPage do
     module Marta
       class SmartPage
         alias umd_saved user_method_dialogs
-        def user_method_dialogs(my_class_name, method_name, data)
+        def user_method_dialogs(method_name)
           donor_name = './spec/test_data_folder/test_pageobjects/Page_three.json'
           file = File.read(donor_name)
           temp_hash = JSON.parse(file)
-          data['meths'].merge!(temp_hash['meths'])
-          data
+          @data['meths'].merge!(temp_hash['meths'])
+          @data
         end
       end
     end

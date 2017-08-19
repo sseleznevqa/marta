@@ -25,9 +25,10 @@ module Marta
     # @note It is believed that no user will use it
     class MagicFinder < BasicFinder
 
-      def initialize(meth, engine, tolerancy, requestor)
+      def initialize(meth, tolerancy, requestor)
         @tolerancy = tolerancy
-        super(meth, engine, requestor)
+        @engine = requestor.engine
+        super(meth, requestor)
       end
 
       # We can prefind an element and wait for it.
@@ -140,7 +141,7 @@ module Marta
 
     # Marta can find something when data is incorrect (by Black magick)
     def marta_magic_finder(meth)
-      finder = MagicFinder.new(meth, engine, tolerancy_value, self)
+      finder = MagicFinder.new(meth, tolerancy_value, self)
       finder.find
     end
   end

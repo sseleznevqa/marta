@@ -21,13 +21,13 @@ module Marta
     # @note It is believed that no user will use it
     class MethodSpeaker
 
-      include XPath, Lightning, Injector, PublicMethods
+      include XPath, Lightning, Injector, PublicMethods, SimpleElementFinder
 
-      def initialize(class_name, method_name, data, requestor)
-        @class_name = class_name
+      def initialize(method_name, requestor)
+        @class_name = requestor.class_name
         @method_name = method_name
-        @data = data
-        @title = class_name+  '.' + method_name.to_s
+        @data = requestor.data
+        @title = @class_name+  '.' + method_name.to_s
         @requestor = requestor
         @found = 0
         @attrs = @data['meths'][@method_name]
@@ -35,8 +35,8 @@ module Marta
       end
 
       # Standart question
-      def ask(what, title = 'Some title', data = Hash.new)
-        inject(what, title, data)
+      def ask(what, title = 'Some title', data = Hash.new, vars = Array.new)
+        inject(what, title, data, vars)
       end
 
       # Was something stated by user?
@@ -69,7 +69,7 @@ module Marta
           xpath_meth_merge
         end
       end
-
+      
       # Asking: "What are you looking for?"
       def ask_for_elements
         ask 'element', "Found #{@found} elements for #{@title}", @attrs
@@ -149,10 +149,10 @@ module Marta
     end
 
     # Method definition process
-    def user_method_dialogs(my_class_name, method_name, data)
-      dialog_master = MethodSpeaker.new(my_class_name, method_name, data, self)
+    def user_method_dialogs(method_name)
+      dialog_master = MethodSpeaker.new(method_name, self)
       data = dialog_master.dialog
-      file_write(my_class_name.to_s, data)
+      file_write(self.class_name.to_s, data)
       data
     end
   end

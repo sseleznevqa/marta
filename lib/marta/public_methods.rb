@@ -10,12 +10,12 @@ module Marta
     #
     # User can create pageobject class using SmartPage.new
     #
-    # SmartPage can be created withoud all the data. But in that case
+    # SmartPage can be created without all the data. But in that case
     # it will be pretty useless until values are provided
     #
-    # The first argument is a class name. It is a constant like string like
+    # The first argument is a class name. It is a constant-like string like
     # "MyClass". All data provided will be stored in MyClass.json
-    # Once created that way you can call it like MyClass.new.
+    # Once it is created that way you can call it like MyClass.new.
     # That argument is totally necessary one
     #
     # The second argument is a marta's special data hash. By default =
@@ -41,7 +41,7 @@ module Marta
     def method_edit(name)
       method_name = correct_name(name)
       exact_name = method_name.to_s + "_exact"
-      data = user_method_dialogs(@class_name, method_name, @data)
+      data = user_method_dialogs(method_name)
       define_singleton_method method_name.to_sym do |meth_content=@data['meths'][method_name]|
         marta_magic_finder(meth_content)
       end

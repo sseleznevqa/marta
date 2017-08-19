@@ -1,0 +1,21 @@
+<html>
+  <head></head>
+  <body>
+    <label style='display:none;' class='found'>One</label>
+    <label style='visibility:hidden'>Two</label>
+    <label style='position: absolute; bottom: 100px; right: 100px; z-index:999'>3</label>
+    <div style='position: absolute; bottom: 90px; right: 90px; height: 30px; width: 70px; z-index: 1000; background-color: black;'></div>
+    <label> Visibleone</label>
+    <script>
+      setTimeout(function() { clickById('marta_show_html'); }, 1000);
+      setTimeout(function() { clickByXpath('//span[1]'); }, 2000);
+      setTimeout(function() { clickById('marta_confirm'); }, 3000);
+      function clickById(id){
+        document.getElementById(id).click()
+      }
+      function clickByXpath(path) {
+        document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+      };
+    </script>
+  </body>
+</html>
