@@ -40,7 +40,7 @@ your_page.your_element.click
 5. Add *url* variable with the url of desired page as a default value.
 6. Confirm.
 7. Then page will be opened and you will be asked about your_element.
-8. Just click the element and confirm the selection (twice)
+8. Just click the element and confirm the selection.
 9. Now you can run the test without LEARN parameter and it will work.
 
 **So you are `writing code in pageobject pattern` style.**
@@ -131,13 +131,16 @@ engine.element(id: 'will_be_located_without_Marta')
 
 *A: When defining an element you can set a collection checkbox at the top of the dialog. In that case Marta will return Watir::ElementCollection.*
 
+**Q: How can I find an invisible element? Or hardly clickable element with 1px size?**
+
+*A: At the stage of element defining you can see a button "Find by HTML". That button will open html code of your page in a special blue form. Find the html code of your element and click on it.*
+
 **Q: How can I find not just an element but a Watir::Radio for example?**
 
 *A: Marta automatically performs to_subtype for every element. So if your element is a radio button you will be able to use specific methods.*
 ```ruby
 your_page.element_that_supposed_to_be_radio.set?
 ```
-*ATTENTION. Until [Watir issue 537](https://github.com/watir/watir/issues/537) is not fixed it may work wrong. Sometimes.*
 
 **Q: And what about elements under iframes?**
 
@@ -173,7 +176,7 @@ your_page.important_element.click
 
 **Q: And what about Cucumber? Will it work with Marta?**
 
-*A: I don't know. I am not a Cucumber fan and I have giant doubts that Marta and Cucumber will work together well. But you can try. Also I am thinking about it.*
+*A: Yes it is working with Cucumber and Spinach. I will add some examples later.*
 
 **Q: Ok. With what WILL it work?**
 
