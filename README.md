@@ -106,6 +106,7 @@ TestPage.new.open_page("smthing.com") # Will navigate you to http://smthing.com
 ```
 
 *Predefined url way:*
+
 *At the step of the page defining set variable url = smthing.com*
 ```ruby
 dance_with
@@ -115,6 +116,7 @@ test_page.open_page # Will navigate you to http://smthing.com
 ```
 
 *The most flexible way:*
+
 *At the step of the page defining you set path = testpath*
 ```ruby
 dance_with base_url: "smthing.com"
@@ -122,6 +124,7 @@ test_page = TestPage.new
 test_page.path #=> "testpath"
 test_page.open_page # Will navigate you to http://smthing.com/testpath
 ```
+*Note: If there is no path provided than Marta will go to base_url. Also if url value defined for page Marta will use it instead the base_url. If url is given as argument for the open_page method Marta will ignore both url and base_url values and will use argument provided.*
 
 **Q: And what if I want to create page and define element without learn mode? For example in the middle of a debug session.**
 
