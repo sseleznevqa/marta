@@ -167,7 +167,7 @@ describe Marta::SmartPage do
   context 'teaching when learn is enabled', need_browser: false do
 
     before(:each) do
-      marta_fire(:dance_with, learn: true)
+      dance_with learn: true
       marta_fire(:json_2_class, @full_name, true)
       @learn_class = Json2Class.new
       def @learn_class.marta_magic_finder(*args)
@@ -184,7 +184,7 @@ describe Marta::SmartPage do
     end
 
     after(:all) do
-      marta_fire(:dance_with, learn: false)
+      dance_with learn: false
     end
 
     it 'methods' do

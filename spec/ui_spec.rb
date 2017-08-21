@@ -15,6 +15,7 @@ describe Marta::SmartPage do
   end
 
   it 'can eat missed Constans' do
+    dance_with learn: true
     def @object.mars_attacks
       Attack
     end

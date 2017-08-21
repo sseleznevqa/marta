@@ -54,11 +54,13 @@ module Marta
   # dance_with is for creating settings to be used later.
   # Settings can be changed at any time by calling dance with.
   # Read more in the README
-  def dance_with(browser: nil, folder: nil, learn: nil, tolerancy: nil)
+  def dance_with(browser: nil, folder: nil, learn: nil, tolerancy: nil,
+                 base_url: nil)
     SettingMaster.set_engine browser
     SettingMaster.set_folder folder
+    SettingMaster.set_base_url base_url
     SettingMaster.set_learn learn
-    SmartPageCreator.create_all
+    read_folder
     SettingMaster.set_tolerancy tolerancy
     engine
   end

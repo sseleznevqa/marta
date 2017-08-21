@@ -5,6 +5,7 @@ require 'marta'
 require 'rspec'
 
 RSpec.configure do |config|
+  config.include Marta
 
   config.before do |example|
     include Marta
@@ -21,7 +22,7 @@ RSpec.configure do |config|
     end
     #We will not work with windows... for now
     folder = "./spec/test_data_folder/test_pageobjects"
-    marta_fire(:dance_with, browser: @browser, folder: folder, learn: false)
+    dance_with(browser: @browser, folder: folder, learn: false)
   end
   config.after do |example|
     if example.metadata[:need_browser]

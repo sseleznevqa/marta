@@ -28,7 +28,7 @@ describe Marta::SmartPage do
     end
 
     it 'creating new chrome when engine was never defined' do
-      new_instance = marta_fire(:dance_with)
+      new_instance = dance_with
       expect(new_instance.class).to eq Watir::Browser
       expect(new_instance != @browser).to be true
     end
