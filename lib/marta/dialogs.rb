@@ -69,7 +69,7 @@ module Marta
           xpath_meth_merge
         end
       end
-      
+
       # Asking: "What are you looking for?"
       def ask_for_elements
         ask 'element', "Found #{@found} elements for #{@title}", @attrs

@@ -115,9 +115,9 @@ describe Marta::SmartPage do
       @class.send(:build_var, "attack", "pew-pew!")
       expect(@class.attack).to eq "pew-pew!"
       @class.send(:build_var, "attack", "boom!")
-      expect(@class.attack).to eq "pew-pew!"
-      @class.send(:build_var, "methods", "pew-pew!")
-      expect(@class.methods).to_not eq 'pew-pew'
+      expect(@class.attack).to eq "boom!"
+      @class.send(:build_var, "methods", "boom!")
+      expect(@class.methods).to_not eq 'boom!'
     end
 
     it 'possibility to strip desired method name' do

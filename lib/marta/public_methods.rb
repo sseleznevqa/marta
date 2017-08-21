@@ -1,5 +1,4 @@
 require 'marta/options_and_paths'
-require 'pry'
 module Marta
 
   # Methods that user can use out of the box in SmartPage
@@ -30,9 +29,11 @@ module Marta
       @data ||= my_data
       @class_name ||= my_class_name
       @edit_mark ||= will_edit
+      data_vars = Hash.new
       build_content my_data
       if will_edit
-        page_edit my_class_name, my_data
+        data_vars = page_edit my_class_name, my_data
+        my_data["vars"] = data_vars if data_vars != Hash.new
       end
       # We need optimization here very much!
       build_content my_data
