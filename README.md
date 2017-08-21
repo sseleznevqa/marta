@@ -124,7 +124,7 @@ test_page = TestPage.new
 test_page.path #=> "testpath"
 test_page.open_page # Will navigate you to http://smthing.com/testpath
 ```
-*Note: If there is no path provided than Marta will go to base_url. Also if url value defined for page Marta will use it instead the base_url. If url is given as argument for the open_page method Marta will ignore both url and base_url values and will use argument provided.*
+*Note: If there is no path provided than Marta will go to base_url. Also if url value is defined for page Marta will use it instead the base_url. If url is given as argument for the open_page method Marta will ignore both url and base_url values and will use the argument provided.*
 
 **Q: And what if I want to create page and define element without learn mode? For example in the middle of a debug session.**
 
@@ -209,9 +209,9 @@ your_page.important_element.click
 
 *A: Yes it is working with Cucumber and Spinach. I will add some examples later.*
 
-**Q: Ok. With what WILL it work?**
+**Q: Where is an example?**
 
-*A: It should work with rspec and parallel_rspec. See example_project for example*
+*A: See "example_project" for rspec based example*
 
 **Q: How can I design more object oriented and DRY tests using Marta**
 
