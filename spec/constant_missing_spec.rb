@@ -60,7 +60,7 @@ describe Marta::SmartPage do
           #alias json_2_class j2c_saved
         #end
       #end
-      marta_fire(:dance_with, learn: true)
+      dance_with learn: true
       @full_name = "./spec/test_data_folder/test_pageobjects/Json2Class.json"
       marta_fire(:json_2_class, @full_name, true)
       #Monkeypatch!

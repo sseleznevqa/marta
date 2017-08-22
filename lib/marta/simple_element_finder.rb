@@ -56,12 +56,7 @@ module Marta
 
       # Transforming an element to a subtype
       def subtype_of(element)
-        element = @engine.element(xpath: @xpath).to_subtype
-        #https://github.com/watir/watir/issues/537
-        if element.class == Watir::IFrame
-          element = @engine.iframe(xpath: @xpath)
-        end
-        element
+        @engine.element(xpath: @xpath).to_subtype
       end
 
       # Main logic. We are returning a prefinded collection

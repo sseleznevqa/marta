@@ -29,9 +29,11 @@ module Marta
       @data ||= my_data
       @class_name ||= my_class_name
       @edit_mark ||= will_edit
+      data_vars = Hash.new
       build_content my_data
       if will_edit
-        page_edit my_class_name, my_data
+        data_vars = page_edit my_class_name, my_data
+        my_data["vars"] = data_vars if data_vars != Hash.new
       end
       # We need optimization here very much!
       build_content my_data
@@ -58,13 +60,16 @@ module Marta
 
     # If page has url variable it can be opened like Page.new.open_page
     def open_page(url = nil)
-      if url != nil
+      @path ||= ""
+      if !url.nil?
         engine.goto url
-      else
-        if @url == nil
-          raise ArgumentError, "You should set url to use open_page"
-        end
+      elsif !@url.nil?
         engine.goto @url
+      elsif base_url != ""
+        engine.goto base_url + "/" + (@path.nil? ? "" : @path)
+      else
+        raise ArgumentError, "You should set url to use open_page. You may"\
+        " also use base_url option for dance_with and path for page object"
       end
     end
 

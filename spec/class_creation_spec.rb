@@ -115,9 +115,9 @@ describe Marta::SmartPage do
       @class.send(:build_var, "attack", "pew-pew!")
       expect(@class.attack).to eq "pew-pew!"
       @class.send(:build_var, "attack", "boom!")
-      expect(@class.attack).to eq "pew-pew!"
-      @class.send(:build_var, "methods", "pew-pew!")
-      expect(@class.methods).to_not eq 'pew-pew'
+      expect(@class.attack).to eq "boom!"
+      @class.send(:build_var, "methods", "boom!")
+      expect(@class.methods).to_not eq 'boom!'
     end
 
     it 'possibility to strip desired method name' do
@@ -167,7 +167,7 @@ describe Marta::SmartPage do
   context 'teaching when learn is enabled', need_browser: false do
 
     before(:each) do
-      marta_fire(:dance_with, learn: true)
+      dance_with learn: true
       marta_fire(:json_2_class, @full_name, true)
       @learn_class = Json2Class.new
       def @learn_class.marta_magic_finder(*args)
@@ -184,7 +184,7 @@ describe Marta::SmartPage do
     end
 
     after(:all) do
-      marta_fire(:dance_with, learn: false)
+      dance_with learn: false
     end
 
     it 'methods' do

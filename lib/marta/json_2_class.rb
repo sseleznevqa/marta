@@ -86,8 +86,8 @@ module Marta
     end
 
     def build_content(data)
-      build_methods(data['meths'])
-      build_vars(data['vars'])
+      build_methods(data['meths']) if !data['meths'].nil?
+      build_vars(data['vars']) if !data['vars'].nil?
     end
 
     def build_methods(methods)
@@ -115,6 +115,8 @@ module Marta
     def build_var(name, content)
       if !self.methods.include?(name.to_sym) and (@data['meths'][name].nil?)
         self.singleton_class.send(:attr_accessor, name.to_sym)
+        instance_variable_set("@#{name}", process_string(content))
+      elsif self.methods.include?(name.to_sym) and (@data['meths'][name].nil?)
         instance_variable_set("@#{name}", process_string(content))
       else
         if !@data['meths'][name].nil?

@@ -27,7 +27,7 @@ describe Marta::SmartPage do
     end
     before(:each) do
       @full_name = "./spec/test_data_folder/test_pageobjects/Json2Class.json"
-      marta_fire(:dance_with, learn: true)
+      dance_with learn: true
       marta_fire(:json_2_class, @full_name, true)
       @class = Json2Class.new
       def @class.marta_magic_finder(*args)
@@ -39,7 +39,7 @@ describe Marta::SmartPage do
     end
 
     after(:all) do
-      marta_fire(:dance_with, learn: false)
+      dance_with learn: false
       module Marta
         class SmartPage
           alias user_method_dialogs umd_saved

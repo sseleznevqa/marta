@@ -16,6 +16,7 @@ module Marta
     def page_edit(const, data=Hash.new)
       data['vars'] = inject('page', const, data['vars'])
       json_2_class(file_write(const.to_s, data))
+      data['vars']
     end
   end
 end

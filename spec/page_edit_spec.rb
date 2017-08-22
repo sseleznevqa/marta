@@ -7,6 +7,7 @@ describe Marta::SmartPage, :need_browser do
     @full_name = "./spec/test_data_folder/test_pageobjects/#{@name}.json"
     @data, @data['meths'], @data['vars'] = Hash.new, Hash.new, Hash.new
     @page_four_url = "file://#{Dir.pwd}/spec/test_data_folder/page_four.html"
+    @page_eight_url = "file://#{Dir.pwd}/spec/test_data_folder/page_eight.html"
     FileUtils.rm_rf(@full_name)#To be sure that we have no precreated file
   end
 
@@ -20,7 +21,14 @@ describe Marta::SmartPage, :need_browser do
     expect(Page.new.hello).to eq "world"
   end
 
-  after(:each) do
+  it 'can edit page variables on fly' do
+    dance_with learn: true
+    @browser.goto @page_eight_url
+    page = Page.new
+    expect(page.hello).to eq "kitty"
+  end
+
+  after(:all) do
     FileUtils.rm_rf(@full_name)
   end
 end
