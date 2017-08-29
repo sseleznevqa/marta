@@ -71,6 +71,7 @@ module Marta
         raise ArgumentError, "You should set url to use open_page. You may"\
         " also use base_url option for dance_with and path for page object"
       end
+      self
     end
 
     alias_method :default_method_missing, :method_missing
