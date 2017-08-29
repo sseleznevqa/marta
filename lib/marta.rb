@@ -36,7 +36,6 @@ module Marta
     def self.open_page(*args)
       page = self.new
       page.open_page(*args)
-      page
     end
   end
 
