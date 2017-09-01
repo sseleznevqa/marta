@@ -240,7 +240,7 @@ g_page.search "I am in love with selenium."
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.31813 only. And I am not a professional developer. But I am training her on new tricks.*
+*A: Nothing. Marta is under development. Her version is 0.31831 only. And I am not a professional developer. But I am training her on new tricks.*
 
 ## Internal Design
 
