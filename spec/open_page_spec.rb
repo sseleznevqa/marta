@@ -13,8 +13,9 @@ describe Marta::SmartPage, :need_browser do
   end
 
   it 'can open page using predefined url' do
-    Test_object.new.open_page
+    page = Test_object.new.open_page
     expect(@browser.url).to eq "about:blank"
+    expect(page.class).to eq Test_object
   end
 
   it 'can open page using base url and path' do
@@ -40,5 +41,23 @@ describe Marta::SmartPage, :need_browser do
     dance_with base_url: "file://#{Dir.pwd}/spec/test_data_folder"
     Xpath.new.open_page
     expect(@browser.text.include?("page_five.html")).to be true
+  end
+
+  it 'can open page and object using predefined url' do
+    page = Test_object.open_page
+    expect(@browser.url).to eq "about:blank"
+    expect(page.class).to eq Test_object
+  end
+
+  it 'can open page and object using base url and path' do
+    dance_with base_url: "file://#{Dir.pwd}/spec/test_data_folder"
+    page = Test_object2.open_page
+    expect(@browser.title).to eq "Page five"
+    expect(page.class).to eq Test_object2
+  end
+
+  it 'is opening base url when there is no path provided' do
+    Xpath.open_page("about:blank")
+    expect(@browser.url).to eq "about:blank"
   end
 end

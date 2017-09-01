@@ -1,10 +1,11 @@
 @keyframes marta_found {
   0%   {border: 4px dashed #6495ED;}
-  20%  {border: 4px dashed #FF7F50}
-  40%  {border: 4px dashed #8FBC8F;}
-  60% {border: 4px dashed #FFA500}
-  80% {border: 4px dashed #DDA0DD}
-  100% {border: 4px dashed #6495ED;}}
+  20%  {border: 4px dashed #FF7F50; transform: scale(1.1);}
+  40%  {border: 4px dashed #8FBC8F; transform: scale(1.2);}
+  60% {border: 4px dashed #FFA500; transform: scale(1.3);}
+  80% {border: 4px dashed #DDA0DD; transform: scale(1.2);}
+  100% {border: 4px dashed #6495ED; transform: scale(1.1);}
+}
 
 div[martaclass=marta_div] * {
   animation : none;
@@ -62,7 +63,7 @@ div[martaclass=marta_div] * {
   caption-side : top;
   clear : none;
   clip : auto;
-  color : inherit;
+  color : black;
   columns : auto;
   column-count : auto;
   column-fill : balance;
@@ -324,4 +325,7 @@ input[martaclass=marta_smthing][type=checkbox]:checked {
 
 [martaclass=foundbymarta]
   {animation: marta_found 6s infinite;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
 }

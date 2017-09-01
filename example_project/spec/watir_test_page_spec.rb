@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe "We will do some dummy things like" do
   before(:each) do
-    @page = MyTestPage.new
-    @page.open_page
+    @page = MyTestPage.open_page
   end
   it "touching every single element at the test page" do
     @page.form_fill

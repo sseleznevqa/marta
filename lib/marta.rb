@@ -31,6 +31,12 @@ module Marta
     include BlackMagic, XPath, SimpleElementFinder, ClassesCreation,
             PublicMethods, Dialogs, Injector, Lightning, OptionsAndPaths,
             Json2Class, ReadWrite, UserValuePrework
+
+    # open_page can create new instance
+    def self.open_page(*args)
+      page = self.new
+      page.open_page(*args)
+    end
   end
 
   # That is how Marta connected to the world
