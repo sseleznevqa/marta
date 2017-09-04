@@ -23,7 +23,7 @@ RSpec.configure do |config|
     #We will not work with windows... for now
     folder = "./spec/test_data_folder/test_pageobjects"
     dance_with(browser: @browser, folder: folder, learn: false,
-               tolerancy: 1024, base_url: "")
+               tolerancy: 1024, base_url: "", cold_timeout: 10)
   end
   config.after do |example|
     if example.metadata[:need_browser]

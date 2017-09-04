@@ -60,7 +60,7 @@ describe Marta::SmartPage, :need_browser do
     expect(element.length).to be 1
   end
 
-  it 'treats iframes correctly until Watir issue 537 is not fixed' do
+  it 'treats iframes correctly' do
     element = marta_fire(:marta_magic_finder, @iframe)
     expect(element.class).to eq Watir::IFrame
     expect{element.switch_to!}.to_not raise_error

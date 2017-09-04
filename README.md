@@ -139,13 +139,20 @@ test_page = SmartPage.new("TestPage")
 test_page.method_edit("magic_button")
 ```
 
-**Q: Sometimes Marta is looking for lost element for too long. What can I do about it?**
+**Q: Sometimes Marta is looking for the lost element for too long. What can I do about it?**
 
 *A: You can set tolerancy parameter. Larger = longer*
 ```ruby
 dance_with tolerancy: 1024# is the default value
 ```
 *That logic will be changed to more understandable soon. I hope.*
+
+**Q: Marta is trying to find the lost element after pretty long time. Why?**
+
+*A: Marta is not starting active searching of the element immediately because she hopes that the element will appear (created by js). By default marta is waiting for the element for 10 seconds. But if you are sure that it is too long (or maybe too short) you can change that waiting time like:*
+```ruby
+dance_with cold_timeout: 5
+```
 
 **Q: How can I get Watir browser instance if I want for example execute_script or find element without Marta?**
 

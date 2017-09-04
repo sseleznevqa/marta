@@ -127,7 +127,7 @@ div[martaclass=marta_div] * {
   right : auto;
   tab-size : 8;
   table-layout : auto;
-  text-align : inherit;
+  text-align : auto;
   text-align-last : auto;
   text-decoration : none;
   text-decoration-color : inherit;
