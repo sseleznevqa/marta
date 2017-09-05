@@ -37,20 +37,20 @@ module Marta
       end
 
       # Inserting to the page
-      def insert_to_page(tag, inner, first = true)
+      def insert_to_page(tag, inner, first = true, attributes = Hash.new)
         where = get_where(first)
+        a_string = "newMartaObject.setAttribute('martaclass','marta_#{tag}');"
+        attributes.each_pair do |key, val|
+          a_string = a_string + "\n" +
+                    "newMartaObject.setAttribute('#{key.to_s}','#{val.to_s}');"
+        end
         script = <<-JS
         var newMartaObject = document.createElement('#{tag}');
-        newMartaObject.setAttribute('martaclass','marta_#{tag}');
+        #{a_string}
         newMartaObject.innerHTML   = '#{inner}';
         document.body.insertBefore(newMartaObject,document.body.#{where}Child);
         JS
         @engine.execute_script script.gsub("\n",'')
-      end
-
-      # Taking a correct js file to inject
-      def js
-        File.read(@folder + "/data/#{@what}.js")
       end
 
       # Taking a correct html file to inject
@@ -66,7 +66,8 @@ module Marta
       # Injecting everything to the page
       def files_to_page
         insert_to_page('div', html)
-        insert_to_page('script', js, false)
+        insert_to_page('script', "", false,
+                               {src: "http://localhost:6262/#{@what}.js"})
         insert_to_page('style', style, false)
       end
 

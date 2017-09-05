@@ -60,7 +60,8 @@ describe Marta::SmartPage do
   #I need more specific tests for iframe
   it 'can change browser to iframe and back.', :need_browser do
     iframe = @browser.iframe
-    expect{dance_with browser: iframe}.to raise_error
+    expect{dance_with browser: iframe}.
+                       to raise_error(Watir::Exception::UnknownFrameException)
     @browser.goto @page_three_url
     dance_with browser: iframe
     expect(marta_fire(:engine).class).to eq Watir::IFrame
@@ -69,8 +70,8 @@ describe Marta::SmartPage do
   end
 
   it 'is destroing old browser when new one is provided', :need_browser do
-    dance_with browser: Watir::Browser.new :chrome
-    expect{@browser}.to raise_error(Watir::Exception::Error,
+    dance_with(browser: Watir::Browser.new(:chrome))
+    expect{@browser.url}.to raise_error(Watir::Exception::Error,
                                     "browser was closed")
   end
 
