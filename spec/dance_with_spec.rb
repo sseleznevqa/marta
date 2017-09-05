@@ -68,6 +68,12 @@ describe Marta::SmartPage do
     expect(marta_fire(:engine).class).to eq Watir::Browser
   end
 
+  it 'is destroing old browser when new one is provided', :need_browser do
+    dance_with browser: Watir::Browser.new :chrome
+    expect{@browser}.to raise_error(Watir::Exception::Error,
+                                    "browser was closed")
+  end
+
   it 'works correctly in different threads' do
     dance_with(tolerancy: 777, folder: @folder, browser: 'crocodile',
                learn: true, base_url: 'Hello', cold_timeout: 11)
