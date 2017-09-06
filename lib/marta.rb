@@ -11,11 +11,9 @@ require 'marta/json_2_class'
 require 'marta/black_magic'
 require 'marta/simple_element_finder'
 require 'marta/x_path'
-require 'marta/server'
 require "watir"
 require 'fileutils'
 require 'json'
-require 'webrick'
 
 #
 # Marta class is providing three simple methods.
@@ -32,7 +30,7 @@ module Marta
 
     include BlackMagic, XPath, SimpleElementFinder, ClassesCreation,
             PublicMethods, Dialogs, Injector, Lightning, OptionsAndPaths,
-            Json2Class, ReadWrite, UserValuePrework, Server
+            Json2Class, ReadWrite, UserValuePrework
 
     # open_page can create new instance
     def self.open_page(*args)
@@ -64,7 +62,6 @@ module Marta
   # Read more in the README
   def dance_with(browser: nil, folder: nil, learn: nil, tolerancy: nil,
                  base_url: nil, cold_timeout: nil)
-    MartaServer.new if engine.nil?
     SettingMaster.set_engine browser
     SettingMaster.set_folder folder
     SettingMaster.set_base_url base_url
