@@ -267,7 +267,7 @@ input[martastyle=confirm_button]:hover {
     border-color: green;
 }
 
-input[martastyle=cancel_button]:hover {
+input[martastyle="cancel_button"]:hover {
     background: linear-gradient(pink , red);
     border-color: red;
 }
