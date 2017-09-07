@@ -149,7 +149,7 @@ dance_with tolerancy: 1024# is the default value
 
 **Q: Marta is trying to find the lost element after pretty long time. Why?**
 
-*A: Marta is not starting active searching of the element immediately because she hopes that the element will appear (created by js). By default marta is waiting for the element for 10 seconds. But if you are sure that it is too long (or maybe too short) you can change that waiting time like:*
+*A: Marta is not starting active search for the element immediately because she hopes that the element will appear (created by js). By default marta is waiting for the element for 10 seconds. But if you are sure that it is too long (or maybe too short) you can change that waiting time like:*
 ```ruby
 dance_with cold_timeout: 5
 ```
