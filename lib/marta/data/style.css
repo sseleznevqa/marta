@@ -213,6 +213,26 @@ div[martastyle=hint] {
     margin: 0 auto;
 }
 
+div[martastyle=at_large] {
+  position:fixed;
+  padding:0;
+  margin:0;
+  top:0;
+  left:0;
+  opacity: 0;
+  background: black;
+  height: 100%;
+  width: 100%;
+  pointer-events: visible;
+  display: block;
+  z-index: 149000;
+}
+
+div[martastyle=off] {
+  height: 0%;
+  width: 0%;
+}
+
 div[martastyle=html_content]{
   text-align: center;
 }
