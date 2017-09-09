@@ -1,4 +1,3 @@
-require 'pry'
 module Marta
 
   #
@@ -129,7 +128,6 @@ module Marta
       syringe = Syringe.new(engine, what, title, data, gem_libdir,
                                                  custom_vars, custom_scripts)
       syringe.actual_injection
-      #binding.pry
       syringe.get_result
     end
   end
