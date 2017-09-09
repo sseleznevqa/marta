@@ -111,7 +111,7 @@ div[martaclass=marta_div] * {
   outline-color : invert;
   outline-style : none;
   outline-width : medium;
-  overflow : visible;
+  overflow : auto;
   overflow-x : visible;
   overflow-y : visible;
   padding : 0;
