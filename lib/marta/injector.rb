@@ -1,4 +1,3 @@
-require 'pry'
 module Marta
 
   #
@@ -82,11 +81,7 @@ module Marta
 
       # Syringe runs scripts
       def run_script(script)
-        begin
-          @engine.execute_script(script)
-        rescue
-          binding.pry
-        end
+        @engine.execute_script(script)
       end
 
       # Syringe takes array of hashes to set lots of variables
@@ -120,11 +115,8 @@ module Marta
         result = false
         while result != true
           # When Marta can't get a result she is reinjecting her stuff
-          begin
-            result = @engine.execute_script("return document.marta_confirm_mark")
-          rescue
-            actual_injection
-          end
+          result = @engine.execute_script("return document.marta_confirm_mark")
+          actual_injection if result.nil?
         end
         @engine.execute_script("return document.marta_result")
       end
@@ -136,7 +128,6 @@ module Marta
       syringe = Syringe.new(engine, what, title, data, gem_libdir,
                                                  custom_vars, custom_scripts)
       syringe.actual_injection
-      binding.pry
       syringe.get_result
     end
   end
