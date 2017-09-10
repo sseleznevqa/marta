@@ -157,6 +157,12 @@ div[martaclass=marta_div] {
     border: 2px solid black;
     outline: 2px solid #bbbbbb;
     background-color: lightgray;
+    position : relative;
+    z-index : 150000;
+    padding: 0;
+    margin: 0px 0px 0px 0px;
+    overflow-y: scroll;
+    max-height: 100%;
 }
 
 div div[martastyle=header] {
@@ -189,17 +195,11 @@ div[martaclass=marta_div][martastyle=hidden]{
   height: 0px;
   outline: none;
   border: none;
+  overflow-y: initial;
 }
 
 h2#marta_main_title {
     font-size: 20px;
-}
-
-div[martaclass=marta_div] {
-  position : relative;
-  z-index : 150000;
-  padding: 0;
-  margin: 0px 0px 0px 0px;
 }
 
 div[martastyle=hint] {
