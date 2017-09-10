@@ -185,6 +185,9 @@ input[martastyle=icon_button] {
     background-color: lightgrey;
     border: 1px solid black;
     visibility: visible;
+    width: 30px;
+    height: 26px;
+    text-align: center;
 }
 
 div[martaclass=marta_div][martastyle=hidden] *:not([martastyle=icon_button]) {
