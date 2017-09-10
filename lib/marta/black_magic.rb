@@ -1,5 +1,6 @@
 require 'marta/x_path'
 require 'marta/simple_element_finder'
+require 'marta/options_and_paths'
 
 module Marta
 
@@ -15,7 +16,7 @@ module Marta
   # becoming larger than tolerancy value
   module BlackMagic
 
-    include XPath, SimpleElementFinder
+    include XPath, SimpleElementFinder, OptionsAndPaths
 
     private
 
@@ -24,6 +25,8 @@ module Marta
     #
     # @note It is believed that no user will use it
     class MagicFinder < BasicFinder
+
+      include OptionsAndPaths
 
       def initialize(meth, tolerancy, requestor)
         @tolerancy = tolerancy
@@ -34,7 +37,7 @@ module Marta
       # We can prefind an element and wait for it.
       def prefind_with_waiting
         begin
-          prefind.wait_until_present(timeout: 10)
+          prefind.wait_until_present(timeout: SettingMaster.cold_timeout)
         rescue
           # found nothing
           prefind

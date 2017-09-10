@@ -30,10 +30,8 @@ describe Marta::SimpleElementFinder::BasicFinder do
     @helper = Helper.new
   end
 
-  it 'waits for prefinded element', :need_browser do
-    @browser.goto @page_three_url
-    expect(@helper.newclass('correct').prefind_with_waiting.class).
-      to eq Watir::HTMLElement
+  after(:all) do
+    dance_with cold_timeout: 10
   end
 
   it 'waits for prefinded element for 10 seconds', :need_browser do
@@ -41,6 +39,15 @@ describe Marta::SimpleElementFinder::BasicFinder do
     t = Time.now
     @helper.newclass('broken').prefind_with_waiting
     expect(Time.now-t).to be >= 10
+  end
+
+  it 'sometimes waits for predefined element not so long', :need_browser do
+    dance_with cold_timeout: 5
+    @browser.goto @page_three_url
+    t = Time.now
+    @helper.newclass('broken').prefind_with_waiting
+    expect(Time.now-t).to be >= 5
+    expect(Time.now-t).to be < 6
   end
 
   it 'finds a broken element', :need_browser do

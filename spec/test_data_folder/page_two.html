@@ -9,7 +9,13 @@
       setTimeout(function() { clickById('marta_confirm'); }, 4000);
       setTimeout(function() { clickById('marta_confirm'); }, 5000);
       function clickById(id){
-        document.getElementById(id).click()
+        document.getElementById(id).scrollIntoView();
+        var rect = document.getElementById(id).getBoundingClientRect();
+        document.marta_test_xx = rect.left+1;
+        document.marta_test_yy = rect.top+1;
+        document.elementFromPoint(document.marta_test_xx, document.marta_test_yy).click();
+        document.marta_test_xx = 0;
+        document.marta_test_yy = 0;
       }
       function setValueById(id,value){
         document.getElementById(id).value = value;

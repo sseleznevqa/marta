@@ -28,7 +28,7 @@ module Marta
         @custom_scripts = custom_scripts
         @default_vars = [{"marta_what": "\"#{@title}\""},
           {"old_marta_Data": @data.to_s.gsub('=>',':').gsub('nil','null')}]
-        @default_scripts = ["marta_add_data();"]
+        @default_scripts = ["document.marta_add_data();"]
       end
 
       # "first" or "last".
@@ -39,12 +39,16 @@ module Marta
       # Inserting to the page
       def insert_to_page(tag, inner, first = true)
         where = get_where(first)
-        script = <<-JS
-        var newMartaObject = document.createElement('#{tag}');
-        newMartaObject.setAttribute('martaclass','marta_#{tag}');
-        newMartaObject.innerHTML   = '#{inner}';
-        document.body.insertBefore(newMartaObject,document.body.#{where}Child);
-        JS
+        if tag != "script"
+          script = <<-JS
+          var newMartaObject = document.createElement('#{tag}');
+          newMartaObject.setAttribute('martaclass','marta_#{tag}');
+          newMartaObject.innerHTML   = '#{inner}';
+          document.body.insertBefore(newMartaObject,document.body.#{where}Child);
+          JS
+        else
+          script = inner
+        end
         @engine.execute_script script.gsub("\n",'')
       end
 
@@ -72,7 +76,7 @@ module Marta
 
       # Syringe sets javascript variables
       def set_var(var, value)
-        insert_to_page('script', "var #{var} = #{value};", false)
+        insert_to_page('script', "document.#{var} = #{value};", false)
       end
 
       # Syringe runs scripts
@@ -111,13 +115,10 @@ module Marta
         result = false
         while result != true
           # When Marta can't get a result she is reinjecting her stuff
-          begin
-            result = @engine.execute_script("return marta_confirm_mark")
-          rescue
-            actual_injection
-          end
+          result = @engine.execute_script("return document.marta_confirm_mark")
+          actual_injection if result.nil?
         end
-        @engine.execute_script("return marta_result")
+        @engine.execute_script("return document.marta_result")
       end
     end
 

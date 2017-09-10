@@ -111,7 +111,7 @@ div[martaclass=marta_div] * {
   outline-color : invert;
   outline-style : none;
   outline-width : medium;
-  overflow : visible;
+  overflow : auto;
   overflow-x : visible;
   overflow-y : visible;
   padding : 0;
@@ -127,7 +127,7 @@ div[martaclass=marta_div] * {
   right : auto;
   tab-size : 8;
   table-layout : auto;
-  text-align : inherit;
+  text-align : auto;
   text-align-last : auto;
   text-decoration : none;
   text-decoration-color : inherit;
@@ -211,6 +211,26 @@ div[martastyle=hint] {
     z-index: 1;
     display: table;
     margin: 0 auto;
+}
+
+div[martastyle=at_large] {
+  position:fixed;
+  padding:0;
+  margin:0;
+  top:0;
+  left:0;
+  opacity: 0;
+  background: black;
+  height: 100%;
+  width: 100%;
+  pointer-events: visible;
+  display: block;
+  z-index: 149000;
+}
+
+div[martastyle=off] {
+  height: 0%;
+  width: 0%;
 }
 
 div[martastyle=html_content]{

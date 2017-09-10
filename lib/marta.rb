@@ -61,13 +61,14 @@ module Marta
   # Settings can be changed at any time by calling dance with.
   # Read more in the README
   def dance_with(browser: nil, folder: nil, learn: nil, tolerancy: nil,
-                 base_url: nil)
+                 base_url: nil, cold_timeout: nil)
     SettingMaster.set_engine browser
     SettingMaster.set_folder folder
     SettingMaster.set_base_url base_url
     SettingMaster.set_learn learn
     read_folder
     SettingMaster.set_tolerancy tolerancy
+    SettingMaster.set_cold_timeout cold_timeout
     engine
   end
 end

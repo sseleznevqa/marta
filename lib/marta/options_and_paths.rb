@@ -18,6 +18,7 @@ module Marta
       @@learn = Hash.new
       @@engine = Hash.new
       @@base_url = Hash.new
+      @@cold_timeout = Hash.new
 
       # Getting uniq id for process thread
       def self.thread_id
@@ -58,6 +59,11 @@ module Marta
         @@base_url[thread_id]
       end
 
+      # Time setting for Marta. She will wait that time before active search
+      def self.cold_timeout
+        @@cold_timeout[thread_id]
+      end
+
       # Marta is changing parameters by the same scheme.
       def self.parameter_set(what, value, default)
         what[thread_id] = !value.nil? ? value : what[thread_id]
@@ -85,6 +91,9 @@ module Marta
 
       # Marta is setting engine by pretty comlex rules
       def self.set_engine(value)
+        if (engine.class == Watir::Browser) and (value.class == Watir::Browser)
+          engine.close
+        end
         iframe_locate
         @@engine = parameter_set(@@engine, value, nil)
         iframe_switch_to
@@ -108,14 +117,23 @@ module Marta
         @@tolerancy = parameter_set(@@tolerancy, value, 1024)
       end
 
-      # Marta uses a simple ruke to set the basic url.
-      def self.set_base_url(value)
-        if (value.nil?) or (value.class == String)
-          @@base_url = parameter_set(@@base_url, value, "")
+      def self.parameter_check_and_set(where, value, default, expected_class)
+        if (value.nil?) or (value.class == expected_class)
+          where = parameter_set(where, value, default)
         else
-          raise ArgumentError, "Basic url at least should be a string. Not"\
-          " a #{value}:#{value.class}"
+          raise ArgumentError, "The value should be a #{expected_class}."\
+                               " Not a #{value}:#{value.class}"
         end
+      end
+
+      # Marta uses a simple rule to set the basic url.
+      def self.set_base_url(value)
+        parameter_check_and_set(@@base_url, value, "", String)
+      end
+
+      # Marta uses simple rule to set the cold timeout
+      def self.set_cold_timeout(value)
+        parameter_check_and_set(@@cold_timeout, value, 10, Fixnum)
       end
     end
 
@@ -146,6 +164,10 @@ module Marta
     # Marta knows the basic url of the projec. If it is defined
     def base_url
       SettingMaster.base_url
+    end
+
+    def cold_timeout
+      SettingMaster.cold_timeout
     end
   end
 end
