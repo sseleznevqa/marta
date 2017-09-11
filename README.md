@@ -39,6 +39,9 @@ your_page.your_element.click
 4. Take a look at the browser window: Marta will ask you to define Your_Page class. You can add variables for the class there.
 5. Add *url* variable with the url of desired page as a default value.
 6. Confirm.
+
+![Steps 4-5-6](readme_files/456steps.png)
+
 7. Then page will be opened and you will be asked about your_element.
 8. Just click the element and confirm the selection.
 9. Now you can run the test without LEARN parameter and it will work.
