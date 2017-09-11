@@ -44,6 +44,9 @@ your_page.your_element.click
 
 7. Then page will be opened and you will be asked about your_element.
 8. Just click the element and confirm the selection.
+
+![Step 8](readme_files/8step.png)
+
 9. Now you can run the test without LEARN parameter and it will work.
 
 **So you are `writing code in pageobject pattern` style.**
@@ -67,11 +70,22 @@ your_page.your_element.click
 
 **Q: What if I can locate element only by dynamic attributes like account_id?**
 
-*A: For example you have a pack of html elements with only one attribute that differs: account_id_attribute. First at the stage of page defining create a class variable account_id = "123". After that you can dynamically change it in your code like*
+*A: For example you want to find an element with the dynamic attribute "itemprop"*
+
+*First at the stage of page defining create a class variable itemprop = "anything".*
+
+![Dynamic attributes - 1](readme_files/itemprop.png)
+
+*After that you can dynamically change it in your code like*
 ```ruby
-your_page.account_id = "456"
+your_page.itemprop # will be "anything" by default
+your_page.itemprop = "about"
 ```
-*And when defining an element you can use it in value field of account_id_attribute like #{@account_id}. See couple examples in example_project (Ruby checkbox, item1 and 2 radio buttons)*
+*And when defining an element you can use it in value field of itemprop like #{@itemprop}.*
+
+![Dynamic attributes - 2](readme_files/itemprop2.png)
+
+*See couple examples in example_project (Ruby checkbox, item1 and 2 radio buttons)*
 
 **Q: I want to use firefox. How could I?**
 
@@ -176,6 +190,8 @@ engine.element(id: 'will_be_located_without_Marta')
 
 *A: At the stage of element defining you can see a button "Find by HTML". That button will open html code of your page in a special blue form. Find the html code of your element and click on it.*
 
+![HTML](readme_files/html.png)
+
 **Q: How can I find not just an element but a Watir::Radio for example?**
 
 *A: Marta automatically performs to_subtype for every element. So if your element is a radio button you will be able to use specific methods.*
@@ -211,6 +227,20 @@ your_page.important_element.click
 
 *A: You can click 'Set custom xpath' at element defining stage and set own xpath. In that case only that xpath will be used to find element. It is planned to add possibility to set custom css, id, name, etc.*
 
+![XPATH](readme_files/xpath.png)
+
+**Q: I cannot see the part of my page under marta's form. How to hide it?**
+
+*A: Use the hide button*
+
+![Hide](readme_files/hide.png)
+
+**Q: At the stage of element defining every click is about selecting element only. Events of the page are not working. What can I do if I want to do some actions at the page before the element selecting?**
+
+*A: There is the "Stop watching" button. It will turn Marta's scripts off until the page is reloaded or until user clicks the "Stop watching" button again.*
+
+![Stop watching button](readme_files/stop.png)
+
 **Q: Why Watir? I want to use pure Selenium Webdriver or Capybara or something!**
 
 *A: I like Watir. And I have no plans so far to implement something else.*
@@ -218,10 +248,6 @@ your_page.important_element.click
 **Q: And what about Cucumber? Will it work with Marta?**
 
 *A: Yes it is working with Cucumber and Spinach. I will add some examples later.*
-
-**Q: Where is an example?**
-
-*A: See "example_project" for rspec based example*
 
 **Q: How can I design more object oriented and DRY tests using Marta**
 
