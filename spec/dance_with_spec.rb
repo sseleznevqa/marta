@@ -75,6 +75,11 @@ describe Marta::SmartPage do
                                     "browser was closed")
   end
 
+  it 'works normally when browser is already closed', :need_browser do
+    @browser.close
+    expect{dance_with(browser: Watir::Browser.new(:chrome))}.not_to raise_error
+  end
+
   it 'works correctly in different threads' do
     dance_with(tolerancy: 777, folder: @folder, browser: 'crocodile',
                learn: true, base_url: 'Hello', cold_timeout: 11)
@@ -95,6 +100,7 @@ describe Marta::SmartPage do
     expect(marta_fire(:pageobjects_folder)).to eq @folder
     expect(marta_fire(:base_url)).to eq 'Hello'
     expect(marta_fire(:cold_timeout)).to eq 11
+    sleep 3
   end
 
   it 'uses default variables when nothing is provided' do
@@ -108,6 +114,7 @@ describe Marta::SmartPage do
       expect(marta_fire(:cold_timeout)).to eq 10
       marta_fire(:engine.close)
     end
+    sleep 3
   end
 
   after(:all) do

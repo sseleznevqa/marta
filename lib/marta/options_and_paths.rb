@@ -91,8 +91,10 @@ module Marta
 
       # Marta is setting engine by pretty comlex rules
       def self.set_engine(value)
-        if (engine.class == Watir::Browser) and (value.class == Watir::Browser)
-          engine.close
+        if (engine.class == Watir::Browser) and
+           (value.class == Watir::Browser) and
+           (engine != value)
+             engine.close if engine.exists?
         end
         iframe_locate
         @@engine = parameter_set(@@engine, value, nil)
