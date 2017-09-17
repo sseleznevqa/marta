@@ -38,6 +38,7 @@ module Marta
           result[key], result["not_#{key}"] =
                       passive_exclude(common_of(key),result["not_#{key}"])
         end
+        #binding.pry
         result
       end
 
@@ -47,12 +48,13 @@ module Marta
       # symbol == *. The way out is to use arrays for tags.
       def options_merge
         temp = Hash.new
-        temp['collection'] = @main_hash['collection']
+        temp['collection'] = @main_hash['options']['collection']
         POSITIVE.each do |key|
-          value = @main_hash[key]
-          main_negative = @main_hash["not_#{key}"]
-          second_negative = @second_hash["not_#{key}"]
-          if (@second_hash[key] == value) and (!@second_hash.nil?)
+          value = @main_hash['options'][key]
+          main_negative = @main_hash['options']["not_#{key}"]
+          second_negative = @second_hash['options']["not_#{key}"]
+          if (@second_hash['options'][key] == value) or
+             (!@second_hash['options'].nil?)
             temp[key] = value
           else
             temp[key] = "*"
@@ -81,29 +83,29 @@ module Marta
         else
           temp = first
         end
+        temp
       end
 
       # This method will leave all the elements of hashes. But if one attribute
       # is presented in both. Method will use the one from the main.
       # When it will be possible to use arrays for tags and attributes this
       # logic will be changed
-      def all_of
+      def all_of(what)
         temp = Hash.new
         first, second = @main_hash[what], @second_hash[what]
-        if !first.nil? and !second.nil?
-          first.each_pair do |key, value|
-            if second[key].class == Array and value.class == Array
-              temp[key] = (value + second[key]).uniq
-            else
-              temp[key] = value
-            end
-          end
+        if !first.nil?
+          temp = first
+        end
+        if !second.nil? and !temp.nil?
           second.each_pair do |key, value|
             if temp[key].nil?
               temp[key] = value
+            elsif temp[key].class == Array and value.class == Array
+              temp[key] = (value + temp[key]).uniq
             end
+          end
         else
-          temp = first
+          temp = second
         end
         temp
       end
@@ -113,12 +115,14 @@ module Marta
       def passive_exclude(main, passive)
         temp = main
         not_temp = passive
-        passive.each_pair do |key, value|
-          if !main[key].nil?
-            if main[key] == value
-              not_temp[key] = nil
-            elsif (value.class == Array) and (main[key].class == Array)
-              not_temp[key] = value - main[key]
+        if !passive.nil?
+          passive.each_pair do |key, value|
+            if !main[key].nil?
+              if main[key] == value
+                not_temp[key] = value.class == Array ? []:nil
+              elsif (value.class == Array) and (main[key].class == Array)
+                not_temp[key] = value - main[key]
+              end
             end
           end
         end
