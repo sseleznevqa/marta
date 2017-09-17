@@ -3,6 +3,7 @@ require 'marta/x_path'
 require 'marta/lightning'
 require 'marta/injector'
 require 'marta/public_methods'
+require 'marta/page_arithmetic'
 
 module Marta
 
@@ -21,7 +22,8 @@ module Marta
     # @note It is believed that no user will use it
     class MethodSpeaker
 
-      include XPath, Lightning, Injector, PublicMethods, SimpleElementFinder
+      include XPath, Lightning, Injector, PublicMethods, SimpleElementFinder,
+              PageArithmetic
 
       def initialize(method_name, requestor)
         @class_name = requestor.class_name
@@ -85,70 +87,8 @@ module Marta
                                           !@result['options']['collection']
           @attrs = @result
         else
-          collection_generate
+          @attrs = make_collection(@attrs, @result)
         end
-      end
-
-      def preclear_nots
-        new_result = Hash.new
-        @result.each_pair do |group, group_hash|
-          new_result[group] = Hash.new
-          group_hash.each_pair do |key, value|
-            if group.include?("not_")
-              if (value.class == Array) and
-                     (@attrs[group.to_s.gsub("not_","")][key].class == Array)
-                new_result[group][key] =
-                              value - @attrs[group.to_s.gsub("not_","")][key]
-              elsif @attrs[group.to_s.gsub("not_","")][key] != value
-                new_result[group][key] = value
-              end
-            end
-            if (group == "options") and (key.include?("not_"))
-              if @attrs[group][key.to_s.gsub("not_","")] != value
-                new_result[group][key] = value
-              end
-            end
-          end
-        end
-        @result = new_result if !@result['not_self'].nil?
-      end
-
-      def fill_attrs_with_result_keys
-        @result.each_pair do |group_name, group|
-          if @attrs[group_name].nil?
-            @attrs[group_name] = Hash.new
-          end
-          group.each_pair do |key, value|
-            if @attrs[group_name][key].nil?
-              @attrs[group_name][key] = value
-            end
-          end
-        end
-      end
-
-      # Logic for getting only the same of two collections
-      def collection_generate
-        preclear_nots
-        fill_attrs_with_result_keys
-        new_result = Hash.new
-        @attrs.each_pair do |group, group_hash|
-          new_result[group] = Hash.new
-          group_hash.each_pair do |key, value|
-            if (!@result[group].nil?) and
-               (@result[group][key] != value) and
-               (@result['not_self'].nil?)
-              if (group == "options")
-                new_result[group][key] = "*"
-              elsif (@result[group][key].class == Array) and
-                                                  (value.class == Array)
-                new_result[group][key] = @result[group][key] & value
-              end
-            else
-              new_result[group][key] = value
-            end
-          end
-        end
-        @attrs = new_result
       end
 
       # Asking: "What are you looking for?"
@@ -179,6 +119,7 @@ module Marta
         else
           xpath = @attrs['options']['xpath']
         end
+        puts xpath
         result = engine.elements(xpath: xpath)
         @found = result.length
         result
