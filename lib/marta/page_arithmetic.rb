@@ -15,7 +15,8 @@ module Marta
     # @note It is believed that no user will use it
     # Now it has only one way to merge hashes
     # This method is getting common only of two methods in order to generate a
-    # correct hash for collection element
+    # correct hash for collection element. Methods of the class are pretty
+    # esoteric. Refactoring is a must here.
     class MethodMerger
 
       # Class is taking two hashes. Sometimes order is valuable
@@ -36,9 +37,8 @@ module Marta
         end
         POSITIVE.each do |key|
           result[key], result["not_#{key}"] =
-                      passive_exclude(common_of(key),result["not_#{key}"])
+                      passive_exclude(common_of(key), result["not_#{key}"])
         end
-        #binding.pry
         result
       end
 
@@ -60,9 +60,9 @@ module Marta
             temp[key] = "*"
           end
           if (second_negative != temp[key]) and
-             ((second_negative == main_negative) or
-             (main_negative.nil?))
-               temp["not_#{key}"] = second_negative
+               ((second_negative == main_negative) or
+                 (main_negative.nil?))
+                   temp["not_#{key}"] = second_negative
           end
         end
         temp
@@ -98,10 +98,17 @@ module Marta
         end
         if !second.nil? and !temp.nil?
           second.each_pair do |key, value|
-            if temp[key].nil?
+            if (temp[key].nil?) or (temp[key] != value)
               temp[key] = value
-            elsif temp[key].class == Array and value.class == Array
+            elsif (temp[key].class == Array) and (value.class == Array)
               temp[key] = (value + temp[key]).uniq
+            end
+          end
+          if !first.nil?
+            first.each_pair do |key, value|
+              if second[key].nil? and !value.nil?
+                temp[key] = nil
+              end
             end
           end
         else
@@ -130,6 +137,7 @@ module Marta
       end
     end
 
+    # Form collection out of two element hashes
     def make_collection(one, two)
       merger = MethodMerger.new(one, two)
       merger.do_collection

@@ -147,9 +147,11 @@ module Marta
             result_array = result_array +
                         form_array_hash_for_class(attribute, value, negative)
           else
-            result_array.push form_hash_for_attribute(attribute,
-                                                      value,
-                                                      negative)
+            if !value.nil? and value != ""
+              result_array.push form_hash_for_attribute(attribute,
+                                                        value,
+                                                        negative)
+            end
           end
         end
         result_array
@@ -157,9 +159,8 @@ module Marta
 
       # Creating a small part of array hash for attribute
       def form_hash_for_attribute(attribute, value, negative)
-        result_array = Array.new
         not_start, not_end = get_nots_frames(negative)
-        if attribute == 'retrieved_by_marta_text'
+        if (attribute == 'retrieved_by_marta_text')
           make_hash("[#{not_start}contains(text(),'#{value}')#{not_end}]", "")
         else
           make_hash("[#{not_start}@#{attribute}='#{value}'#{not_end}]", "")

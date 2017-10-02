@@ -330,6 +330,16 @@ input[martastyle=name_field]:disabled, input[martastyle=value_field]:disabled{
     background: linear-gradient(to right, lightgrey , white);
 }
 
+input[type=text][martastyle=not_value_field] {
+  width: 40%;
+}
+
+input[type=text][martastyle=not_field] {
+  width: 10%;
+  color:red;
+  background-color: darkblue;
+}
+
 input[martaclass=marta_smthing][type=checkbox] {
     -webkit-appearance: none;
     background-color: white;
