@@ -1,1 +1,1 @@
-{"meths":{"hello_world":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["#{@element}","to","find"],"id":"element1","retrieved_by_marta_text":"Hello World!"}}},"vars":{}}
+{"meths":{"hello_world":{"granny":{},"options":{"collection":false,"not_granny":"LOL","granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"not_self":{"class":["xx"],"id":"elementz","retrieved_by_marta_text":"Bye"},"self":{"class":["#{@element}","to","find"],"id":"element1","retrieved_by_marta_text":"Hello World!"}}},"vars":{}}

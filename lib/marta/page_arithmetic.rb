@@ -54,7 +54,7 @@ module Marta
           main_negative = @main_hash['options']["not_#{key}"]
           second_negative = @second_hash['options']["not_#{key}"]
           if (@second_hash['options'][key] == value) or
-             (!@second_hash['options'].nil?)
+             ((@second_hash['options'][key].nil?) and (!value.nil?))
             temp[key] = value
           else
             temp[key] = "*"
