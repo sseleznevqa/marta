@@ -34,14 +34,9 @@ module Marta
       # Getting a part (by data or empty=any)
       def get_xpaths(todo, what)
         if todo
-          result = []
-          if !@meth[what].nil?
-            result = form_array_hash(@meth['options'][what], @meth[what])
-          end
-          if !@meth['not_' + what].nil?
-            result = result + form_array_hash(@meth['options']['not_' + what],
+          result = form_array_hash(@meth['options'][what], @meth[what])
+          result = result + form_array_hash(@meth['options']['not_' + what],
                                               @meth['not_' + what], true)
-          end
           result
         else
           [make_hash("//", "//"), make_hash("*", "*")]
@@ -105,6 +100,7 @@ module Marta
 
       # Special method to get the single xpath only. Without unknowns
       def generate_xpath
+        #binding.pry
         generate_xpaths(0).join
       end
 
@@ -142,15 +138,17 @@ module Marta
       # Creating an array hash
       def form_array_hash(tag, attrs, negative = false)
         result_array = form_array_hash_for_tag(tag, negative)
-        attrs.each_pair do |attribute, value|
-          if attribute.include?('class')
-            result_array = result_array +
+        if !attrs.nil?
+          attrs.each_pair do |attribute, value|
+            if attribute.include?('class')
+              result_array = result_array +
                         form_array_hash_for_class(attribute, value, negative)
-          else
-            if !value.nil? and value != ""
-              result_array.push form_hash_for_attribute(attribute,
-                                                        value,
-                                                        negative)
+            else
+              if !value.nil? and value != ""
+                result_array.push form_hash_for_attribute(attribute,
+                                                          value,
+                                                          negative)
+              end
             end
           end
         end

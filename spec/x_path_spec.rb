@@ -24,10 +24,11 @@ describe Marta::XPath::XPathFactory do
                    {full: "[not(contains(@class,'xx'))]", empty: ""},
                    {full: "[not(@id='elementz')]", empty: ""},
                    {full: "[not(contains(text(),'Bye'))]", empty: ""}]
-    @granny_array = [{full:"//",empty:"//"},{full:"HTML",empty:"*"}]
+    @granny_array = [{full:"//",empty:"//"},{full:"HTML",empty:"*"},
+                     {:full=>"[not(self::LOL)]", :empty=>""}]
     @pappy_array = [{full:"/",empty:"//"},{full:"BODY",empty:"*"}]
     @not_pappy_array = [{full: "[not(self::BODY)]", empty: ""}]
-    @xpath = "//HTML/BODY/H1[contains(@class,'element')]"\
+    @xpath = "//HTML[not(self::LOL)]/BODY/H1[contains(@class,'element')]"\
       "[contains(@class,'to')][contains(@class,'find')][@id='element1']"\
       "[contains(text(),'Hello World!')][not(contains(@class,'xx'))]"\
       "[not(@id='elementz')][not(contains(text(),'Bye'))]"
@@ -54,7 +55,9 @@ describe Marta::XPath::XPathFactory do
 
   it 'can form part of array of hashes' do
     granny = @class.get_xpaths(true, 'granny')
-    expect(granny).to eq [{full:"/",empty:"//"},{full:"HTML",empty:"*"}]
+    expect(granny).to eq [{full:"/",empty:"//"},
+                          {full:"HTML",empty:"*"},
+                          {:full=>"[not(self::LOL)]", :empty=>""}]
   end
 
   it 'forms dummy part of array of hashes sometimes' do
@@ -64,7 +67,8 @@ describe Marta::XPath::XPathFactory do
 
   it 'treats granny in a special way' do
     granny = @class.create_granny
-    expect(granny).to eq [{full:"//",empty:"//"},{full:"HTML",empty:"*"}]
+    expect(granny).to eq [{full:"//",empty:"//"},{full:"HTML",empty:"*"},
+                          {:full=>"[not(self::LOL)]", :empty=>""}]
   end
 
   it 'treats granny as usual when granny option is off' do
@@ -100,11 +104,11 @@ describe Marta::XPath::XPathFactory do
   end
 
   it 'forms more guess arrays with depth = 1' do
-    expect(@class.form_variants(1).count).to eq 14
+    expect(@class.form_variants(1).count).to eq 15
   end
 
   it 'forms more guess arrays with depth = 2' do
-    expect(@class.form_variants(2).count).to eq 92
+    expect(@class.form_variants(2).count).to eq 106
   end
 
   it 'forms one guess xpath string with depth = 0' do
@@ -114,11 +118,11 @@ describe Marta::XPath::XPathFactory do
   end
 
   it 'forms more guess xpath strings with depth = 1' do
-    expect(@class.generate_xpaths(1).count).to eq 14
+    expect(@class.generate_xpaths(1).count).to eq 15
   end
 
   it 'forms more guess xpath strings with depth = 2' do
-    expect(@class.generate_xpaths(2).count).to eq 92
+    expect(@class.generate_xpaths(2).count).to eq 106
   end
 
   it 'generates plain xpath in one simple call' do
