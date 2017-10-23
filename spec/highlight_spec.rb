@@ -5,6 +5,7 @@ describe Marta::SmartPage, :need_browser do
   before(:all) do
     @page_three_url = "file://#{Dir.pwd}" +
       "/spec/test_data_folder/page_three.html"
+    @page_six_url = "file://#{Dir.pwd}/spec/test_data_folder/page_six.html"
   end
 
   before(:each) do
@@ -38,5 +39,18 @@ describe Marta::SmartPage, :need_browser do
     mass.each do |item|
       expect(item.attribute_value("martaclass")).to eq nil
     end
+  end
+
+  it 'ignores lost elements' do
+    mass = @browser.elements(name: "findme")
+    marta_fire(:mass_highlight_turn, mass)
+    mass.each do |item|
+      martaclass = item.attribute_value("martaclass")
+      expect(martaclass).to eq "foundbymarta"
+      @browser.execute_script("arguments[0].parentNode."\
+                              "removeChild(arguments[0]);",
+                              item)
+    end
+    expect{marta_fire(:mass_highlight_turn, mass, false)}.to_not raise_error
   end
 end

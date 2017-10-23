@@ -13,6 +13,7 @@ describe Marta::SmartPage, :need_browser do
     @iframe = temp_hash['meths']['iframe']
     @collection_with_nots = temp_hash['meths']['nots_collection']
     @element_with_nots = temp_hash['meths']['nots_span']
+    @broken = temp_hash['meths']['broken']
   end
 
   before(:each) do
@@ -44,6 +45,10 @@ describe Marta::SmartPage, :need_browser do
   it 'can find an element with nots' do
     result = marta_fire(:marta_simple_finder, @element_with_nots).class
     expect(result).to eq Watir::Span
+  end
+
+  it 'is not failing when there is no element' do
+    expect{marta_fire(:marta_simple_finder, @broken)}.to_not raise_error
   end
 
 end

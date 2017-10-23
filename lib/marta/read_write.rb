@@ -16,7 +16,7 @@ module Marta
       def self.file_write(name, data)
         file_name = File.join(SettingMaster.pageobjects_folder, name + '.json')
         File.open(file_name,"w") do |f|
-          f.write(data.to_json)
+          f.write(JSON.pretty_generate(data))
         end
         file_name
       end
