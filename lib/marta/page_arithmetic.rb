@@ -98,8 +98,9 @@ module Marta
         end
         if !second.nil? and !temp.nil?
           second.each_pair do |key, value|
-            if (temp[key].nil?) or (temp[key] != value)
-              temp[key] = value
+            if (temp[key].nil?) or ((temp[key] != value) and
+               (temp[key].class != Array) and (value.class != Array))
+                 temp[key] = value
             elsif (temp[key].class == Array) and (value.class == Array)
               temp[key] = (value + temp[key]).uniq
             end

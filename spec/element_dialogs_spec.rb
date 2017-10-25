@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'pry'
+
 describe Marta::SmartPage, :need_browser do
 
   before(:all) do

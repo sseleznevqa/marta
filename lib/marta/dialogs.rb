@@ -119,7 +119,6 @@ module Marta
         else
           xpath = @attrs['options']['xpath']
         end
-        puts xpath
         result = engine.elements(xpath: xpath)
         @found = result.length
         result

@@ -6,8 +6,8 @@ describe Marta::SmartPage, :need_browser do
   before(:all) do
     @page_three_url = "file://#{Dir.pwd}" +
       "/spec/test_data_folder/page_three.html"
-    @text1 = "penetrated\nHello World!\nReally, dude."
-    @text2 = "Hello World!\nReally, dude. penetrated"
+    @text1 = "penetrated\nHello World!\nReally, dude.\nspan1\nspan2"
+    @text2 = "Hello World!\nReally, dude.\nspan1\nspan2 penetrated"
   end
 
   before(:each) do

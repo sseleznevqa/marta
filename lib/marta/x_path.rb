@@ -100,7 +100,6 @@ module Marta
 
       # Special method to get the single xpath only. Without unknowns
       def generate_xpath
-        #binding.pry
         generate_xpaths(0).join
       end
 
