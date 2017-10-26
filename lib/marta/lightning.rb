@@ -7,14 +7,24 @@ module Marta
 
     # We can highlight an element
     def highlight(element)
-      engine.execute_script("arguments[0].setAttribute"\
+      if is_here?(element)
+        engine.execute_script("arguments[0].setAttribute"\
                             "('martaclass','foundbymarta')", element)
+      end
     end
 
     # We can unhighlight an element
     def unhighlight(element)
-      engine.execute_script("arguments[0].removeAttribute('martaclass')",
-                            element)
+      if is_here?(element)
+        engine.execute_script("arguments[0].removeAttribute('martaclass')",
+                              element)
+      end
+    end
+
+    def is_here?(element)
+      element.exists?
+    rescue
+      false
     end
 
     # We can highlight\unhighlight tons of elements at once

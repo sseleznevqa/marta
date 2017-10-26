@@ -15,6 +15,10 @@ describe Marta::SmartPage, :need_browser do
     @broken = temp_hash['meths']['broken']
     @broken_collection = temp_hash['meths']['broken_collection']
     @iframe = temp_hash['meths']['iframe']
+    @nots = temp_hash['meths']['nots_span']
+    @broken_nots = temp_hash['meths']['broken_nots_span']
+    @nots_collection = temp_hash['meths']['nots_collection']
+    @broken_nots_collection = temp_hash['meths']['broken_nots_collection']
   end
 
   before(:each) do
@@ -64,5 +68,31 @@ describe Marta::SmartPage, :need_browser do
     element = marta_fire(:marta_magic_finder, @iframe)
     expect(element.class).to eq Watir::IFrame
     expect{element.switch_to!}.to_not raise_error
+  end
+
+  it 'can find a correct element with nots' do
+    element = marta_fire(:marta_magic_finder, @nots)
+    expect(element.class).to eq Watir::Span
+    expect(element.exists?).to be true
+  end
+
+  it 'can find a broken element with nots' do
+    element = marta_fire(:marta_magic_finder, @broken_nots)
+    expect(element.class).to eq Watir::Span
+    expect(element.exists?).to be true
+  end
+
+  it 'can find s correct collection with nots' do
+    element = marta_fire(:marta_magic_finder, @nots_collection)
+    expect(element.class).to eq Watir::HTMLElementCollection
+    expect(element[0].exists?).to be true
+    expect(element.length).to be 1
+  end
+
+  it 'can find a broken collection with nots' do
+    element = marta_fire(:marta_magic_finder, @broken_nots_collection)
+    expect(element.class).to eq Watir::HTMLElementCollection
+    expect(element[0].exists?).to be true
+    expect(element.length).to be 1
   end
 end

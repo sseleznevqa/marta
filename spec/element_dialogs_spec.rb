@@ -13,6 +13,7 @@ describe Marta::SmartPage, :need_browser do
       "/spec/test_data_folder/page_three.html"
     @page_seven_url = "file://#{Dir.pwd}" +
       "/spec/test_data_folder/page_seven.html"
+    @page_nine_url = "file://#{Dir.pwd}/spec/test_data_folder/page_nine.html"
     FileUtils.rm_rf(@full_name)#To be sure that we have no precreated file
   end
 
@@ -61,6 +62,17 @@ describe Marta::SmartPage, :need_browser do
   end
 
   it 'treats a collection mark' do
+    @browser.goto @page_nine_url
+    page = Marta::SmartPage.new(@name, ({"vars" => {},"meths" => {}}), false)
+    page.send(:user_method_dialogs, "collection")
+    expect(File.exists?(@full_name)).to be true
+    file = File.read(@full_name)
+    the_collection = JSON.parse(file)["meths"]["collection"]
+    expect(the_collection["self"]["class"][0]).to eq("element")
+    expect(the_collection["options"]["self"]).to eq("*")
+    expect(the_collection["options"]["not_self"]).to eq("LABEL")
+    expect(the_collection["not_self"]["class"][0]).to eq("exclude")
+    expect(the_collection["not_self"]["retrieved_by_marta_text"]).to eq("Yes!")
   end
 
   after(:each) do

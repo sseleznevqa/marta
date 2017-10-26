@@ -11,6 +11,9 @@ describe Marta::SmartPage, :need_browser do
     @method = temp_hash['meths']['correct']
     @method_with_collection = temp_hash['meths']['correct_collection']
     @iframe = temp_hash['meths']['iframe']
+    @collection_with_nots = temp_hash['meths']['nots_collection']
+    @element_with_nots = temp_hash['meths']['nots_span']
+    @broken = temp_hash['meths']['broken']
   end
 
   before(:each) do
@@ -27,9 +30,25 @@ describe Marta::SmartPage, :need_browser do
     expect(result).to eq Watir::HTMLElementCollection
   end
 
-  it 'treats iframes correctly until Watir issue 537 is not fixed' do
+  it 'treats iframes correctly all the times :)' do
     element = marta_fire(:marta_simple_finder, @iframe)
     expect(element.class).to eq Watir::IFrame
     expect{element.switch_to!}.to_not raise_error
   end
+
+  it 'can find collection with nots' do
+    result = marta_fire(:marta_simple_finder, @collection_with_nots)
+    expect(result.class).to eq Watir::HTMLElementCollection
+    expect(result.length).to eq 1
+  end
+
+  it 'can find an element with nots' do
+    result = marta_fire(:marta_simple_finder, @element_with_nots).class
+    expect(result).to eq Watir::Span
+  end
+
+  it 'is not failing when there is no element' do
+    expect{marta_fire(:marta_simple_finder, @broken)}.to_not raise_error
+  end
+
 end

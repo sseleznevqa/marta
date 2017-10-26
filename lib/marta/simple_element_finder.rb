@@ -56,7 +56,11 @@ module Marta
 
       # Transforming an element to a subtype
       def subtype_of(element)
-        @engine.element(xpath: @xpath).to_subtype
+        if @engine.element(xpath: @xpath).exists?
+          @engine.element(xpath: @xpath).to_subtype
+        else
+          @engine.element(xpath: @xpath)
+        end
       end
 
       # Main logic. We are returning a prefinded collection

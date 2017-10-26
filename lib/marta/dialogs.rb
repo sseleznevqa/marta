@@ -3,6 +3,7 @@ require 'marta/x_path'
 require 'marta/lightning'
 require 'marta/injector'
 require 'marta/public_methods'
+require 'marta/page_arithmetic'
 
 module Marta
 
@@ -21,7 +22,8 @@ module Marta
     # @note It is believed that no user will use it
     class MethodSpeaker
 
-      include XPath, Lightning, Injector, PublicMethods, SimpleElementFinder
+      include XPath, Lightning, Injector, PublicMethods, SimpleElementFinder,
+              PageArithmetic
 
       def initialize(method_name, requestor)
         @class_name = requestor.class_name
@@ -58,7 +60,7 @@ module Marta
           @result = ask_for_elements
           mass_highlight_turn(@mass, false)
           if @result.class == Hash
-            @attrs = @result
+            attrs_plus_result
           elsif @result != '1'
             xpath_way
           end
@@ -67,6 +69,25 @@ module Marta
           standart_meth_merge
         else
           xpath_meth_merge
+        end
+      end
+
+      #
+      # This method is responsible for collection in two clicks feature
+      #
+      # If we have two elements of collection this methods returns hash of
+      # element without diffs (only the same attributes). As well this method
+      # is responsible for adding excluding attributes to collection.
+      # Rare case with single element that not has some attribute is not
+      # implemented so far. All that party is for collections now.
+      def attrs_plus_result
+        if !attrs_exists?
+          @attrs = @result
+        elsif !@attrs['options']['collection'] or
+                                          !@result['options']['collection']
+          @attrs = @result
+        else
+          @attrs = make_collection(@attrs, @result)
         end
       end
 

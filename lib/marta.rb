@@ -11,6 +11,7 @@ require 'marta/json_2_class'
 require 'marta/black_magic'
 require 'marta/simple_element_finder'
 require 'marta/x_path'
+require 'marta/page_arithmetic'
 require "watir"
 require 'fileutils'
 require 'json'
@@ -30,7 +31,7 @@ module Marta
 
     include BlackMagic, XPath, SimpleElementFinder, ClassesCreation,
             PublicMethods, Dialogs, Injector, Lightning, OptionsAndPaths,
-            Json2Class, ReadWrite, UserValuePrework
+            Json2Class, ReadWrite, UserValuePrework, PageArithmetic
 
     # open_page can create new instance
     def self.open_page(*args)

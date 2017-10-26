@@ -83,7 +83,7 @@ describe Marta::SmartPage do
   it 'works correctly in different threads' do
     dance_with(tolerancy: 777, folder: @folder, browser: 'crocodile',
                learn: true, base_url: 'Hello', cold_timeout: 11)
-    Thread.new do
+    thread = Thread.new do
       dance_with(tolerancy: 888, folder: @folder_2, browser: 'cat',
                  learn: false, base_url: 'Good bye', cold_timeout: 12)
       expect(marta_fire(:tolerancy_value)).to eq 888
@@ -92,7 +92,6 @@ describe Marta::SmartPage do
       expect(marta_fire(:pageobjects_folder)).to eq @folder_2
       expect(marta_fire(:base_url)).to eq 'Good bye'
       expect(marta_fire(:cold_timeout)).to eq 12
-      marta_fire(:engine.close)
     end
     expect(marta_fire(:tolerancy_value)).to eq 777
     expect(marta_fire(:engine)).to eq 'crocodile'
@@ -100,21 +99,21 @@ describe Marta::SmartPage do
     expect(marta_fire(:pageobjects_folder)).to eq @folder
     expect(marta_fire(:base_url)).to eq 'Hello'
     expect(marta_fire(:cold_timeout)).to eq 11
-    sleep 3
+    thread.join
   end
 
   it 'uses default variables when nothing is provided' do
-    Thread.new do
+    thread = Thread.new do
       dance_with
       expect(marta_fire(:tolerancy_value)).to eq 1024
-      expect(marta_fire(:engine.class)).to eq Watir::Browser
+      expect(marta_fire(:engine).class).to eq Watir::Browser
       expect(marta_fire(:learn_status)).to be false
       expect(marta_fire(:pageobjects_folder)).to eq 'Marta_s_pageobjects'
       expect(marta_fire(:base_url)).to eq ''
       expect(marta_fire(:cold_timeout)).to eq 10
-      marta_fire(:engine.close)
+      marta_fire(:engine).close
     end
-    sleep 3
+    thread.join
   end
 
   after(:all) do

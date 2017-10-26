@@ -8,7 +8,7 @@ module Marta
     private
 
     #
-    # Here we are crating xpath including arrays of xpaths with one-two-...-x
+    # Here we are creating xpath including arrays of xpaths with one-two-...-x
     # parts that are not known
     #
     # @note It is believed that no user will use it
@@ -34,7 +34,10 @@ module Marta
       # Getting a part (by data or empty=any)
       def get_xpaths(todo, what)
         if todo
-          form_array_hash(@meth['options'][what], @meth[what])
+          result = form_array_hash(@meth['options'][what], @meth[what])
+          result = result + form_array_hash(@meth['options']['not_' + what],
+                                              @meth['not_' + what], true)
+          result
         else
           [make_hash("//", "//"), make_hash("*", "*")]
         end
@@ -118,44 +121,61 @@ module Marta
       end
 
       # Creating a small part of array hash for tag
-      def form_array_hash_for_tag(tag)
+      def form_array_hash_for_tag(tag, negative)
         result_array = Array.new
-        result_array.push make_hash("/", "//")
-        result_array.push make_hash(tag, "*")
+        if negative
+          if !tag.nil? and tag != ""
+            result_array.push make_hash("[not(self::#{tag})]", "")
+          end
+        else
+          result_array.push make_hash("/", "//")
+          result_array.push make_hash(tag, "*")
+        end
         result_array
       end
 
       # Creating an array hash
-      def form_array_hash(tag, attrs)
-        result_array = form_array_hash_for_tag(tag)
-        attrs.each_pair do |attribute, value|
-          if attribute.include?('class')
-            result_array = result_array +
-                                   form_array_hash_for_class(attribute, value)
-          else
-            result_array.push form_hash_for_attribute(attribute, value)
+      def form_array_hash(tag, attrs, negative = false)
+        result_array = form_array_hash_for_tag(tag, negative)
+        if !attrs.nil?
+          attrs.each_pair do |attribute, value|
+            if attribute.include?('class')
+              result_array = result_array +
+                        form_array_hash_for_class(attribute, value, negative)
+            else
+              if !value.nil? and value != ""
+                result_array.push form_hash_for_attribute(attribute,
+                                                          value,
+                                                          negative)
+              end
+            end
           end
         end
         result_array
       end
 
       # Creating a small part of array hash for attribute
-      def form_hash_for_attribute(attribute, value)
-        result_array = Array.new
-        if attribute == 'retrieved_by_marta_text'
-          make_hash("[contains(text(),'#{value}')]", "")
+      def form_hash_for_attribute(attribute, value, negative)
+        not_start, not_end = get_nots_frames(negative)
+        if (attribute == 'retrieved_by_marta_text')
+          make_hash("[#{not_start}contains(text(),'#{value}')#{not_end}]", "")
         else
-          make_hash("[@#{attribute}='#{value}']", "")
+          make_hash("[#{not_start}@#{attribute}='#{value}'#{not_end}]", "")
         end
       end
 
+      def get_nots_frames (negative)
+        return negative ? ["not(", ")"] : ["", ""]
+      end
+
       # Creating a small part of array hash for attribute contains 'class'
-      def form_array_hash_for_class(attribute, value)
+      def form_array_hash_for_class(attribute, value, negative)
         result_array = Array.new
+        not_start, not_end = get_nots_frames(negative)
         value.each do |value_part|
           if value_part.gsub(' ','') != ''
-            result_array.push make_hash("[contains(@#{attribute},"\
-                                        "'#{value_part}')]", "")
+            result_array.push make_hash("[#{not_start}contains(@#{attribute},"\
+                                        "'#{value_part}')#{not_end}]", "")
           end
         end
         result_array
