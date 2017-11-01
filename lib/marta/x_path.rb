@@ -89,13 +89,25 @@ module Marta
       def generate_xpaths(depth)
         result_array = Array.new
         form_variants(depth).each do |variant|
-          xpath = String.new
+          xpaths = [""]
           variant.each do |part|
-            xpath = xpath + part[:full]
+            xpaths = tree_push(xpaths, part[:full])
           end
-          result_array.push process_string(xpath, @requestor)
+          result_array += xpaths
         end
         result_array
+      end
+
+      # Sometimes we need to double number of variants since there
+      # are more than one option to try
+      def tree_push(main, what)
+        result = Array.new
+        what.each do |part|
+          main.each do |host_item|
+            result.push(process_string(host_item + part, @requestor))
+          end
+        end
+        result
       end
 
       # Special method to get the single xpath only. Without unknowns
@@ -158,9 +170,10 @@ module Marta
       def form_hash_for_attribute(attribute, value, negative)
         not_start, not_end = get_nots_frames(negative)
         if (attribute == 'retrieved_by_marta_text')
-          make_hash("[#{not_start}contains(text(),'#{value}')#{not_end}]", "")
+          make_hash("[#{not_start}contains(text(),'#{value}')#{not_end}]", [""])
         else
-          make_hash("[#{not_start}@#{attribute}='#{value}'#{not_end}]", "")
+          make_hash("[#{not_start}@#{attribute}='#{value}'#{not_end}]", ["",
+                     "[#{not_start}@*='#{value}'#{not_end}]"])
         end
       end
 
@@ -174,8 +187,11 @@ module Marta
         not_start, not_end = get_nots_frames(negative)
         value.each do |value_part|
           if value_part.gsub(' ','') != ''
-            result_array.push make_hash("[#{not_start}contains(@#{attribute},"\
-                                        "'#{value_part}')#{not_end}]", "")
+            result_array.
+              push make_hash("[#{not_start}contains(@#{attribute},"\
+                             "'#{value_part}')#{not_end}]", ["",
+                             "[#{not_start}@*[contains"\
+                             "(.,'#{value_part}')]#{not_end}]"])
           end
         end
         result_array
@@ -183,7 +199,13 @@ module Marta
 
       # Creating the smallest possible part of array hash
       def make_hash(full, empty)
-        {full: "#{full}", empty: "#{empty}"}
+        if empty.class != Array
+          empty = [empty]
+        end
+        if full.class != Array
+          full = [full]
+        end
+        {full: full, empty: empty}
       end
     end
   end

@@ -110,7 +110,7 @@ module Marta
         else
           result = nil
         end
-        if result != nil
+        if !result.nil?
           @xpath = array_of_els_xpaths[array_of_elements.index(result)]
         else
           result = something

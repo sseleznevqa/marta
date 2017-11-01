@@ -1,5 +1,6 @@
 require 'marta/x_path'
 require 'spec_helper'
+require 'pry'
 
 describe Marta::XPath::XPathFactory do
 
@@ -14,38 +15,52 @@ describe Marta::XPath::XPathFactory do
     temp_hash = JSON.parse(file)
     @meth = temp_hash['meths']['hello_world']
     @class = Marta::XPath::XPathFactory.new(@meth, @requestor)
-    @self_array = [{full: "/", empty: "//"},
-                   {full: "H1", empty: "*"},
-                   {full: "[contains(@class,'\#{@element}')]", empty: ""},
-                   {full: "[contains(@class,'to')]", empty: ""},
-                   {full: "[contains(@class,'find')]", empty: ""},
-                   {full: "[@id='element1']", empty: ""},
-                   {full: "[contains(text(),'Hello World!')]", empty: ""},
-                   {full: "[not(contains(@class,'xx'))]", empty: ""},
-                   {full: "[not(@id='elementz')]", empty: ""},
-                   {full: "[not(contains(text(),'Bye'))]", empty: ""}]
-    @granny_array = [{full:"//",empty:"//"},{full:"HTML",empty:"*"},
-                     {:full=>"[not(self::LOL)]", :empty=>""}]
-    @pappy_array = [{full:"/",empty:"//"},{full:"BODY",empty:"*"}]
-    @not_pappy_array = [{full: "[not(self::BODY)]", empty: ""}]
+    @self_array = [{:full=>["/"], :empty=>["//"]},
+                   {:full=>["H1"], :empty=>["*"]},
+                   {:full=>["[contains(@class,'\#{@element}')]"],
+                     :empty=>["", "[@*[contains(.,'\#{@element}')]]"]},
+                   {:full=>["[contains(@class,'to')]"],
+                     :empty=>["", "[@*[contains(.,'to')]]"]},
+                   {:full=>["[contains(@class,'find')]"],
+                     :empty=>["", "[@*[contains(.,'find')]]"]},
+                   {:full=>["[@id='element1']"],
+                     :empty=>["", "[@*='element1']"]},
+                   {:full=>["[contains(text(),'Hello World!')]"], :empty=>[""]},
+                   {:full=>["[not(contains(@class,'xx'))]"],
+                     :empty=>["", "[not(@*[contains(.,'xx')])]"]},
+                   {:full=>["[not(@id='elementz')]"],
+                     :empty=>["", "[not(@*='elementz')]"]},
+                   {:full=>["[not(contains(text(),'Bye'))]"], :empty=>[""]}]
+    @granny_array = [{full:["//"],empty:["//"]},{full:["HTML"],empty:["*"]},
+                     {:full=>["[not(self::LOL)]"], :empty=>[""]}]
+    @pappy_array = [{full:["/"],empty:["//"]},{full:["BODY"],empty:["*"]}]
+    @not_pappy_array = [{full: ["[not(self::BODY)]"], empty: [""]}]
     @xpath = "//HTML[not(self::LOL)]/BODY/H1[contains(@class,'element')]"\
       "[contains(@class,'to')][contains(@class,'find')][@id='element1']"\
       "[contains(text(),'Hello World!')][not(contains(@class,'xx'))]"\
       "[not(@id='elementz')][not(contains(text(),'Bye'))]"
-    @guess_part = [[{full: "//", empty: "//"}, {full: "BODY", empty: "*"}],
-                  [{full: "/", empty: "//"}, {full: "*", empty: "*"}]]
-    @positive_self = [{full: "/", empty: "//"},
-                      {full: "H1", empty: "*"},
-                      {full: "[contains(@class,'\#{@element}')]", empty: ""},
-                      {full: "[contains(@class,'to')]", empty: ""},
-                      {full: "[contains(@class,'find')]", empty: ""},
-                      {full: "[@id='element1']", empty: ""},
-                      {full: "[contains(text(),'Hello World!')]", empty: ""}]
-    @negative_self = [{full: "/", empty: "//"},
-                      {full: "H1", empty: "*"},
-                      {full: "[contains(@class,'xx')]", empty: ""},
-                      {full: "[@id='elementz']", empty: ""},
-                      {full: "[contains(text(),'Bye')]", empty: ""}]
+    @guess_part = [[{full: ["//"], empty: ["//"]},
+                    {full: ["BODY"], empty: ["*"]}],
+                  [{full: ["/"], empty: ["//"]}, {full: ["*"], empty: ["*"]}]]
+    @positive_self = [{:full=>["/"], :empty=>["//"]},
+                      {:full=>["H1"], :empty=>["*"]},
+                      {:full=>["[contains(@class,'\#{@element}')]"],
+                        :empty=>["", "[@*[contains(.,'\#{@element}')]]"]},
+                      {:full=>["[contains(@class,'to')]"],
+                        :empty=>["", "[@*[contains(.,'to')]]"]},
+                      {:full=>["[contains(@class,'find')]"],
+                        :empty=>["", "[@*[contains(.,'find')]]"]},
+                      {:full=>["[@id='element1']"],
+                        :empty=>["", "[@*='element1']"]},
+                      {:full=>["[contains(text(),'Hello World!')]"],
+                        :empty=>[""]}]
+    @negative_self = [{:full=>["/"], :empty=>["//"]},
+                      {:full=>["H1"], :empty=>["*"]},
+                      {:full=>["[contains(@class,'xx')]"],
+                        :empty=>["", "[@*[contains(.,'xx')]]"]},
+                      {:full=>["[@id='elementz']"],
+                        :empty=>["", "[@*='elementz']"]},
+                      {:full=>["[contains(text(),'Bye')]"], :empty=>[""]}]
   end
 
   it 'uses default vars' do
@@ -55,37 +70,38 @@ describe Marta::XPath::XPathFactory do
 
   it 'can form part of array of hashes' do
     granny = @class.get_xpaths(true, 'granny')
-    expect(granny).to eq [{full:"/",empty:"//"},
-                          {full:"HTML",empty:"*"},
-                          {:full=>"[not(self::LOL)]", :empty=>""}]
+    expect(granny).to eq [{full:["/"],empty:["//"]},
+                          {full:["HTML"],empty:["*"]},
+                          {:full=>["[not(self::LOL)]"], :empty=>[""]}]
   end
 
   it 'forms dummy part of array of hashes sometimes' do
     granny = @class.get_xpaths(false, 'granny')
-    expect(granny).to eq [{full:"//",empty:"//"},{full:"*",empty:"*"}]
+    expect(granny).to eq [{full:["//"],empty:["//"]},{full:["*"],empty:["*"]}]
   end
 
   it 'treats granny in a special way' do
     granny = @class.create_granny
-    expect(granny).to eq [{full:"//",empty:"//"},{full:"HTML",empty:"*"},
-                          {:full=>"[not(self::LOL)]", :empty=>""}]
+    expect(granny).to eq [{full:["//"],empty:["//"]},
+                          {full:["HTML"],empty:["*"]},
+                          {:full=>["[not(self::LOL)]"], :empty=>[""]}]
   end
 
   it 'treats granny as usual when granny option is off' do
     @class.granny = false
     granny = @class.create_granny
-    expect(granny).to eq [{full:"//",empty:"//"},{full:"*",empty:"*"}]
+    expect(granny).to eq [{full:["//"],empty:["//"]},{full:["*"],empty:["*"]}]
   end
 
   it 'creates pappy' do
     pappy = @class.create_pappy
-    expect(pappy).to eq [{full:"/",empty:"//"},{full:"BODY",empty:"*"}]
+    expect(pappy).to eq [{full:["/"],empty:["//"]},{full:["BODY"],empty:["*"]}]
   end
 
   it 'creates dummy pappy when it is off' do
     @class.pappy = false
     pappy = @class.create_pappy
-    expect(pappy).to eq [{full:"//",empty:"//"},{full:"*",empty:"*"}]
+    expect(pappy).to eq [{full:["//"],empty:["//"]},{full:["*"],empty:["*"]}]
   end
 
   it 'creates self' do
@@ -104,6 +120,7 @@ describe Marta::XPath::XPathFactory do
   end
 
   it 'forms more guess arrays with depth = 1' do
+    #binding.pry
     expect(@class.form_variants(1).count).to eq 15
   end
 
@@ -118,11 +135,11 @@ describe Marta::XPath::XPathFactory do
   end
 
   it 'forms more guess xpath strings with depth = 1' do
-    expect(@class.generate_xpaths(1).count).to eq 15
+    expect(@class.generate_xpaths(1).count).to eq 21
   end
 
   it 'forms more guess xpath strings with depth = 2' do
-    expect(@class.generate_xpaths(2).count).to eq 106
+    expect(@class.generate_xpaths(2).count).to eq 205
   end
 
   it 'generates plain xpath in one simple call' do
@@ -151,44 +168,54 @@ describe Marta::XPath::XPathFactory do
 
   it 'forms correct attribute part (positive hash)' do
     expect(@class.form_hash_for_attribute('a', 'b', false)).
-                                          to eq ({full:"[@a='b']", empty: ""})
+                      to eq ({:full=>["[@a='b']"], :empty=>["", "[@*='b']"]})
   end
 
   it 'forms correct attribute part (negative hash)' do
     expect(@class.form_hash_for_attribute('a', 'b', true)).
-                                      to eq ({full:"[not(@a='b')]", empty: ""})
+                to eq ({full:["[not(@a='b')]"], empty: ["", "[not(@*='b')]"]})
   end
 
   it 'forms correct attribute part for text-like atributes' do
     text = 'retrieved_by_marta_text'
-    result = ({full:"[contains(text(),'b')]",empty: ""})
+    result = ({full:["[contains(text(),'b')]"],empty: [""]})
     expect(@class.form_hash_for_attribute(text, 'b', false)).to eq result
   end
 
   it 'forms correct attribute part for text-like atributes (negative case)' do
     text = 'retrieved_by_marta_text'
-    result = ({full:"[not(contains(text(),'b'))]",empty: ""})
+    result = ({full:["[not(contains(text(),'b'))]"],empty: [""]})
     expect(@class.form_hash_for_attribute(text, 'b', true)).to eq result
   end
 
   it 'forms correct attribute parts for class-like attributes' do
     text = 'class-like'
-    result = [{full:"[contains(@class-like,'b')]",empty: ""},
-              {full:"[contains(@class-like,'a')]",empty: ""}]
+    result = [{:full=>["[contains(@class-like,'b')]"],
+                :empty=>["", "[@*[contains(.,'b')]]"]},
+              {:full=>["[contains(@class-like,'a')]"],
+                :empty=>["", "[@*[contains(.,'a')]]"]}]
     expect(@class.form_array_hash_for_class(text, ['b','a'], false))
                                                                 .to eq result
   end
 
   it 'forms correct attribute parts for class-like attributes with nots' do
     text = 'class-like'
-    result = [{full:"[not(contains(@class-like,'b'))]",empty: ""},
-              {full:"[not(contains(@class-like,'a'))]",empty: ""}]
+    result = [{:full=>["[not(contains(@class-like,'b'))]"],
+                :empty=>["", "[not(@*[contains(.,'b')])]"]},
+              {:full=>["[not(contains(@class-like,'a'))]"],
+                :empty=>["", "[not(@*[contains(.,'a')])]"]}]
     expect(@class.form_array_hash_for_class(text, ['b','a'], true))
                                                                 .to eq result
   end
 
   it 'can form hashes by special rule' do
-    expect(@class.make_hash('a','b')).to eq ({full: 'a', empty: 'b'})
+    a = (rand(2) == 0)? "a" : ["a"]
+    b = (rand(2) == 0)? "b" : ["b"]
+    expect(@class.make_hash(a,b)).to eq ({full: ['a'], empty: ['b']})
+  end
+
+  it 'can do a tree push' do
+    expect(@class.tree_push(['1','2'],['3','4'])).to eq ['13','23','14','24']
   end
 
 end
