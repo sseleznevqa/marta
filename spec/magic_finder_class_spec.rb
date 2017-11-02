@@ -1,6 +1,5 @@
 require 'marta/black_magic'
 require 'spec_helper'
-require 'pry'
 
 describe "Magic Finder" do
 

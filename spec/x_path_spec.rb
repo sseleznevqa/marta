@@ -1,6 +1,5 @@
 require 'marta/x_path'
 require 'spec_helper'
-require 'pry'
 
 describe Marta::XPath::XPathFactory do
 
@@ -120,7 +119,6 @@ describe Marta::XPath::XPathFactory do
   end
 
   it 'forms more guess arrays with depth = 1' do
-    #binding.pry
     expect(@class.form_variants(1).count).to eq 15
   end
 
