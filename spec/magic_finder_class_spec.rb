@@ -1,7 +1,7 @@
 require 'marta/black_magic'
 require 'spec_helper'
 
-describe Marta::SimpleElementFinder::BasicFinder do
+describe "Magic Finder" do
 
   before(:all) do
     @xpath = "//HTML/BODY/H1[contains(@class,'element')]"\
@@ -111,13 +111,13 @@ describe Marta::SimpleElementFinder::BasicFinder do
 
   it 'creates the array of candidates for finding', :need_browser do
     @browser.goto @page_three_url
-    xpaths = ["//HTML", "//DUMMY"]
+    xpaths = ["//HTML", "//DUMMY", "//SPAN"]
     array1, array2 = @helper.
                          newclass('broken').candidates_arrays_creation(xpaths)
-    expect(array1[0].class).to eq Watir::HTMLElement
-    expect(array2[0]).to eq "//HTML"
-    expect(array1.count). to eq 1
-    expect(array2.count). to eq 1
+    expect(array1[0].class).to eq Watir::Html
+    expect(array2).to eq ["//HTML", "//SPAN", "//SPAN"]
+    expect(array1.count). to eq 3
+    expect(array2.count). to eq 3
   end
 
   it 'selects candidates' do
@@ -126,6 +126,18 @@ describe Marta::SimpleElementFinder::BasicFinder do
     result = @helper.newclass('broken').get_search_result('anything',
                                                              elements, xpaths)
     expect(result).to eq 'good'
+  end
+
+  it 'getting indexes of most common elements of array' do
+    array = @helper.newclass('broken').get_result_inputs([1,2,3,1,0,3,1,0,7,1])
+    expect(array).to eq [0,3,6,9]
+  end
+
+  it 'most uniq paths of most common elements' do
+    els = [2,1,2,1,1]
+    ins = [0,1,2,3,4]
+    xpath = @helper.newclass('broken').most_uniq_xpath_by_inputs(els, ins)
+    expect(xpath).to eq 2
   end
 
   it 'selects no candidates if arrays are empty' do

@@ -184,7 +184,7 @@ engine.element(id: 'will_be_located_without_Marta')
 
 **Q: How can I find a collection of elements?**
 
-*A: When defining an element you can set a collection checkbox at the top of the dialog. In that case Marta will return Watir::ElementCollection.*
+*A: When defining an element you can set a collection checkbox at the top of the dialog. In that case Marta will return Watir::ElementCollection. When collection mark is enabled Marta will try to find all the elements of the kind. Click the first and the second element of a kind and Marta will try to find all elements of that kind. If Marta will add to many elements to the collection press shift and click the element that should be excluded. Try it. This is fun.*
 
 **Q: How can I find an invisible element? Or hardly clickable element with 1px size?**
 
@@ -276,7 +276,7 @@ g_page.search "I am in love with selenium."
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.35324. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
+*A: Nothing. Marta is under development. Her version is 0.36651. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
 
 ## Internal Design
 

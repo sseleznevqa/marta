@@ -10,5 +10,7 @@
   "nots_collection":{"granny":{},"options":{"collection":true,"granny":"*","pappy":"*","self":"SPAN","not_pappy":"DIV"},"pappy":{},"self":{"class":["1"]}},
   "broken_nots_collection":{"granny":{},"options":{"collection":true,"granny":"*","pappy":"*","self":"SPAN"},"pappy":{},"self":{"class":["2"]},"not_self":{"class":["1"]}},
   "nots_span":{"granny":{},"options":{"collection":false,"granny":"*","pappy":"DIV","self":"SPAN"},"pappy":{},"self":{"class":["1"]},"not_self":{"id":"span2"}},
-  "broken_nots_span":{"granny":{},"options":{"collection":false,"granny":"*","pappy":"DIV","self":"SPAN"},"pappy":{},"self":{"class":["1", "2"]},"not_self":{"retrieved_by_marta_text":"span1"}}
+  "broken_nots_span":{"granny":{},"options":{"collection":false,"granny":"*","pappy":"DIV","self":"SPAN"},"pappy":{},"self":{"class":["1", "2"]},"not_self":{"retrieved_by_marta_text":"span1"}},
+  "smart":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"B"},"pappy":{},"self":{"id":"id"}},
+  "smart_class":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"I"},"pappy":{},"self":{"class":["aa", "zz"]}}
 },"vars":{"new_var":"!"}}

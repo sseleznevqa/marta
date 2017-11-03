@@ -19,6 +19,8 @@ describe Marta::SmartPage, :need_browser do
     @broken_nots = temp_hash['meths']['broken_nots_span']
     @nots_collection = temp_hash['meths']['nots_collection']
     @broken_nots_collection = temp_hash['meths']['broken_nots_collection']
+    @smart = temp_hash['meths']['smart']
+    @smart_class = temp_hash['meths']['smart_class']
   end
 
   before(:each) do
@@ -94,5 +96,15 @@ describe Marta::SmartPage, :need_browser do
     expect(element.class).to eq Watir::HTMLElementCollection
     expect(element[0].exists?).to be true
     expect(element.length).to be 1
+  end
+
+  it 'can find element with changed attribute name' do
+    element = marta_fire(:marta_magic_finder, @smart)
+    expect(element.attribute_value("notid")).to eq "id"
+  end
+
+  it 'can find element with changed attribute name (class related)' do
+    element = marta_fire(:marta_magic_finder, @smart_class)
+    expect(element.attribute_value("notclass")).to eq "aa zz"
   end
 end

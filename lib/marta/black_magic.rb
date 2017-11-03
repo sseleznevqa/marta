@@ -92,10 +92,10 @@ module Marta
         array_of_elements, array_of_els_xpaths = Array.new, Array.new
         something = nil
         array_of_xpaths.each do |xpath|
-          something = @engine.element(xpath: xpath)
-          if something.exists?
-            array_of_elements.push something
-            array_of_els_xpaths.push xpath
+          something = @engine.elements(xpath: xpath)
+          if something.to_a.length > 0
+            array_of_elements += something.to_a
+            something.to_a.length.times {array_of_els_xpaths.push xpath}
           end
         end
         return array_of_elements, array_of_els_xpaths
@@ -105,17 +105,36 @@ module Marta
       def get_search_result(result, array_of_elements, array_of_els_xpaths)
         something = result
         if array_of_elements.size > 0
-          result = array_of_elements.group_by(&:itself).
-                   values.max_by(&:size).first
+          inputs = get_result_inputs(array_of_elements)
+          most_uniq_xpath_by_inputs(array_of_els_xpaths, inputs)
+          array_of_elements[array_of_els_xpaths.index(@xpath)]
         else
-          result = nil
+          something
         end
-        if result != nil
-          @xpath = array_of_els_xpaths[array_of_elements.index(result)]
-        else
-          result = something
+      end
+
+      # Getting indexes of the most common element in the array of suggested
+      # elements
+      def get_result_inputs(array_of_elements)
+        result = array_of_elements.group_by(&:itself).
+                 values.max_by(&:size).first
+        array_of_elements.each_index.
+                                select{|i| array_of_elements[i] == result}
+      end
+
+      # Getting the most specific xpath for the most common element in order
+      # to locate it only
+      def most_uniq_xpath_by_inputs(array_of_els_xpaths, inputs)
+        xpaths = Array.new
+        array_of_els_xpaths.
+               each_with_index{|e, i| xpaths.push e if inputs.include?(i)}
+        @xpath = xpaths[0]
+        xpaths.each do |x|
+          current_count = array_of_els_xpaths.count(x)
+          proposed_count = array_of_els_xpaths.count(@xpath)
+          @xpath = x if current_count < proposed_count
         end
-        return result
+        @xpath
       end
 
       # The core of Black Magic Algorithm
