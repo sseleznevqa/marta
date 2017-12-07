@@ -12,9 +12,12 @@ require 'marta/black_magic'
 require 'marta/simple_element_finder'
 require 'marta/x_path'
 require 'marta/page_arithmetic'
+require 'marta/server'
 require "watir"
 require 'fileutils'
 require 'json'
+require 'webrick'
+
 
 #
 # Marta class is providing three simple methods.
@@ -23,7 +26,7 @@ require 'json'
 # constant as an unknown pageobject and will try to ask about using browser
 module Marta
 
-  include OptionsAndPaths, ReadWrite, Json2Class
+  include OptionsAndPaths, ReadWrite, Json2Class, Server
 
   class SmartPage
 
@@ -31,7 +34,7 @@ module Marta
 
     include BlackMagic, XPath, SimpleElementFinder, ClassesCreation,
             PublicMethods, Dialogs, Injector, Lightning, OptionsAndPaths,
-            Json2Class, ReadWrite, UserValuePrework, PageArithmetic
+            Json2Class, ReadWrite, UserValuePrework, PageArithmetic, Server
 
     # open_page can create new instance
     def self.open_page(*args)
@@ -62,7 +65,10 @@ module Marta
   # Settings can be changed at any time by calling dance with.
   # Read more in the README
   def dance_with(browser: nil, folder: nil, learn: nil, tolerancy: nil,
-                 base_url: nil, cold_timeout: nil)
+                 base_url: nil, cold_timeout: nil, port: nil)
+    SettingMaster.set_port port
+    port_to_use = Marshal.dump(SettingMaster.port)
+    SettingMaster.server = MartaServer.new(port_to_use) if engine.nil?
     SettingMaster.set_engine browser
     SettingMaster.set_folder folder
     SettingMaster.set_base_url base_url

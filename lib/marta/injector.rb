@@ -7,6 +7,8 @@ module Marta
   # Those insertions are the only way for her to perform dialog with user
   module Injector
 
+    include Server, OptionsAndPaths
+
     private
 
     #
@@ -14,6 +16,8 @@ module Marta
     #
     # @note It is believed that no user will use it
     class Syringe
+
+      include Server, OptionsAndPaths
 
       def initialize(engine, marta_what, title = 'Something important',
                      old_data = Hash.new, folder = gem_libdir,
@@ -27,7 +31,8 @@ module Marta
         @custom_vars = custom_vars
         @custom_scripts = custom_scripts
         @default_vars = [{"marta_what": "\"#{@title}\""},
-          {"old_marta_Data": @data.to_s.gsub('=>',':').gsub('nil','null')}]
+          {"old_marta_Data": @data.to_s.gsub('=>',':').gsub('nil','null')},
+          {"martaPort": port.to_s}]
         @default_scripts = ["document.marta_add_data();"]
       end
 
@@ -115,7 +120,7 @@ module Marta
         result = false
         while result != true
           # When Marta can't get a result she is reinjecting her stuff
-          result = @engine.execute_script("return document.marta_confirm_mark")
+          result = MartaServer.wait_user_dialog_response(port)
           actual_injection if result.nil?
         end
         @engine.execute_script("return document.marta_result")

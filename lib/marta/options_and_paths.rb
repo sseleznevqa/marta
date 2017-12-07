@@ -19,6 +19,8 @@ module Marta
       @@engine = Hash.new
       @@base_url = Hash.new
       @@cold_timeout = Hash.new
+      @@port = Hash.new
+      @@server = Hash.new
 
       # Getting uniq id for process thread
       def self.thread_id
@@ -62,6 +64,16 @@ module Marta
       # Time setting for Marta. She will wait that time before active search
       def self.cold_timeout
         @@cold_timeout[thread_id]
+      end
+
+      # Marta knows the server port.
+      def self.port
+        @@port[thread_id]
+      end
+
+      # Marta stores the server as a setting.
+      def self.server
+        @@server[thread_id]
       end
 
       # Marta is changing parameters by the same scheme.
@@ -137,6 +149,12 @@ module Marta
       def self.set_cold_timeout(value)
         parameter_check_and_set(@@cold_timeout, value, 10, Fixnum)
       end
+
+      # Marta sets port. If it is not defined and there are number of threads
+      # Marta will use ports from 6260 one by one (6260, 6261, 6262,...)
+      def self.set_port(value)
+        parameter_check_and_set(@@port, value, 6260 + @@port.size, Fixnum)
+      end
     end
 
     private
@@ -163,13 +181,24 @@ module Marta
       SettingMaster.tolerancy_value
     end
 
-    # Marta knows the basic url of the projec. If it is defined
+    # Marta knows the basic url of the project. If it is defined
     def base_url
       SettingMaster.base_url
     end
 
+    # Marta stores a cold_timeout value
     def cold_timeout
       SettingMaster.cold_timeout
+    end
+
+    #Marta stores port for Marta server for each thread.
+    def port
+      SettingMaster.port
+    end
+
+    # Marta can call server easily
+    def server
+      SettingMaster.server
     end
   end
 end
