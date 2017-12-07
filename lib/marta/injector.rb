@@ -1,3 +1,6 @@
+require 'marta/server'
+require 'marta/options_and_paths'
+
 module Marta
 
   #
@@ -32,7 +35,7 @@ module Marta
         @custom_scripts = custom_scripts
         @default_vars = [{"marta_what": "\"#{@title}\""},
           {"old_marta_Data": @data.to_s.gsub('=>',':').gsub('nil','null')},
-          {"martaPort": port.to_s}]
+          {"martaPort": SettingMaster.port.to_s}]
         @default_scripts = ["document.marta_add_data();"]
       end
 

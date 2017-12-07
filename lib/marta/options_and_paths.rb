@@ -155,6 +155,11 @@ module Marta
       def self.set_port(value)
         parameter_check_and_set(@@port, value, 6260 + @@port.size, Fixnum)
       end
+
+      # We are storaging server instance as a setting
+      def self.set_server(value)
+        @@server[thread_id] = value
+      end
     end
 
     private

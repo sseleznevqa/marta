@@ -1,3 +1,5 @@
+require 'webrick'
+
 module Marta
 
   #
@@ -27,14 +29,19 @@ module Marta
         @@touch_port
       end
 
+      def self.drop
+        @@has_answer, @@touch_port = nil, nil
+      end
+
       def do_GET (request, response)
-        touch_port = request.port
+        puts "SEE!"
+        @@touch_port = request.port
         response.status = 200
         response.content_type = "text/plain"
         if request.path == '/got_answer'
-          has_answer = true
+          @@has_answer = true
         else
-          has_answer = false
+          @@has_answer = false
         end
         response.body = "Ok!"
       end
@@ -48,22 +55,18 @@ module Marta
 
       include OptionsAndPaths
 
-      def initialize(port = SettingMaster.port, folder = gem_libdir)
+      def initialize(port = SettingMaster.port)
         Thread.new do
-          the_server = WEBrick::HTTPServer.new(:Port => port,
-                                  :DocumentRoot => "/#{folder}/data/"
-                                  :AccessLog => [],
-                                  :Logger => WEBrick::Log::new("/dev/null", 7))
+          the_server = WEBrick::HTTPServer.new(:Port => port)
           the_server.mount "/dialog", DialogServlet
           the_server.start
         end
       end
 
       def self.wait_user_dialog_response(port)
-        DialogServlet.has_answer = nil
-        DialogServlet.touch_port = nil
+        DialogServlet.drop
         start_time = Time.now
-        while (DialogServlet.touch_port != port) and (Time.now - start_time < 1)
+        while (DialogServlet.touch_port != port) and (Time.now - start_time < 2)
           # Since endless loop is a bad idea...
         end
         if (DialogServlet.touch_port != port)

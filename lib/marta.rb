@@ -26,7 +26,7 @@ require 'webrick'
 # constant as an unknown pageobject and will try to ask about using browser
 module Marta
 
-  include OptionsAndPaths, ReadWrite, Json2Class, Server
+  include OptionsAndPaths, ReadWrite, Json2Class
 
   class SmartPage
 
@@ -68,7 +68,9 @@ module Marta
                  base_url: nil, cold_timeout: nil, port: nil)
     SettingMaster.set_port port
     port_to_use = Marshal.dump(SettingMaster.port)
-    SettingMaster.server = MartaServer.new(port_to_use) if engine.nil?
+    if engine.nil?
+      SettingMaster.set_server(Server::MartaServer.new(port_to_use))
+    end
     SettingMaster.set_engine browser
     SettingMaster.set_folder folder
     SettingMaster.set_base_url base_url
