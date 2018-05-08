@@ -1,0 +1,16 @@
+{
+  "name": "Marta app",
+  "version": "0.36788",
+  "description": "Messaging from browser to main app",
+  "permissions": ["activeTab", "tabs", "declarativeContent", "storage", "http://127.0.0.1*/*"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "content_scripts": [{
+       "matches": ["http://*/*", "https://*/*"],
+       "all_frames": true,
+       "js":      ["content.js"]
+   }],
+  "manifest_version": 2
+}

@@ -112,7 +112,9 @@ module Marta
         @@engine = parameter_set(@@engine, value, nil)
         iframe_switch_to
         if engine.nil?
-          @@engine = parameter_set(@@engine, value, Watir::Browser.new(:chrome))
+          binding.pry
+          @@engine = parameter_set(@@engine, value, Watir::Browser.new(:chrome,
+                       opt: ["--load-extension=='#{gem_libdir}/marta_app'"]))
         end
       end
 

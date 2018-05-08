@@ -124,6 +124,7 @@ module Marta
         while result != true
           # When Marta can't get a result she is reinjecting her stuff
           result = MartaServer.wait_user_dialog_response(port)
+          binding.pry if result.nil?
           actual_injection if result.nil?
         end
         @engine.execute_script("return document.marta_result")

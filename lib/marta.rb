@@ -67,14 +67,14 @@ module Marta
   def dance_with(browser: nil, folder: nil, learn: nil, tolerancy: nil,
                  base_url: nil, cold_timeout: nil, port: nil)
     SettingMaster.set_port port
-    port_to_use = Marshal.dump(SettingMaster.port)
-    if engine.nil?
+    port_to_use = Marshal.load Marshal.dump(SettingMaster.port)
+    SettingMaster.set_learn learn
+    if engine.nil? and SettingMaster.learn_status
       SettingMaster.set_server(Server::MartaServer.new(port_to_use))
     end
     SettingMaster.set_engine browser
     SettingMaster.set_folder folder
     SettingMaster.set_base_url base_url
-    SettingMaster.set_learn learn
     read_folder
     SettingMaster.set_tolerancy tolerancy
     SettingMaster.set_cold_timeout cold_timeout

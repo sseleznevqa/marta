@@ -1,4 +1,6 @@
 require 'webrick'
+require 'marta/options_and_paths'
+require 'pry'
 
 module Marta
 
@@ -34,15 +36,17 @@ module Marta
       end
 
       def do_GET (request, response)
-        puts "SEE!"
         @@touch_port = request.port
         response.status = 200
         response.content_type = "text/plain"
-        if request.path == '/got_answer'
-          @@has_answer = true
-        else
-          @@has_answer = false
-        end
+        @@has_answer = case request.path
+                       when '/dialog/got_answer'
+                         true
+                       when '/dialog/lost'
+                         nil
+                       when '/dialog/not_answer'
+                         false
+                       end
         response.body = "Ok!"
       end
     end
@@ -56,21 +60,43 @@ module Marta
       include OptionsAndPaths
 
       def initialize(port = SettingMaster.port)
-        Thread.new do
-          the_server = WEBrick::HTTPServer.new(:Port => port)
-          the_server.mount "/dialog", DialogServlet
-          the_server.start
+        @@thread = Thread.new(port) do |port|
+          the_server_start(port)
+          Thread.stop
+        end
+      end
+
+      def self.thread
+        @@thread
+      end
+
+      def the_server_start(port)
+        the_server = WEBrick::HTTPServer.new(Port: port,
+                   Logger: WEBrick::Log.new(File.open(File::NULL, 'w')),
+                   AccessLog: WEBrick::Log.new(File.open(File::NULL, 'w')))
+        the_server.mount "/dialog", DialogServlet
+        the_server.start
+        port
+      end
+
+      def self.server_check
+        if !@@thread.alive?
+          warn "Marta server was not started properly"
+          @@thread.join
+        else
+          true
         end
       end
 
       def self.wait_user_dialog_response(port)
+        server_check
         DialogServlet.drop
         start_time = Time.now
         while (DialogServlet.touch_port != port) and (Time.now - start_time < 2)
           # Since endless loop is a bad idea...
         end
         if (DialogServlet.touch_port != port)
-          nil
+          false
         else
           DialogServlet.has_answer
         end
