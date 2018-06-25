@@ -18,10 +18,10 @@
     <script>
       document.marta_shift = false;
       setTimeout(function() { clickById('marta_array'); }, 1000);
-      setTimeout(function() { clickById('element1'); }, 2000);
-      setTimeout(function() { clickById('element2'); }, 3000);
-      setTimeout(function() {   document.marta_shift = true; clickById('element3'); }, 4000);
-      setTimeout(function() { clickById('marta_confirm'); }, 5000);
+      setTimeout(function() { clickById('element1'); }, 3000);
+      setTimeout(function() { clickById('element2'); }, 5000);
+      setTimeout(function() {   document.marta_shift = true; clickById('element3'); }, 7000);
+      setTimeout(function() { clickById('marta_confirm'); }, 9000);
       function clickById(id){
         document.getElementById(id).scrollIntoView();
         var rect = document.getElementById(id).getBoundingClientRect();

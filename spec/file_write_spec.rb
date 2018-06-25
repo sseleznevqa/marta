@@ -5,6 +5,8 @@ describe Marta::SmartPage do
     @name = 'File_write_test'
     @full_name = "./spec/test_data_folder/test_pageobjects/#{@name}.json"
     @data = {"vars": {"a": "B"},"meths":{}}
+    Marta::OptionsAndPaths::SettingMaster.
+                      set_folder "./spec/test_data_folder/test_pageobjects/"
     FileUtils.rm_rf(@full_name)#To be sure that we have no precreated file
   end
 

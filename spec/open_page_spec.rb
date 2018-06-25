@@ -60,4 +60,10 @@ describe Marta::SmartPage, :need_browser do
     Xpath.open_page("about:blank")
     expect(@browser.url).to eq "about:blank"
   end
+
+  it "Can open page by a base url when page is empty" do
+    dance_with base_url: "file://#{Dir.pwd}/spec/test_data_folder/page_five.html"
+    page = Test_object4.open_page
+    expect(@browser.title).to eq "Page five"
+  end
 end

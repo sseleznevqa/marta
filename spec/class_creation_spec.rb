@@ -164,10 +164,10 @@ describe Marta::SmartPage do
       expect((defined? @class.hello_world_exact).nil?).to eq(false)
     end
   end
-  context 'teaching when learn is enabled', need_browser: false do
+  context 'teaching when learn is enabled', need_only_browser: false do
 
     before(:each) do
-      dance_with learn: true
+      dance_with clear: true, learn: true
       marta_fire(:json_2_class, @full_name, true)
       @learn_class = Json2Class.new
       def @learn_class.marta_magic_finder(*args)

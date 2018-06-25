@@ -36,7 +36,8 @@ module Marta
         @default_vars = [{"marta_what": "\"#{@title}\""},
           {"old_marta_Data": @data.to_s.gsub('=>',':').gsub('nil','null')},
           {"martaPort": SettingMaster.port.to_s}]
-        @default_scripts = ["document.marta_add_data();"]
+        @default_scripts =
+                  ["document.marta_add_data(); document.marta_connect();"]
       end
 
       # "first" or "last".
@@ -57,7 +58,7 @@ module Marta
         else
           script = inner
         end
-        @engine.execute_script script.gsub("\n",'')
+        run_script(script)
       end
 
       # Taking a correct js file to inject
@@ -89,7 +90,7 @@ module Marta
 
       # Syringe runs scripts
       def run_script(script)
-        @engine.execute_script(script)
+        @engine.execute_script script.gsub("\n",'')
       end
 
       # Syringe takes array of hashes to set lots of variables
@@ -123,11 +124,10 @@ module Marta
         result = false
         while result != true
           # When Marta can't get a result she is reinjecting her stuff
-          result = MartaServer.wait_user_dialog_response(port)
-          binding.pry if result.nil?
-          actual_injection if result.nil?
+          result = MartaServer.wait_user_dialog_response
+          actual_injection if !result
         end
-        @engine.execute_script("return document.marta_result")
+        run_script("return document.marta_result")
       end
     end
 

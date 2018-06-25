@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Marta::SmartPage do
+describe Marta::SmartPage, :need_browser do
   before (:all) do
     @full_name = "./spec/test_data_folder/test_pageobjects/Attack.json"
     FileUtils.rm_rf(@full_name)

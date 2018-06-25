@@ -63,10 +63,10 @@ module Marta
       @path ||= ""
       if !url.nil?
         engine.goto url
-      elsif !@url.nil?
+      elsif !@url.nil? and @url != ""
         engine.goto @url
       elsif base_url != ""
-        engine.goto base_url + "/" + (@path.nil? ? "" : @path)
+        engine.goto base_url + ((@path == "") ? "" : "/#{@path}")
       else
         raise ArgumentError, "You should set url to use open_page. You may"\
         " also use base_url option for dance_with and path for page object"

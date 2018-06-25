@@ -17,6 +17,7 @@ require "watir"
 require 'fileutils'
 require 'json'
 require 'webrick'
+require 'socket'
 
 
 #
@@ -65,14 +66,12 @@ module Marta
   # Settings can be changed at any time by calling dance with.
   # Read more in the README
   def dance_with(browser: nil, folder: nil, learn: nil, tolerancy: nil,
-                 base_url: nil, cold_timeout: nil, port: nil)
+                 base_url: nil, cold_timeout: nil, port: nil, clear: nil)
+    SettingMaster.clear if clear
     SettingMaster.set_port port
-    port_to_use = Marshal.load Marshal.dump(SettingMaster.port)
+    SettingMaster.set_server # server should be before browser
+    SettingMaster.set_engine browser # browser should be before learn!
     SettingMaster.set_learn learn
-    if engine.nil? and SettingMaster.learn_status
-      SettingMaster.set_server(Server::MartaServer.new(port_to_use))
-    end
-    SettingMaster.set_engine browser
     SettingMaster.set_folder folder
     SettingMaster.set_base_url base_url
     read_folder
