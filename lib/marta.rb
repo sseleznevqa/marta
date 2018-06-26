@@ -1,4 +1,5 @@
 require "marta/version"
+require "marta/object"
 require 'marta/public_methods'
 require 'marta/options_and_paths'
 require 'marta/read_write'
@@ -41,18 +42,6 @@ module Marta
     def self.open_page(*args)
       page = self.new
       page.open_page(*args)
-    end
-  end
-
-  # That is how Marta connected to the world
-
-  # We will ask user about completely new class
-  def Object.const_missing(const, *args, &block)
-    if !SettingMaster.learn_status
-      raise NameError, "#{const} is not defined."
-    else
-      data, data['vars'], data['meths'] = Hash.new, Hash.new, Hash.new
-      SmartPageCreator.json_2_class(ReaderWriter.file_write(const.to_s, data))
     end
   end
 
