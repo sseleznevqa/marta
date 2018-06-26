@@ -13,12 +13,34 @@ module Marta
     #
     # @note It is believed that no user will use it
     class SettingMaster
+
       @@folder = Hash.new
       @@tolerancy = Hash.new
       @@learn = Hash.new
       @@engine = Hash.new
       @@base_url = Hash.new
       @@cold_timeout = Hash.new
+      @@port = Hash.new
+      @@server = Hash.new
+
+      def self.clear
+        @@folder[thread_id] = nil
+        @@tolerancy[thread_id] = nil
+        @@learn[thread_id] = nil
+        if @@engine[thread_id].class == Watir::Browser
+          @@engine[thread_id].quit
+        end
+        @@engine[thread_id] = nil
+        @@base_url[thread_id] = nil
+        @@cold_timeout[thread_id] = nil
+        @@port[thread_id]
+        @@port[thread_id] = nil
+        @@server[thread_id]
+        if @@server[thread_id].class == Marta::Server::MartaServer
+          @@server[thread_id].server_kill
+        end
+        @@server[thread_id] = nil
+      end
 
       # Getting uniq id for process thread
       def self.thread_id
@@ -64,6 +86,16 @@ module Marta
         @@cold_timeout[thread_id]
       end
 
+      # Marta knows the server port.
+      def self.port
+        @@port[thread_id]
+      end
+
+      # Marta stores the server as a setting.
+      def self.server
+        @@server[thread_id]
+      end
+
       # Marta is changing parameters by the same scheme.
       def self.parameter_set(what, value, default)
         what[thread_id] = !value.nil? ? value : what[thread_id]
@@ -94,13 +126,16 @@ module Marta
         if (engine.class == Watir::Browser) and
            (value.class == Watir::Browser) and
            (engine != value)
-             engine.close if engine.exists?
+             engine.quit if engine.exists?
         end
         iframe_locate
         @@engine = parameter_set(@@engine, value, nil)
         iframe_switch_to
         if engine.nil?
-          @@engine = parameter_set(@@engine, value, Watir::Browser.new(:chrome))
+          browser = Watir::Browser.new(:chrome,
+                    switches: ["--load-extension=#{gem_libdir}/marta_app"])
+                    browser.goto "127.0.0.1:#{SettingMaster.port}/welcome"
+          @@engine = parameter_set(@@engine, value, browser)
         end
       end
 
@@ -112,6 +147,7 @@ module Marta
       # Marta uses simple rules to set the laearn mode
       def self.set_learn(value)
         @@learn = parameter_set(@@learn, value, learn_option)
+        warn "If browser was not started by Marta. Learn will not work properly"
       end
 
       # Marta uses simple rules to set the tolerancy value
@@ -137,15 +173,41 @@ module Marta
       def self.set_cold_timeout(value)
         parameter_check_and_set(@@cold_timeout, value, 10, Fixnum)
       end
+
+      # Marta sets port. If it is not defined and there are number of threads
+      # Marta will use ports from 6260 one by one (6260, 6261, 6262,...)
+      def self.set_port(value)
+        i = 0
+        if value.nil?
+          while Server::MartaServer.port_check(6260 + @@port.size + i)
+            i += 1
+          end
+        end
+        parameter_check_and_set(@@port, value, 6260 + @@port.size + i, Fixnum)
+      end
+
+      # We are storaging server instance as a setting
+      def self.set_server
+        if SettingMaster.server.nil?
+          @@server[thread_id] = Server::MartaServer.new(SettingMaster.port)
+        elsif SettingMaster.server.current_port != SettingMaster.port
+          @@server[thread_id] = Server::MartaServer.new(SettingMaster.port)
+        end
+      end
+
+      # Marta knows where is she actually is.
+      def self.gem_libdir
+        t = ["#{Dir.pwd}/lib/#{Marta::NAME}",
+             "#{Gem.dir}/gems/#{Marta::NAME}-#{Marta::VERSION}/lib/#{Marta::NAME}"]
+        File.readable?(t[0])? t[0] : t[1]
+      end
     end
 
     private
 
     # Defining the place for files to inject to browser
     def gem_libdir
-      t = ["#{Dir.pwd}/lib/#{Marta::NAME}",
-           "#{Gem.dir}/gems/#{Marta::NAME}-#{Marta::VERSION}/lib/#{Marta::NAME}"]
-      File.readable?(t[0])? t[0] : t[1]
+      SettingMaster.gem_libdir
     end
 
     # Marta knows does she learn or not.
@@ -163,13 +225,29 @@ module Marta
       SettingMaster.tolerancy_value
     end
 
-    # Marta knows the basic url of the projec. If it is defined
+    # Marta knows the basic url of the project. If it is defined
     def base_url
       SettingMaster.base_url
     end
 
+    # Marta stores a cold_timeout value
     def cold_timeout
       SettingMaster.cold_timeout
+    end
+
+    #Marta stores port for Marta server for each thread.
+    def port
+      SettingMaster.port
+    end
+
+    # Marta can call server easily
+    def server
+      SettingMaster.server
+    end
+
+    # Marta knows was the browser started by she
+    def correct_engine?
+      SettingMaster.correct_engine?
     end
   end
 end

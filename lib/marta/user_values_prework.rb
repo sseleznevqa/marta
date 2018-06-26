@@ -7,20 +7,19 @@ module Marta
 
     # Marta can parse strings like "hello #{value}"
     def process_string(str='', requestor = self)
-      position1 = 0
-      # Not pretty. When you will see it again rewrite it
-      while (position1 != nil) and (str != nil) do
-        position1, position2 = str.index("\#{@"), str.index("}")
-        if position1 != nil
-          first_part = str[0, position1]
-          var_part = str[position1 + 2..position2 - 1]
-          last_part = str[position2 + 1..-1]
-          str = first_part +
-                requestor.instance_variable_get(var_part).to_s +
-                last_part
+      str ||= ""
+      n = nil
+      while str != n
+        str = n if !n.nil?
+        thevar = str.match(/\#{@+[^\#{@]*}/).to_s
+        if thevar != ""
+          value = requestor.instance_variable_get thevar.match(/@.*[^}]/).to_s
+          n = str.gsub(thevar, value)
+        else
+          n = str
         end
       end
-      str.nil? ? '' : str
+      str
     end
   end
 end

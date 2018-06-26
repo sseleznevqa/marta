@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Marta::SmartPage do
+describe Marta::SmartPage, :need_browser do
   before(:all) do
     @object = Object.new
     @object.extend(Marta)

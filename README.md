@@ -87,20 +87,6 @@ your_page.itemprop = "about"
 
 *See couple examples in example_project (Ruby checkbox, item1 and 2 radio buttons)*
 
-**Q: I want to use firefox. How could I?**
-
-*A: dance_with is accepting parameter :browser like*
-```ruby
-dance_with browser: Watir::Browser.new(:firefox)
-```
-
-**Q: How Marta stores data?**
-
-*A: Marta creates a json files in the default folder with name = Marta_s_pageobjects'. You can force Marta to use other folder like*
-```ruby
-dance_with folder: 'path/to/your/folder'
-```
-
 **Q: I want to turn learning mode on\off in the code. How?**
 
 *A:*
@@ -110,6 +96,37 @@ dance_with learn: true or false
 *Note: it may not work inside of the previously defined class. In that case use:*
 ```ruby
 your_page.method_edit('newelementname')
+```
+
+**Q: I want to use firefox. How could I?**
+
+*A: dance_with is accepting parameter :browser like*
+```ruby
+dance_with browser: Watir::Browser.new(:firefox)
+```
+*Note: If you are using a custom browser learn mode will not work properly. Custom browsers could be used for execution only*
+
+**Q: Why firefox(or other browser) cannot be used for learning?**
+
+*A: Marta is starting by default with Chrome with an extension - marta_app. It is for Chrome only. This app is used for dialogs between user and Marta in a learning mode as well as a server.*
+
+**Q: A server?**
+
+*A: In order to pass security restrictions for js on pages the code injected to the page by marta is sending information to the marta_app. And marta_app is sending information through a web server. You can force Marta to use a specific port:*
+```ruby
+dance_with port: 7766
+```
+*Note: default port is 6260 but now Marta is starting server for each thread. It will be changed in the future. So if the port 6260 is busy, Marta will take next 6261 and then 6262, etc.*
+
+**Q: What else Marta server and Marta_app can do?**
+
+*A: Nothing. But I have a nice plan about it.*
+
+**Q: How Marta stores data?**
+
+*A: Marta creates a json files in the default folder with name = Marta_s_pageobjects'. You can force Marta to use other folder like*
+```ruby
+dance_with folder: 'path/to/your/folder'
 ```
 
 **Q: How is working the open_page method?**
@@ -170,6 +187,14 @@ dance_with tolerancy: 1024# is the default value
 ```ruby
 dance_with cold_timeout: 5
 ```
+
+**Q: What if I need Marta to drop all the settings to default?**
+
+*A: Start Marta with clear setting*
+```ruby
+dance_with clear: true
+```
+*Note: It will restart browser as well*
 
 **Q: How can I get Watir browser instance if I want for example execute_script or find element without Marta?**
 
@@ -272,11 +297,11 @@ g_page.search "I am in love with selenium."
     $ cd example_project
     $ ./tests_with_learning.sh
 
-*Take a look at elements defining (especially when variables like #{i1} are used). Try to redefine elements. And see what attributes are used what are not. Also take a look at the ruby code. There are some comments.*
+*Take a look at elements defining (especially when variable #{r_selection} is used). Try to redefine elements. Also take a look at the ruby code. There are some comments.*
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.36651. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
+*A: Nothing. Marta is under development. Her version is 0.36788. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
 
 ## Internal Design
 

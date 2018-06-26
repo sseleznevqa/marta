@@ -11,6 +11,11 @@ describe Marta::SmartPage, :need_browser do
     FileUtils.rm_rf(@full_name)#To be sure that we have no precreated file
   end
 
+  before(:each) do
+    dance_with learn: true
+    dance_with learn: false
+  end
+
   it 'can perform basic page creation user story' do
     @browser.goto @page_four_url
     marta_fire(:page_edit, @name, @data)

@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "simplecov"
-  spec.add_dependency "watir", '~> 6.7.2'
+  spec.add_dependency "watir", '>= 6.7.2'
   spec.add_dependency "json"
+  spec.add_dependency "webrick"
 end

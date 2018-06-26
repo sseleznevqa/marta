@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Marta::SmartPage, :need_browser do
 
+  # Theese tests are slightly not stable for some reason! Careful!
+
   before(:all) do
     @name = 'Dialogs'
     @full_name = "./spec/test_data_folder/test_pageobjects/#{@name}.json"
@@ -15,6 +17,10 @@ describe Marta::SmartPage, :need_browser do
       "/spec/test_data_folder/page_seven.html"
     @page_nine_url = "file://#{Dir.pwd}/spec/test_data_folder/page_nine.html"
     FileUtils.rm_rf(@full_name)#To be sure that we have no precreated file
+  end
+
+  before(:each) do
+    @browser = dance_with learn: true
   end
 
   it 'can perform basic element selection user story' do
@@ -39,10 +45,12 @@ describe Marta::SmartPage, :need_browser do
   end
 
   it 'finds predefined element' do
+    dance_with learn: false
     page_3 = Page_three.new
     @browser.goto @page_three_url
     page = Marta::SmartPage.new("Page_three",
                                 JSON.parse(File.read(@page_3_name)), false)
+    dance_with learn: true
     page.send(:user_method_dialogs, "hello_world")
     expect(File.exists?(@page_3_name)).to be true
     file = File.read(@page_3_name)

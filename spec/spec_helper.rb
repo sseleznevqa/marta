@@ -9,25 +9,21 @@ RSpec.configure do |config|
 
   config.before do |example|
     include Marta
+    folder = "./spec/test_data_folder/test_pageobjects"
     if example.metadata[:need_browser]
-      while @browser.nil?
-        begin
-          @browser = Watir::Browser.new :chrome
-        rescue
-          @browser = nil
-        end
-      end
+      @browser = dance_with(folder: folder, learn: false, tolerancy: 1024,
+                 base_url: "", cold_timeout: 10, clear: true)
+    elsif example.metadata[:need_only_browser]
+      @browser = Watir::Browser.new
     else
       @browser = "We do not need real browser for the test"
     end
     #We will not work with windows... for now
     folder = "./spec/test_data_folder/test_pageobjects"
-    dance_with(browser: @browser, folder: folder, learn: false,
-               tolerancy: 1024, base_url: "", cold_timeout: 10)
   end
   config.after do |example|
-    if example.metadata[:need_browser]
-      @browser.close
+    if example.metadata[:need_browser] or example.metadata[:need_only_browser]
+      @browser.quit
     end
   end
 end

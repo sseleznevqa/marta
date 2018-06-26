@@ -13,6 +13,7 @@ describe Marta::SmartPage, :need_browser do
                                           'nil||"data"', marta_fire(:gem_libdir),
                                           ["wild_tiger": '"Joe"'],
                                           ["document.title = document.wild_tiger;"])
+    dance_with learn: true
   end
 
   # If it is failed. Are u sure that rake install was performed?
@@ -44,8 +45,8 @@ describe Marta::SmartPage, :need_browser do
 
   it 'is injecting html and js all data and gets a result' do
     result = marta_fire(:inject, 'for_test', 'title', '"data"',
-                                 ["wild_tiger": '"Joe"'],
-                                 ["document.title = document.wild_tiger;"])
+                      ["wild_tiger": '"Joe"'],
+                      ["document.title = document.wild_tiger;"])
     expect(@browser.text.include?("INJECT")).to be true
     expect(@browser.text.include?("title")).to be true
     expect(@browser.text.include?("data")).to be true
