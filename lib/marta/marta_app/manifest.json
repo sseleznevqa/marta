@@ -1,6 +1,6 @@
 {
   "name": "Marta app",
-  "version": "0.36788",
+  "version": "0.37396",
   "description": "Messaging from browser to main app",
   "permissions": ["activeTab", "http://127.0.0.1*/*", "storage"],
   "background": {
