@@ -1,6 +1,5 @@
 require 'marta/server'
 require 'marta/options_and_paths'
-require 'pry'
 
 module Marta
 
@@ -126,7 +125,6 @@ module Marta
         while result != true
           # When Marta can't get a result she is reinjecting her stuff
           result = MartaServer.wait_user_dialog_response
-          binding.pry if !result
           actual_injection if !result
         end
         run_script("return document.marta_result")
