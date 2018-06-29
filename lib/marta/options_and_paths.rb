@@ -147,7 +147,13 @@ module Marta
       # Marta uses simple rules to set the laearn mode
       def self.set_learn(value)
         @@learn = parameter_set(@@learn, value, learn_option)
-        warn "If browser was not started by Marta. Learn will not work properly"
+        if learn_status
+          warn "Be carefull. If browser was not started by Marta."\
+          " Learn mode will not work properly"
+        else
+          # We are switching server off if we do not really need it
+          SettingMaster.server.server_kill
+        end
       end
 
       # Marta uses simple rules to set the tolerancy value

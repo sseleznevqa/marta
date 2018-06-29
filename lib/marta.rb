@@ -1,5 +1,5 @@
 require "marta/version"
-require "marta/object"
+require "object"
 require 'marta/public_methods'
 require 'marta/options_and_paths'
 require 'marta/read_write'
@@ -58,6 +58,7 @@ module Marta
                  base_url: nil, cold_timeout: nil, port: nil, clear: nil)
     SettingMaster.clear if clear
     SettingMaster.set_port port
+    # We are always turning the server on in order to show Welcome!
     SettingMaster.set_server # server should be before browser
     SettingMaster.set_engine browser # browser should be before learn!
     SettingMaster.set_learn learn
