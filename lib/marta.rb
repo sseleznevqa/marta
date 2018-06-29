@@ -1,25 +1,24 @@
-puts require "watir"
-puts require 'fileutils'
-puts require 'json'
-puts require 'webrick'
-puts require 'socket'
-
-puts require "marta/version"
-puts require "object"
-puts require 'marta/public_methods'
-puts require 'marta/options_and_paths'
-puts require 'marta/read_write'
-puts require 'marta/user_values_prework'
-puts require 'marta/dialogs'
-puts require 'marta/classes_creation'
-puts require 'marta/lightning'
-puts require 'marta/injector'
-puts require 'marta/json_2_class'
-puts require 'marta/black_magic'
-puts require 'marta/simple_element_finder'
-puts require 'marta/x_path'
-puts require 'marta/page_arithmetic'
-puts require 'marta/server'
+require "watir"
+require 'fileutils'
+require 'json'
+require 'webrick'
+require 'socket'
+require "marta/version"
+require "object"
+require 'marta/public_methods'
+require 'marta/options_and_paths'
+require 'marta/read_write'
+require 'marta/user_values_prework'
+require 'marta/dialogs'
+require 'marta/classes_creation'
+require 'marta/lightning'
+require 'marta/injector'
+require 'marta/json_2_class'
+require 'marta/black_magic'
+require 'marta/simple_element_finder'
+require 'marta/x_path'
+require 'marta/page_arithmetic'
+require 'marta/server'
 
 
 
