@@ -3,6 +3,7 @@
 # Object class is Hijacked by Marta in order to catch not defined constants
 #
 #
+puts "NN"
 class Object
   class << self
     # We are saving old const_missing to marta_const_missing
@@ -19,3 +20,4 @@ class Object
     end
   end
 end
+puts "DD"

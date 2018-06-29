@@ -45,17 +45,17 @@ describe Marta::SmartPage do
   end
 
   it 'cannot change basic url option to something that is not a string' do
-    message = "The value should be a String. Not a 1:Fixnum"
+    message = "The value should be a String. Not a 1:Integer"
     expect{dance_with(base_url: 1)}.to raise_error(ArgumentError, message)
   end
 
-  it 'can change cold_timeout option to a fixnum' do
+  it 'can change cold_timeout option to a integer' do
     dance_with cold_timeout: 9
     expect(marta_fire(:cold_timeout)).to eq 9
   end
 
-  it 'cannot change cold_timout to sommething that is not a Fixnum' do
-    message = 'The value should be a Fixnum. Not a 91:String'
+  it 'cannot change cold_timout to sommething that is not a Integer' do
+    message = 'The value should be a Integer. Not a 91:String'
     expect{dance_with(cold_timeout: "91")}.to raise_error(ArgumentError, message)
   end
 

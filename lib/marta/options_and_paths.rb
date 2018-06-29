@@ -177,7 +177,7 @@ module Marta
 
       # Marta uses simple rule to set the cold timeout
       def self.set_cold_timeout(value)
-        parameter_check_and_set(@@cold_timeout, value, 10, Fixnum)
+        parameter_check_and_set(@@cold_timeout, value, 10, Integer)
       end
 
       # Marta sets port. If it is not defined and there are number of threads
@@ -189,7 +189,7 @@ module Marta
             i += 1
           end
         end
-        parameter_check_and_set(@@port, value, 6260 + @@port.size + i, Fixnum)
+        parameter_check_and_set(@@port, value, 6260 + @@port.size + i, Integer)
       end
 
       # We are storaging server instance as a setting
