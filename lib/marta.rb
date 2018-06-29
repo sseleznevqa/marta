@@ -1,5 +1,5 @@
 require "marta/version"
-require "object"
+require "marta/object"
 require 'marta/public_methods'
 require 'marta/options_and_paths'
 require 'marta/read_write'
