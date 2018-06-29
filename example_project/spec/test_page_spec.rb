@@ -17,7 +17,7 @@ describe "We will do some dummy things like" do
 
     it "Looking into iframe" do
       the_iframe = TheIframe.new
-      expect(the_iframe.github_link.text).to_eq "GITHUB link"
+      expect(the_iframe.github_link.text).to eq "GITHUB link"
     end
   end
 
@@ -28,4 +28,5 @@ describe "We will do some dummy things like" do
     @page.second_button.click
     expect(@page.title_exact.present?).to be true
   end
+
 end

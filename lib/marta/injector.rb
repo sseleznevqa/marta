@@ -126,6 +126,9 @@ module Marta
           # When Marta can't get a result she is reinjecting her stuff
           result = MartaServer.wait_user_dialog_response
           # We need double check for iframes here. It should be 100% changed.
+          if !result
+            result = engine.execute_script("return document.marta_confirm_mark")
+          end
           if (!result and !engine.element(id: 'marta_s_everything').exists?)
             actual_injection
           end
