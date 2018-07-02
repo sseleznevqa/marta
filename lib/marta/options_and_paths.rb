@@ -196,7 +196,7 @@ module Marta
       def self.set_server
         if SettingMaster.server.nil?
           @@server[thread_id] = Server::MartaServer.new(SettingMaster.port)
-        elsif SettingMaster.server.current_port != SettingMaster.port
+        elsif !Server::MartaServer.port_check(SettingMaster.port)
           @@server[thread_id] = Server::MartaServer.new(SettingMaster.port)
         end
       end

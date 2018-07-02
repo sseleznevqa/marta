@@ -3,8 +3,10 @@ require 'fileutils'
 require 'json'
 require 'webrick'
 require 'socket'
+
+
 require "marta/version"
-require "object"
+require "marta/object"
 require 'marta/public_methods'
 require 'marta/options_and_paths'
 require 'marta/read_write'
@@ -19,8 +21,6 @@ require 'marta/simple_element_finder'
 require 'marta/x_path'
 require 'marta/page_arithmetic'
 require 'marta/server'
-
-
 
 
 #
