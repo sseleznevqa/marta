@@ -301,7 +301,7 @@ g_page.search "I am in love with selenium."
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.37396. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
+*A: Nothing. Marta is under development. Her version is 0.41245. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
 
 ## Internal Design
 
