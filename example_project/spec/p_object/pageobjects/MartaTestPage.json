@@ -160,6 +160,23 @@
         "type": "button",
         "value": "First button"
       }
+    },
+    "the_iframe": {
+      "granny": {
+      },
+      "options": {
+        "collection": false,
+        "granny": "HTML",
+        "pappy": "BODY",
+        "self": "IFRAME"
+      },
+      "pappy": {
+      },
+      "self": {
+        "height": "300",
+        "src": "/welcome",
+        "width": "300"
+      }
     }
   }
 }

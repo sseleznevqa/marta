@@ -147,7 +147,13 @@ module Marta
       # Marta uses simple rules to set the laearn mode
       def self.set_learn(value)
         @@learn = parameter_set(@@learn, value, learn_option)
-        warn "If browser was not started by Marta. Learn will not work properly"
+        if learn_status
+          warn "Be carefull. If browser was not started by Marta."\
+          " Learn mode will not work properly"
+        else
+          # We are switching server off if we do not really need it
+          SettingMaster.server.server_kill
+        end
       end
 
       # Marta uses simple rules to set the tolerancy value
@@ -171,7 +177,7 @@ module Marta
 
       # Marta uses simple rule to set the cold timeout
       def self.set_cold_timeout(value)
-        parameter_check_and_set(@@cold_timeout, value, 10, Fixnum)
+        parameter_check_and_set(@@cold_timeout, value, 10, Integer)
       end
 
       # Marta sets port. If it is not defined and there are number of threads
@@ -183,14 +189,14 @@ module Marta
             i += 1
           end
         end
-        parameter_check_and_set(@@port, value, 6260 + @@port.size + i, Fixnum)
+        parameter_check_and_set(@@port, value, 6260 + @@port.size + i, Integer)
       end
 
       # We are storaging server instance as a setting
       def self.set_server
         if SettingMaster.server.nil?
           @@server[thread_id] = Server::MartaServer.new(SettingMaster.port)
-        elsif SettingMaster.server.current_port != SettingMaster.port
+        elsif !Server::MartaServer.port_check(SettingMaster.port)
           @@server[thread_id] = Server::MartaServer.new(SettingMaster.port)
         end
       end

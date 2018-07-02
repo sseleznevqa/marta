@@ -1,4 +1,4 @@
 module Marta
-  VERSION = "0.36788"
+  VERSION = "0.37396"
   NAME = "marta"
 end

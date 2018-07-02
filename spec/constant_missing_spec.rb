@@ -45,7 +45,7 @@ describe Marta::SmartPage, :need_browser do
     end
 
     it 'unknown constant will raise an error ' do
-      expect{@object.mars_attacks}.to raise_error(NameError, "Attack is not defined.")
+      expect{@object.mars_attacks}.to raise_error(NameError, "uninitialized constant Attack")
     end
 
     it 'unknown method will raise an error ' do

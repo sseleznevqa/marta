@@ -9,6 +9,9 @@ describe Marta::SmartPage, :need_browser do
 
   before(:each) do
     @browser.goto @page_five_url
+    class Marta::Injector::Syringe
+      include Marta
+    end
     @syring = Marta::Injector::Syringe.new(@browser, 'for_test', 'title',
                                           'nil||"data"', marta_fire(:gem_libdir),
                                           ["wild_tiger": '"Joe"'],

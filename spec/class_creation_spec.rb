@@ -51,12 +51,12 @@ describe Marta::SmartPage do
 
   it 'will do nothing if json file is incorrect' do
     marta_fire(:json_2_class, @bad_name, false)
-    expect{Bad.new}.to raise_error(NameError, "Bad is not defined.")
+    expect{Bad.new}.to raise_error(NameError, "uninitialized constant Bad")
   end
 
   it 'will do nothing if json file does not exist' do
     marta_fire(:json_2_class, @fake_name, false)
-    expect{Fake.new}.to raise_error(NameError, "Fake is not defined.")
+    expect{Fake.new}.to raise_error(NameError, "uninitialized constant Fake")
   end
 
   it 'can create a special class out of json file' do

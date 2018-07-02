@@ -1,0 +1,24 @@
+{
+  "vars": {
+    "path": "",
+    "url": ""
+  },
+  "meths": {
+    "github_link": {
+      "granny": {
+      },
+      "options": {
+        "collection": false,
+        "granny": "HTML",
+        "pappy": "BODY",
+        "self": "A"
+      },
+      "pappy": {
+      },
+      "self": {
+        "href": "https://github.com/sseleznevqa/marta",
+        "retrieved_by_marta_text": "GITHUB link"
+      }
+    }
+  }
+}

@@ -1,4 +1,12 @@
+require "watir"
+require 'fileutils'
+require 'json'
+require 'webrick'
+require 'socket'
+
+
 require "marta/version"
+require "marta/object"
 require 'marta/public_methods'
 require 'marta/options_and_paths'
 require 'marta/read_write'
@@ -13,11 +21,6 @@ require 'marta/simple_element_finder'
 require 'marta/x_path'
 require 'marta/page_arithmetic'
 require 'marta/server'
-require "watir"
-require 'fileutils'
-require 'json'
-require 'webrick'
-require 'socket'
 
 
 #
@@ -44,18 +47,6 @@ module Marta
     end
   end
 
-  # That is how Marta connected to the world
-
-  # We will ask user about completely new class
-  def Object.const_missing(const, *args, &block)
-    if !SettingMaster.learn_status
-      raise NameError, "#{const} is not defined."
-    else
-      data, data['vars'], data['meths'] = Hash.new, Hash.new, Hash.new
-      SmartPageCreator.json_2_class(ReaderWriter.file_write(const.to_s, data))
-    end
-  end
-
   # Marta is returning an engine (it should be a browser instance)
   # Watir::Browser.new(:chrome) by default
   def engine
@@ -69,6 +60,7 @@ module Marta
                  base_url: nil, cold_timeout: nil, port: nil, clear: nil)
     SettingMaster.clear if clear
     SettingMaster.set_port port
+    # We are always turning the server on in order to show Welcome!
     SettingMaster.set_server # server should be before browser
     SettingMaster.set_engine browser # browser should be before learn!
     SettingMaster.set_learn learn
