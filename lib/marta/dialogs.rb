@@ -173,8 +173,41 @@ module Marta
     def user_method_dialogs(method_name)
       dialog_master = MethodSpeaker.new(method_name, self)
       data = dialog_master.dialog
+      data['meths'][method_name] =
+                    dynamise_method(data['vars'], data['meths'][method_name])
       file_write(self.class_name.to_s, data)
       data
     end
+
+    # Marta will search for page variables in attributes of element in order
+    # to create dynamic element by itself. Maybe move to Page arithmetic?
+    def dynamise_method(vars, method)
+      vars.each_pair do |variable_name, variable|
+        if method.is_a? Hash
+          method.each_pair do |key, value|
+            if value.class == Hash or value.class == Array
+              dynamised_value = dynamise_method(vars, value)
+            elsif (value.class == String) and
+                    (self.instance_variable_get("@#{variable_name}") != "")
+              dynamised_value = value.
+                gsub(self.instance_variable_get("@#{variable_name}"),
+                     '#{@' + variable_name + '}')
+            else
+              dynamised_value = value
+            end
+            method[key] = dynamised_value
+          end
+        elsif method.is_a? Array
+          method.each do |value|
+            if self.instance_variable_get("@#{variable_name}") != ""
+              value.gsub!(self.instance_variable_get("@#{variable_name}"),
+                   '#{@' + variable_name + '}')
+            end
+          end
+        end
+      end
+      method
+    end
+
   end
 end

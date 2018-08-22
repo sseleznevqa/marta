@@ -6,7 +6,6 @@ module Marta
 
     include OptionsAndPaths
 
-
     #
     # User can create pageobject class using SmartPage.new
     #
@@ -44,10 +43,12 @@ module Marta
       method_name = correct_name(name)
       exact_name = method_name.to_s + "_exact"
       data = user_method_dialogs(method_name)
-      define_singleton_method method_name.to_sym do |meth_content=@data['meths'][method_name]|
+      define_singleton_method method_name.
+                         to_sym do |meth_content=@data['meths'][method_name]|
         marta_magic_finder(meth_content)
       end
-      define_singleton_method exact_name.to_sym do |meth_content=@data['meths'][method_name]|
+      define_singleton_method exact_name.
+                         to_sym do |meth_content=@data['meths'][method_name]|
         marta_simple_finder(meth_content)
       end
       public_send name.to_sym

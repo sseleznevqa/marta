@@ -23,5 +23,6 @@
     }
   },
   "vars": {
+    "the_var": "come"
   }
 }

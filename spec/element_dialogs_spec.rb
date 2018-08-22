@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe Marta::SmartPage, :need_browser do
 
@@ -81,6 +82,19 @@ describe Marta::SmartPage, :need_browser do
     expect(the_collection["options"]["not_self"]).to eq("LABEL")
     expect(the_collection["not_self"]["class"][0]).to eq("exclude")
     expect(the_collection["not_self"]["retrieved_by_marta_text"]).to eq("Yes!")
+  end
+
+  it 'applying dynamic values to attributes' do
+    @browser.goto @page_one_url
+    page = Marta::SmartPage.new(@name, ({"vars" => {"potato" => "el"},"meths" => {}}), false)
+    page.send(:user_method_dialogs, "hello_world")
+    expect(File.exists?(@full_name)).to be true
+    file = File.read(@full_name)
+    data_hash = JSON.parse(file)
+    expect(data_hash["meths"]["hello_world"]["self"]["class"][0]).
+                                                    to eq("\#{@potato}ement")
+    expect(data_hash["meths"]["hello_world"]["self"]["id"]).
+                                                    to eq("\#{@potato}ement1")
   end
 
   after(:each) do
