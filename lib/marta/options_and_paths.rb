@@ -158,7 +158,7 @@ module Marta
 
       # Marta uses simple rules to set the tolerancy value
       def self.set_tolerancy(value)
-        @@tolerancy = parameter_set(@@tolerancy, value, 1024)
+        @@tolerancy = parameter_set(@@tolerancy, value, 10000)
       end
 
       def self.parameter_check_and_set(where, value, default, expected_class)
@@ -246,14 +246,5 @@ module Marta
       SettingMaster.port
     end
 
-    # Marta can call server easily
-    def server
-      SettingMaster.server
-    end
-
-    # Marta knows was the browser started by she
-    def correct_engine?
-      SettingMaster.correct_engine?
-    end
   end
 end

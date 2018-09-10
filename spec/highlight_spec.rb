@@ -24,6 +24,14 @@ describe Marta::SmartPage, :need_browser do
     expect(martaclass.nil?).to be true
   end
 
+  it 'has no problem with highlighting nothing' do
+    expect{marta_fire(:highlight, @browser.element(id:"noelement"))}.not_to raise_error
+  end
+
+  it 'has no problem with unhighlighting nothing' do
+    expect{marta_fire(:unhighlight, @browser.element(id:"noelement"))}.not_to raise_error
+  end
+
   it 'can perform a massive highlight' do
     mass = @browser.elements(name: "findme")
     marta_fire(:mass_highlight_turn, mass)

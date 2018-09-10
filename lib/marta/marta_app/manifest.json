@@ -2,7 +2,8 @@
   "name": "Marta app",
   "version": "0.41245",
   "description": "Messaging from browser to main app",
-  "permissions": ["activeTab", "http://127.0.0.1*/*", "storage"],
+  "devtools_page": "devtools.html",
+  "permissions": ["activeTab", "http://127.0.0.1*/*", "storage", "contextMenus"],
   "background": {
     "scripts": ["background.js"],
     "persistent": true

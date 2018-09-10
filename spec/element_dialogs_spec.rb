@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe Marta::SmartPage, :need_browser do
 
@@ -31,8 +30,8 @@ describe Marta::SmartPage, :need_browser do
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)
     data_hash = JSON.parse(file)
-    expect(data_hash["meths"]["hello_world"]["self"]["class"].length).to eq(3)
-    expect(data_hash["meths"]["hello_world"]["self"]["id"]).to eq("element1")
+    expect(data_hash["meths"]["hello_world"]["positive"]["self"]["attributes"]["class"].length).to eq(3)
+    expect(data_hash["meths"]["hello_world"]["positive"]["self"]["attributes"]["id"]).to eq(["element1"])
   end
 
   it "can save element by xpath" do
@@ -56,8 +55,8 @@ describe Marta::SmartPage, :need_browser do
     expect(File.exists?(@page_3_name)).to be true
     file = File.read(@page_3_name)
     data_hash = JSON.parse(file)
-    expect(data_hash["meths"]["hello_world"]["self"]["class"].length).to eq(3)
-    expect(data_hash["meths"]["hello_world"]["self"]["id"]).to eq("element1")
+    expect(data_hash["meths"]["hello_world"]["positive"]["self"]["attributes"]["class"].length).to eq(3)
+    expect(data_hash["meths"]["hello_world"]["positive"]["self"]["attributes"]["id"]).to eq(["element1"])
   end
 
   it 'can find invisible elements by html' do
@@ -67,7 +66,7 @@ describe Marta::SmartPage, :need_browser do
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)
     data_hash = JSON.parse(file)
-    expect(data_hash["meths"]["invisible"]["self"]["class"][0]).to eq("found")
+    expect(data_hash["meths"]["invisible"]["positive"]["self"]["attributes"]["class"][0]).to eq("found")
   end
 
   it 'treats a collection mark' do
@@ -77,24 +76,24 @@ describe Marta::SmartPage, :need_browser do
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)
     the_collection = JSON.parse(file)["meths"]["collection"]
-    expect(the_collection["self"]["class"][0]).to eq("element")
-    expect(the_collection["options"]["self"]).to eq("*")
-    expect(the_collection["options"]["not_self"]).to eq("LABEL")
-    expect(the_collection["not_self"]["class"][0]).to eq("exclude")
-    expect(the_collection["not_self"]["retrieved_by_marta_text"]).to eq("Yes!")
+    expect(the_collection["positive"]["self"]["attributes"]["class"][0]).to eq("element")
+    expect(the_collection["positive"]["self"]["tag"]).to eq([])
+    expect(the_collection["negative"]["self"]["tag"]).to eq(["LABEL"])
+    expect(the_collection["negative"]["self"]["attributes"]["class"][0]).to eq("exclude")
+    expect(the_collection["negative"]["self"]["text"]).to eq(["Yes!"])
   end
 
   it 'applying dynamic values to attributes' do
     @browser.goto @page_one_url
-    page = Marta::SmartPage.new(@name, ({"vars" => {"potato" => "el"},"meths" => {}}), false)
+    page = Marta::SmartPage.new(@name, ({"vars" => {"class" => "el", "id" => "en", "text" => "orld"},"meths" => {}}), false)
     page.send(:user_method_dialogs, "hello_world")
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)
     data_hash = JSON.parse(file)
-    expect(data_hash["meths"]["hello_world"]["self"]["class"][0]).
-                                                    to eq("\#{@potato}ement")
-    expect(data_hash["meths"]["hello_world"]["self"]["id"]).
-                                                    to eq("\#{@potato}ement1")
+    hello_world = data_hash["meths"]["hello_world"]['positive']["self"]
+    expect(hello_world['attributes']["class"][0]).to eq("\#{@class}ement")
+    expect(hello_world['attributes']["id"][0]).to eq("elem\#{@id}t1")
+    expect(hello_world["text"][0]).to eq("Hello W\#{@text}!")
   end
 
   after(:each) do

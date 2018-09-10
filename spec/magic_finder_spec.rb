@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Marta::SmartPage, :need_browser do
 
   before(:all) do
-    @page_three_url = "file://#{Dir.pwd}" +
-      "/spec/test_data_folder/page_three.html"
+    @page_three_url = "file://#{Dir.pwd}/spec/test_data_folder/page_three.html"
+    @page_ten_url = "file://#{Dir.pwd}/spec/test_data_folder/page_ten.html"
     donor_name = './spec/test_data_folder/test_pageobjects/Page_three_all.json'
     file = File.read(donor_name)
     temp_hash = JSON.parse(file)
@@ -37,7 +37,7 @@ describe Marta::SmartPage, :need_browser do
     element = marta_fire(:marta_magic_finder, @correct_collection)
     expect(element.class).to eq Watir::HTMLElementCollection
     expect(element[0].exists?).to be true
-    expect(element.length).to be 1
+    expect(element.count).to be 1
   end
 
   it 'can find a correct element by xpath' do
@@ -106,5 +106,51 @@ describe Marta::SmartPage, :need_browser do
   it 'can find element with changed attribute name (class related)' do
     element = marta_fire(:marta_magic_finder, @smart_class)
     expect(element.attribute_value("notclass")).to eq "aa zz"
+  end
+
+  context 'Auto learn feature' do
+    before(:each) do
+      @name = 'Toedit'
+      @full_name = "./spec/test_data_folder/test_pageobjects/#{@name}.json"
+      @data = {"vars": {},
+               "meths":{"h1" => {'options' => {'collection' => false},
+                        'positive' => {
+                          'self' => {
+                            'text'=>[], 'tag' => ["H1"], 'attributes' => {"id" => ["wrong"]}},
+                           'pappy' => {
+                             'text'=>[], 'tag' => [], 'attributes' => {}},
+                           'granny' => {
+                             'text'=>[], 'tag' => [], 'attributes' => {}}},
+                         'negative' => {
+                           'self' => {
+                             'text'=>[], 'tag' => [], 'attributes' => {}},
+                            'pappy' => {
+                              'text'=>[], 'tag' => [], 'attributes' => {}},
+                            'granny' => {
+                              'text'=>[], 'tag' => [], 'attributes' => {}}}
+                           }}}
+      Marta::OptionsAndPaths::SettingMaster.
+                      set_folder "./spec/test_data_folder/test_pageobjects/"
+      File.open(@full_name,"w") do |f|
+        f.write(JSON.pretty_generate(@data))
+      end
+      dance_with
+      @browser.goto @page_ten_url
+    end
+    after(:each) do
+      FileUtils.rm_rf(@full_name)
+    end
+
+    it 'somewhere at magic find we are silently rewriting broken js' do
+      Toedit.new.h1
+      file = File.read(@full_name)
+      data_hash = JSON.parse(file)
+      check_data = data_hash['meths']['h1']['positive']
+      expect(check_data['self']['tag'][0]).to eq "H1"
+      expect(check_data['self']['attributes']['id']).to eq []
+      expect(check_data['self']['attributes']['class']).to eq ['hello', 'world']
+      expect(check_data['pappy']['tag'][0]).to eq "SPAN"
+      expect(check_data['granny']['tag'][0]).to eq "DIV"
+    end
   end
 end

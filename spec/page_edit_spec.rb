@@ -13,21 +13,22 @@ describe Marta::SmartPage, :need_browser do
 
   before(:each) do
     dance_with learn: true
-    dance_with learn: false
+    #sleep 5
+    #dance_with learn: false
   end
 
   it 'can perform basic page creation user story' do
     @browser.goto @page_four_url
-    marta_fire(:page_edit, @name, @data)
+    Page.new
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)
     data_hash = JSON.parse(file)
     expect(data_hash["vars"]["hello"]).to eq "world"
+    dance_with learn: false
     expect(Page.new.hello).to eq "world"
   end
 
   it 'can edit page variables on fly' do
-    dance_with learn: true
     @browser.goto @page_eight_url
     page = Page.new
     expect(page.hello).to eq "kitty"

@@ -21,6 +21,7 @@ module Marta
       end
     end
 
+    # Method to understand that something shouldn't be highlighted
     def is_here?(element)
       element.exists?
     rescue

@@ -104,7 +104,7 @@ module Marta
 
     def build_method(name, content)
       define_singleton_method name.to_sym do
-        learn_status ? method_edit(name) : marta_magic_finder(content)
+        learn_status ? method_edit(name) : marta_magic_finder(content, name)
       end
       exact = name + '_exact'
       define_singleton_method exact.to_sym do

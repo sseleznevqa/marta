@@ -4,6 +4,10 @@ Marta was planned as an element locating tool for Watir tests. But now Marta is 
 
 Also Marta is providing a little more stability when locating elements on the page.
 
+## Refactoring notification.
+
+Version 0.41245 (that one) is the version with new structure of data storing. Marta will try to convert old pajeobject json files to the new format automatically. But manual redefining is the safest way.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -84,6 +88,8 @@ your_page.itemprop = "about"
 *And when defining an element you can use it in value field of itemprop like #{@itemprop}.*
 
 ![Dynamic attributes - 2](readme_files/itemprop2.png)
+
+*If name of your variable is the same as the name of attribute and attribute value is including your variable value. Marta will do everything automatically*
 
 *See couple examples in example_project (Ruby checkbox, item1 and 2 radio buttons)*
 
@@ -177,9 +183,9 @@ test_page.method_edit("magic_button")
 
 *A: You can set tolerancy parameter. Larger = longer*
 ```ruby
-dance_with tolerancy: 1024# is the default value
+dance_with tolerancy: 10000# is the default value
 ```
-*That logic will be changed to more understandable soon. I hope.*
+*The amount = 10000 means that Marta will look for element 3 times (with different settings) trying up to 10000 xpaths each iteration. She will generate all possible combinations at first. When she's getting closer to the limit she's starting to try more random xpaths*
 
 **Q: Marta is trying to find the lost element after pretty long time. Why?**
 

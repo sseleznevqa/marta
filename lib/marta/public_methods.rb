@@ -45,7 +45,7 @@ module Marta
       data = user_method_dialogs(method_name)
       define_singleton_method method_name.
                          to_sym do |meth_content=@data['meths'][method_name]|
-        marta_magic_finder(meth_content)
+        marta_magic_finder(meth_content, method_name)
       end
       define_singleton_method exact_name.
                          to_sym do |meth_content=@data['meths'][method_name]|

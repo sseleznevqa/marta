@@ -1,1 +1,172 @@
-{"meths":{"hello_world":{"granny":{},"options":{"collection":false,"granny":"UNKNOWN","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","UNKNOWN","find"],"id":"UNKNOWN"}},"raise_raise":{"granny":{},"options":{"collection":false,"granny":"a","pappy":"b","self":"c"},"pappy":{},"self":{"class":["d","e","f","g","h","i","j","k","l","m","n","o","p","q","r"],"id":"x"}}},"vars":{}}
+{
+  "meths": {
+    "hello_world": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "UNKNOWN",
+              "find"
+            ],
+            "id": [
+              "UNKNOWN"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "UNKNOWN"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "raise_raise": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "c"
+          ],
+          "attributes": {
+            "class": [
+              "d",
+              "e",
+              "f",
+              "g",
+              "h",
+              "i",
+              "j",
+              "k",
+              "l",
+              "m",
+              "n",
+              "o",
+              "p",
+              "q",
+              "r"
+            ],
+            "id": [
+              "x"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "b"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "a"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  },
+  "vars": {
+  }
+}

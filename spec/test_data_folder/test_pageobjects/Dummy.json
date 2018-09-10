@@ -1,44 +1,42 @@
 {
+  "vars": {
+  },
   "meths": {
-    "hello_world": {
+    "unknown": {
       "options": {
         "collection": false
       },
       "positive": {
         "self": {
-          "text": [
-            "Hello World!"
-          ],
           "tag": [
-            "H1"
+            "I"
+          ],
+          "text": [
+
           ],
           "attributes": {
-            "class": [
-              "#{@element}",
-              "to",
-              "find"
-            ],
-            "id": [
-              "element1"
+            "notclass": [
+              "aa",
+              "zz"
             ]
           }
         },
         "pappy": {
-          "text": [
-
-          ],
           "tag": [
             "BODY"
+          ],
+          "text": [
+
           ],
           "attributes": {
           }
         },
         "granny": {
-          "text": [
-
-          ],
           "tag": [
             "HTML"
+          ],
+          "text": [
+
           ],
           "attributes": {
           }
@@ -47,18 +45,12 @@
       "negative": {
         "self": {
           "text": [
-            "Bye"
+
           ],
           "tag": [
 
           ],
           "attributes": {
-            "class": [
-              "xx"
-            ],
-            "id": [
-              "elementz"
-            ]
           }
         },
         "pappy": {
@@ -76,14 +68,12 @@
 
           ],
           "tag": [
-            "LOL"
+
           ],
           "attributes": {
           }
         }
       }
     }
-  },
-  "vars": {
   }
 }

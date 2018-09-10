@@ -130,9 +130,9 @@ describe Marta::SmartPage do
       @browser.goto @page_three_url
       expect(@class.var).to eq "something"
       expect(@class.othervar).to eq "somethingother"
-      expect{@class.var, @class.othervar = 1,2}.to_not raise_error
-      expect(@class.var).to eq 1
-      expect(@class.othervar).to eq 2
+      expect{@class.var, @class.othervar = "1","2"}.to_not raise_error
+      expect(@class.var).to eq "1"
+      expect(@class.othervar).to eq "2"
       expect(@class.class).to_not eq 'ignored'
       expect(@class.not_welcome).to_not eq 'ignored'
     end

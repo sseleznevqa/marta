@@ -5,7 +5,9 @@ describe Marta::SimpleElementFinder::BasicFinder do
 
   before(:all) do
     @xpath = "//HTML/BODY/H1[contains(@class,'element')]"\
-            "[contains(@class,'to')][contains(@class,'find')][@id='element1']"
+                           "[contains(@class,'to')]"\
+                           "[contains(@class,'find')]"\
+                           "[contains(@id,'element1')]"
     @page_three_url = "file://#{Dir.pwd}/spec/test_data_folder/page_three.html"
     @page_six_url = "file://#{Dir.pwd}/spec/test_data_folder/page_six.html"
     class Helper
@@ -22,7 +24,7 @@ describe Marta::SimpleElementFinder::BasicFinder do
     @helper = Helper.new
   end
 
-  it 'knows when we are looking for collection' do
+  it 'knows when we are looking for collection', :need_browser do
     expect(@helper.newclass('correct_collection').collection?).to be true
   end
 
