@@ -14,7 +14,7 @@
           ],
           "attributes": {
             "class": [
-              "#{@element}",
+              "#{@element_class}",
               "to",
               "find"
             ],

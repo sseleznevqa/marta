@@ -91,9 +91,9 @@ describe Marta::SmartPage, :need_browser do
     file = File.read(@full_name)
     data_hash = JSON.parse(file)
     hello_world = data_hash["meths"]["hello_world"]['positive']["self"]
-    expect(hello_world['attributes']["class"][0]).to eq("\#{@class}ement")
-    expect(hello_world['attributes']["id"][0]).to eq("elem\#{@id}t1")
-    expect(hello_world["text"][0]).to eq("Hello W\#{@text}!")
+    expect(hello_world['attributes']["class"][0]).to eq("\#{@classy}ement")
+    expect(hello_world['attributes']["id"][0]).to eq("elem\#{@idy}t1")
+    expect(hello_world["text"][0]).to eq("Hello W\#{@texty}!")
   end
 
   after(:each) do

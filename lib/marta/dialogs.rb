@@ -203,13 +203,13 @@ module Marta
     # to create dynamic element by itself. It must be splited. And moved.
     def dynamise_method(vars, method)
       vars.each_pair do |variable_name, variable|
-        if variable_name == 'text'
-          dynamise 'text', [method['positive']['self']['text'],
-                            method['positive']['pappy']['text'],
-                            method['positive']['granny']['text'],
-                            method['negative']['self']['text'],
-                            method['negative']['pappy']['text'],
-                            method['negative']['granny']['text']]
+        if variable_name.include?('text')
+          dynamise variable_name, [method['positive']['self']['text'],
+                                   method['positive']['pappy']['text'],
+                                   method['positive']['granny']['text'],
+                                   method['negative']['self']['text'],
+                                   method['negative']['pappy']['text'],
+                                   method['negative']['granny']['text']]
         else
           [method['positive'], method['negative']].each do |method|
             method.each_pair do |level, content|

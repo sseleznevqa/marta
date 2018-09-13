@@ -5,10 +5,10 @@ describe Marta::XPath::XPathFactory do
 
   before(:each) do
     class Requestor
-      attr_accessor :element
+      attr_accessor :element_class
     end
     @requestor = Requestor.new
-    @requestor.element = "element"
+    @requestor.element_class = "WOW"
     donor_name = './spec/test_data_folder/test_pageobjects/Xpath.json'
     file = File.read(donor_name)
     temp_hash = JSON.parse(file)
@@ -22,8 +22,8 @@ describe Marta::XPath::XPathFactory do
              {:full=>["/"], :empty=>["//"]},
              {:full=>["H1"], :empty=>["*"]},
              {:full=>["[contains(text(),'Hello World!')]"], :empty=>[""]},
-             {:full=>["[contains(@class,'\#{@element}')]"],
-                     :empty=>["[@*[contains(.,'\#{@element}')]]", ""]},
+             {:full=>["[contains(@class,'\#{@element_class}')]"],
+                     :empty=>["[@*[contains(.,'\#{@element_class}')]]", ""]},
              {:full=>["[contains(@class,'to')]"],
                      :empty=>["[@*[contains(.,'to')]]", ""]},
              {:full=>["[contains(@class,'find')]"],
@@ -37,7 +37,7 @@ describe Marta::XPath::XPathFactory do
     @no_pappy = @full[0..2] + @full[5..-1]
     @self = [@full[0]] + @full[6..-1]
     @xpath = "//HTML[not(self::LOL)]/BODY/H1[contains(text(),'Hello World!')]"\
-             "[contains(@class,'\#{@element}')][contains(@class,'to')]"\
+             "[contains(@class,'WOW')][contains(@class,'to')]"\
              "[contains(@class,'find')][contains(@id,'element1')]"\
              "[not(contains(text(),'Bye'))][not(contains(@class,'xx'))]"\
              "[not(contains(@id,'elementz'))]"
