@@ -49,13 +49,15 @@ module Marta
         end
       end
 
+      # When black magic is finding some collection it is not only returning
+      # it. It is silently generating changes to a json file
       def return_collection
         result = prefind_collection
         to_save = @meth
         result.each do |item|
           meth_data = method_structure true
           meth_data['positive'] = get_attributes item, @requestor
-          to_save = forget_unstable(to_save, meth_data)
+          to_save = make_collection(to_save, meth_data)
         end
         file_name  = @requestor.instance_variable_get("@class_name").to_s
         file_data = @requestor.instance_variable_get("@data")
@@ -64,6 +66,8 @@ module Marta
         result
       end
 
+      # When black magic is finding some element it is not only returning
+      # it. It is silently writing actual data about the element to json
       def return_element
         result = prefind
         meth_data = method_structure

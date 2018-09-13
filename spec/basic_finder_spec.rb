@@ -76,11 +76,6 @@ describe Marta::SimpleElementFinder::BasicFinder do
     expect(element.class).to eq Watir::Heading
   end
 
-  it 'finds all the invisible elements', :need_browser do
-    @browser.goto @page_six_url
-    expect(@helper.newclass('correct').find_invisibles.length).to eq 4
-  end
-
   it 'can be created with nil instead of meth data' do
     expect{Marta::SimpleElementFinder::BasicFinder.new(nil,
       Marta::SmartPage.new('Dummy', ({"vars" => {},"meths" => {}}), false))}.

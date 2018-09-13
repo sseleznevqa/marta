@@ -6,12 +6,18 @@ module Marta
 
     private
 
+    #
+    # We are using helper class which can parse element attributes to our
+    # special hash format.
+    #
+    # @note It is believed that no user will use it
     class ElementHelper
 
       def initialize(requestor)
         @engine = requestor.engine
       end
 
+      # We can get data of the element or data of any parent.
       def get_element_info(element, parent_count = 0)
         parent = ''
         parent_count.times do
@@ -39,6 +45,7 @@ module Marta
         return result
       end
 
+      # That class is also stores an empty special format hash.
       def self.method_structure(collection = false)
         return {'options' => {'collection' => collection},
                  'positive' => {
@@ -59,6 +66,8 @@ module Marta
       end
     end
 
+    # We are getting three levels of attributes of element,
+    # parent and grandparent
     def get_attributes(element, requestor = self)
       result = Hash.new
       element_helper = ElementHelper.new requestor
@@ -68,6 +77,7 @@ module Marta
       return result
     end
 
+    # We can return the default structure of our special format
     def method_structure(collection = false)
       ElementHelper.method_structure collection
     end

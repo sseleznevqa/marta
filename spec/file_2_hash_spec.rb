@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe Marta::SmartPage do
   before(:all) do

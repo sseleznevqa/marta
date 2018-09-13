@@ -31,6 +31,16 @@ module Marta
         @requestor = requestor
       end
 
+      # We are trying to understand here how much work should we do in order
+      # to generate all possible xpaths variants.
+      #
+      # depth is suggested amount of unstable xpath parts
+      # limit is the maximum amount of xpaths that we want to generate
+      # If we can try all the combinations of xpaths with considering
+      # depth elements unstable withou reaching the limit of tries,
+      # method will return that depth and precreated array_of_hashes
+      # If limit will be reached on creation of all xpaths, method
+      # is returning last acceptable depth and array_of_hashes
       def analyze(depth, limit)
         hashes = array_of_hashes
         count = 1
@@ -48,6 +58,8 @@ module Marta
         return real_depth, hashes
       end
 
+      # Generating not more than limit random xpaths variants considering
+      # that depth parts of xpath are unstable
       def monte_carlo(hashes, depth, limit)
         xpaths = Array.new
         while xpaths.count < limit do
@@ -65,6 +77,11 @@ module Marta
         xpaths
       end
 
+      # We are generating masks like [:empty,:full,:full,:empty]
+      # They are used for more understandable logic of looping xpaths variants
+      # In fact they are lists with all the combinations of
+      # switches :full\:empty. Where the length of switches is the same as
+      # length of xpath parts. And amount of :empty switches is depth
       def get_masks(masks, depth)
         result = Array.new
         masks.each do |mask|
@@ -81,6 +98,7 @@ module Marta
         end
       end
 
+      # We are forming xpath strings by masks and hashes with data
       def xpaths_by_mask(mask, hashes)
         xpaths = Array.new
         final_array = [[]]
@@ -108,6 +126,11 @@ module Marta
         xpaths
       end
 
+      # Full logic of xpath generating
+      # We are understanding can we find all the possible xpath variations
+      # We are creating all possible masks (arrays of switches) one by one
+      # If we know that we cannot find all variants we are generating some
+      # by more random algorithm
       def generate_xpaths(depth, limit = 10000)
         xpaths = Array.new
         real_depth, hashes = analyze(depth, limit)
@@ -121,6 +144,7 @@ module Marta
         xpaths.uniq
       end
 
+      # We can generate straight xpath by all known data
       def generate_xpath
         result = ''
         array_of_hashes.each do |hash|
@@ -129,6 +153,7 @@ module Marta
         result
       end
 
+      # We are parsing positive part of element data to array of hashes
       def positive_part_of_array_of_hashes(what)
         result = Array.new
         result.push make_hash(@meth['positive'][what]['tag'] != [] ? @meth['positive'][what]['tag'][0] : '*', '*')
@@ -146,6 +171,7 @@ module Marta
         result
       end
 
+      # We are parsing negative part of element data to array of hashes
       def negative_part_of_array_of_hashes(what)
         result = Array.new
         @meth['negative'][what]['tag'].each do |not_tag|
@@ -164,6 +190,13 @@ module Marta
         result
       end
 
+      # We are parsing stored element data (tag, text and attributes)
+      # into the array of hashes
+      #
+      # Output looks like:
+      # [{full:["//"],empty["//"]},
+      # {full:["H1"],empty["*"]},
+      # {full:["[@id='x']"],empty["", "[@*[contains(.,'x')]]"]}]
       def array_of_hashes
         result = Array.new
         result.push make_hash('//', '//')

@@ -46,6 +46,9 @@ module Marta
         result
       end
 
+      # When black magic finds something
+      # she's not trusting dynamic attribute anymore. So she's forgetting
+      # unstable attributes and remembering stable and new ones
       def forget_unstable
         result = method_structure
         result['options'] = @main_hash['options']
@@ -83,21 +86,35 @@ module Marta
         result
       end
 
+      # That is not a real merge. We are leaving everything that is the same
+      # or new and deleting everyting that is not the same
+      #
+      # Idea:
+      # merge({a:[1],b:[2],c:[3]},{a:[1],b:[2,3]}) #=> {a:[1],b:[2],c:[3]}
       def merge(first, second)
         do_arithmetic(second, first, '*')
       end
 
-      # Simple adding options
+      # Simple adding everyting to everything
+      #
+      # Idea:
+      # summarize({a:[1],c:[4]},{a:[2],b:[3]}) #=> {a:[1,2],b:[3],c:[4]}
       def summarize(first, second)
         do_arithmetic(second, do_arithmetic(first, second, '+'), '+')
       end
 
       # That will leave only the same options in the result
+      #
+      # Idea:
+      # multiply({a:[1,2],b:[2],c:[5]},{a:[1,3],b:[4],d:[0]}) #=> {a:[1],b:[2]}
       def multiply(first, second)
         do_arithmetic(first, second, '&')
       end
 
       # That will take out of the result all options of second
+      #
+      # Idea
+      # extract({a:[1,2],b:[2],c:[5]},{a:[2],c:[5],d:[0]}) #=> {a:[1],b:[2]}
       def extract(first, second)
         do_arithmetic(first, second, '-')
       end
@@ -109,10 +126,10 @@ module Marta
       merger.do_collection
     end
 
+    # Forgetting unstable attributes leaving the same ones and new ones
     def forget_unstable(old_one, new_one)
       merger = MethodMerger.new(old_one, new_one)
       merger.forget_unstable
-      #binding.pry
     end
   end
 end

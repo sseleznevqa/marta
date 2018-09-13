@@ -5,7 +5,6 @@ require 'marta/injector'
 require 'marta/public_methods'
 require 'marta/page_arithmetic'
 require 'marta/element_information'
-require 'pry'
 
 module Marta
 
