@@ -65,7 +65,7 @@ module Marta
         first.each_pair do |key, value|
           if value.is_a? Hash
             result[key] = do_arithmetic(first[key], second[key], what)
-          elsif !second[key].nil?
+          elsif !second[key].nil? and !value.nil?
             if what == '+'
               result[key] = (first[key] + second[key]).uniq
             elsif what == '&'

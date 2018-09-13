@@ -161,7 +161,7 @@ module Marta
           result.push make_hash("[contains(text(),'#{@meth['positive'][what]['text'][0]}')]")
         end
         @meth['positive'][what]['attributes'].each_pair do |attribute, values|
-          if (values != []) and (values != [''])
+          if (values != []) and (values != ['']) and !values.nil?
             values.each do |value|
               result.push make_hash("[contains(@#{attribute},'#{value}')]",
                                     ["[@*[contains(.,'#{value}')]]", ""])
@@ -181,7 +181,7 @@ module Marta
           result.push make_hash("[not(contains(text(),'#{not_text}'))]", '')
         end
         @meth['negative'][what]['attributes'].each_pair do |attribute, values|
-          if (values != []) and (values != [''])
+          if (values != []) and (values != ['']) and !values.nil?
             values.each do |value|
               result.push make_hash("[not(contains(@#{attribute},'#{value}'))]")
             end

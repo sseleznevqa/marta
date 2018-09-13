@@ -84,26 +84,28 @@ module Marta
       def find
         if !forced_xpath?
           element = prefind_with_waiting
-          warn_and_search element
+          if !element.exists?
+            warn_and_search element
+            if collection?
+              return_collection
+            else
+              return_element
+            end
+          end
         end
-        if collection?
-          return_collection
-        else
-          return_element
-        end
+        super
       end
 
       # Marta is producing warning when element was not found normally
       def warn_and_search(element)
-        if !element.exists?
-          warn "ATTENTION: Element "\
-               "#{@requestor.instance_variable_get("@class_name")}.#{@name}"\
-               " was not found by locator = #{@xpath}."
-          warn "And Marta uses a black"\
-               " magic to find it. If she finds something"\
-               " Marta redefines it without warning."
-          actual_searching(element)
-        end
+        warn "ATTENTION: Element "\
+             "#{@requestor.instance_variable_get("@class_name")}.#{@name}"\
+             " was not found by locator = #{@xpath}."
+        warn "And Marta uses a black"\
+             " magic to find it. If she finds something"\
+             " Marta redefines it without warning."
+        actual_searching(element)
+        warn "Xpath suggested by Marta  = #{@xpath}"
       end
 
       # Marta can form special xpath guess for element finding attempt
