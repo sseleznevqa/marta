@@ -68,9 +68,7 @@ your_page.your_element.click
 ## FAQ
 **Q: What if some attributes of elements will be changed?**
 
-*A: First of all at the defining stage you can exclude dynamic attributes. Also Marta has special Black Magic algorithm that will try to find the most similar element anyway.*
-
-*NOTE: Exclude attributes with empty values as well. In later versions Marta will filter them out automatically.*
+*A: Marta has her special Black Magic algorithm that will try to find the most similar element anyway.*
 
 **Q: What if I can locate element only by dynamic attributes like account_id?**
 
@@ -84,7 +82,7 @@ your_page.your_element.click
 
 *First at the stage of page defining create a class variable account_id = "anything".*
 
-![Dynamic attributes - 1](readme_files/account.png)
+![Dynamic attributes - 1](readme_files/account_id.png)
 
 *After that you can dynamically change it in your code like*
 ```ruby
@@ -313,12 +311,12 @@ g_page.search "I am in love with selenium."
 
 **Q: What about an example?**
 
-*A: It is placed in example_project folder. All elements are defined already (except one that is not in use by default). For a tour do*
+*A: It is placed in example_project folder. All elements are defined already. For a tour do*
 
     $ cd example_project
     $ ./tests_with_learning.sh
 
-*Take a look at elements defining (especially when variable #{r_selection} is used). Try to redefine elements. Also take a look at the ruby code. There are some comments.*
+*Take a look at elements defining. Try to redefine elements. Also take a look at the ruby code. There are some comments.*
 
 **Q: What else?**
 
