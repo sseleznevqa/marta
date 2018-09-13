@@ -131,7 +131,7 @@ module Marta
       # We are creating all possible masks (arrays of switches) one by one
       # If we know that we cannot find all variants we are generating some
       # by more random algorithm
-      def generate_xpaths(depth, limit = 10000)
+      def generate_xpaths(depth, limit = 100000)
         xpaths = Array.new
         real_depth, hashes = analyze(depth, limit)
         masks = get_masks([Array.new(hashes.count, :full)], real_depth)
