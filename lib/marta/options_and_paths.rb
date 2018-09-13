@@ -158,7 +158,7 @@ module Marta
 
       # Marta uses simple rules to set the tolerancy value
       def self.set_tolerancy(value)
-        @@tolerancy = parameter_set(@@tolerancy, value, 10000)
+        @@tolerancy = parameter_set(@@tolerancy, value, 100000)
       end
 
       def self.parameter_check_and_set(where, value, default, expected_class)

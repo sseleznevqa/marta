@@ -198,9 +198,9 @@ test_page.method_edit("magic_button")
 
 *A: You can set tolerancy parameter. Larger = longer*
 ```ruby
-dance_with tolerancy: 10000# is the default value
+dance_with tolerancy: 100000# is the default value
 ```
-*The amount = 10000 means that Marta will look for element 3 times (with different settings) trying up to 10000 xpaths each iteration. She will generate all possible combinations at first. When she's getting closer to the limit she's starting to try more random xpaths*
+*The amount = 100000 means that Marta will look for element 3 times (with different settings) trying up to 100000 xpaths each iteration. She will generate all possible combinations at first. When she's getting closer to the limit she's starting to try more random xpaths*
 
 **Q: Marta is trying to find the lost element after pretty long time. Why?**
 
