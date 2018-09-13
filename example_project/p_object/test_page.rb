@@ -8,7 +8,8 @@ class MyTestPage < MartaTestPage
     some_field.set some
     # We will choose radio dynamically. Note:
     # the variable @r_select is defined at the page creation stage
-    @r_select = r_selection
+    @id_and_value_for_radio = r_selection
+    warn "r_select = #{@id_and_value_for_radio}"
     dynamic_radio.set
     dropbox.select selection
     dummy_checkbox.set if confirmed

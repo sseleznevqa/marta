@@ -85,7 +85,7 @@ describe Marta::SmartPage, :need_browser do
 
   it 'applying dynamic values to attributes' do
     @browser.goto @page_one_url
-    page = Marta::SmartPage.new(@name, ({"vars" => {"class" => "el", "id" => "en", "text" => "orld"},"meths" => {}}), false)
+    page = Marta::SmartPage.new(@name, ({"vars" => {"classy" => "el", "idy" => "en", "texty" => "orld"},"meths" => {}}), false)
     page.send(:user_method_dialogs, "hello_world")
     expect(File.exists?(@full_name)).to be true
     file = File.read(@full_name)

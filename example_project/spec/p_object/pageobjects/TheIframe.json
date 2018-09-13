@@ -1,24 +1,80 @@
 {
+  "meths": {
+    "github_link": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "tag": [
+            "A"
+          ],
+          "text": [
+            "GITHUB link"
+          ],
+          "attributes": {
+            "href": [
+              "https://github.com/sseleznevqa/marta"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "HTML"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  },
   "vars": {
     "path": "",
     "url": ""
-  },
-  "meths": {
-    "github_link": {
-      "granny": {
-      },
-      "options": {
-        "collection": false,
-        "granny": "HTML",
-        "pappy": "BODY",
-        "self": "A"
-      },
-      "pappy": {
-      },
-      "self": {
-        "href": "https://github.com/sseleznevqa/marta",
-        "retrieved_by_marta_text": "GITHUB link"
-      }
-    }
   }
 }

@@ -141,7 +141,7 @@ module Marta
         if real_depth != depth
           xpaths = xpaths + monte_carlo(hashes, depth, limit)
         end
-        xpaths.uniq
+        xpaths.uniq.map {|xpath| process_string(xpath, @requestor)}
       end
 
       # We can generate straight xpath by all known data
@@ -150,7 +150,7 @@ module Marta
         array_of_hashes.each do |hash|
           result = result + hash[:full][0]
         end
-        result
+        process_string result, @requestor
       end
 
       # We are parsing positive part of element data to array of hashes

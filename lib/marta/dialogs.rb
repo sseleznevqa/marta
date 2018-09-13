@@ -214,7 +214,7 @@ module Marta
           [method['positive'], method['negative']].each do |method|
             method.each_pair do |level, content|
               content['attributes'].each_pair do |attribute_name, values|
-                if attribute_name == variable_name
+                if variable_name.include?(attribute_name)
                   dynamise variable_name, [values]
                 end
               end
