@@ -74,24 +74,37 @@ your_page.your_element.click
 
 **Q: What if I can locate element only by dynamic attributes like account_id?**
 
-*A: For example you want to find an element with the dynamic attribute "itemprop"*
+*A: For example you've got an element:*
 
-*First at the stage of page defining create a class variable itemprop = "anything".*
+```html
+<span account_id="(notimportantpart)_2132">Account</span>
+```
 
-![Dynamic attributes - 1](readme_files/itemprop.png)
+*where 2132 is a dynamic value that is not known at the begining of the test.*
+
+*First at the stage of page defining create a class variable account_id = "anything".*
+
+![Dynamic attributes - 1](readme_files/account.png)
 
 *After that you can dynamically change it in your code like*
 ```ruby
-your_page.itemprop # will be "anything" by default
-your_page.itemprop = "about"
+your_page.account_id # will be "anything" by default
+your_page.account_id = "2132"
 ```
-*And when defining an element you can use it in value field of itemprop like #{@itemprop}.*
+*At the stage of element defining you should be sure that your_page.account_id has your right value, just the same as in account_id attribute of your span. Just click on your span and Marta will remember that attribute automatically as an attribute with a dynamic part. Next time it will automatically change dynamic part of an attribute to your_page.account_id value.*
 
-![Dynamic attributes - 2](readme_files/itemprop2.png)
+*If there are two dynamic attributes that are containing the same dynamic part. Like:*
+```html
+<span account_id="(notimportantpart)_2132" value="2132">Account</span>
+```
+*You can use variable with name containing both. Like:*
+```ruby
+your_page.account_id_and_value #=> whatever was set by default at the page defining stage.
+your_page.account_id_and_value = "2132"
+```
+*Marta will understand it.*
 
-*If name of your variable is the same as the name of attribute and attribute value is including your variable value. Marta will do everything automatically*
-
-*See couple examples in example_project (Ruby checkbox, item1 and 2 radio buttons)*
+*You can see an example of it in exapmle_project. Page variable id_and_value_for_radio is related to attributes id and value of the radio buttons*
 
 **Q: I want to turn learning mode on\off in the code. How?**
 
@@ -148,6 +161,8 @@ TestPage.open_page("smthing.com") # Will navigate you to http://smthing.com
 *Predefined url way:*
 
 *At the step of the page defining set variable url = smthing.com*
+![Url way - 1](readme_files/urlway.png)
+*And in the code:*
 ```ruby
 dance_with
 test_page = TestPage.open_page # Will navigate you to http://smthing.com
@@ -157,6 +172,8 @@ test_page.url #=> "smthing.com"
 *The most flexible way:*
 
 *At the step of the page defining you set path = testpath*
+![Path way - 1](readme_files/pathway.png)
+*And in the code:*
 ```ruby
 dance_with base_url: "smthing.com"
 test_page = TestPage.open_page # Navigating you to http://smthing.com/testpath
@@ -219,9 +236,7 @@ engine.element(id: 'will_be_located_without_Marta')
 
 **Q: How can I find an invisible element? Or hardly clickable element with 1px size?**
 
-*A: At the stage of element defining you can see a button "Find by HTML". That button will open html code of your page in a special blue form. Find the html code of your element and click on it.*
-
-![HTML](readme_files/html.png)
+*A: At the stage of element defining you can open devtools. Just find the element you want to find and click Import from Devtools button*
 
 **Q: How can I find not just an element but a Watir::Radio for example?**
 
