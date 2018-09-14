@@ -104,6 +104,10 @@ your_page.account_id_and_value = "2132"
 
 *You can see an example of it in exapmle_project. Page variable id_and_value_for_radio is related to attributes id and value of the radio buttons*
 
+**Q: And what about dynamic text?**
+
+*The same story. Your page variable name should include 'text'*
+
 **Q: I want to turn learning mode on\off in the code. How?**
 
 *A:*
