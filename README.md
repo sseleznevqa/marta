@@ -4,10 +4,6 @@ Marta was planned as an element locating tool for Watir tests. But now Marta is 
 
 Also Marta is providing a little more stability when locating elements on the page.
 
-## Refactoring notification.
-
-Version 0.41245 (that one) is the version with new structure of data storing. Marta will try to convert old pajeobject json files to the new format automatically. But manual redefining is the safest way.
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -324,7 +320,7 @@ g_page.search "I am in love with selenium."
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.41245. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
+*A: Nothing. Marta is under development. Her version is 0.42216. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
 
 ## Internal Design
 
