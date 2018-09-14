@@ -45,6 +45,7 @@ describe Marta::SmartPage, :need_browser do
     end
 
     it 'unknown constant will raise an error ' do
+      dance_with learn: false
       expect{@object.mars_attacks}.to raise_error(NameError, "uninitialized constant Attack")
     end
 

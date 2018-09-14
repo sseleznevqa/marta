@@ -1,1 +1,178 @@
-{"meths":{"not_welcome":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","to","find"],"id":"element1"}}},"vars":{"not_welcome":"ignored","class":"ignored","othervar":"somethingother","var":"something"}}
+{
+  "meths": {
+    "not_welcome": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "tag": [
+            "H1"
+          ],
+          "text": [
+            "Hello World!"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "to",
+              "find"
+            ],
+            "id": [
+              "element1"
+            ],
+            "name": [
+              "findme"
+            ],
+            "style": [
+              "color:",
+              "green"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "HTML"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "hello_world": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "tag": [
+            "H1"
+          ],
+          "text": [
+            "Hello World!"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "to",
+              "find"
+            ],
+            "id": [
+              "element1"
+            ],
+            "name": [
+              "findme"
+            ],
+            "style": [
+              "color:",
+              "green"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "HTML"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  },
+  "vars": {
+    "not_welcome": "ignored",
+    "class": "ignored",
+    "othervar": "somethingother",
+    "var": "something"
+  }
+}

@@ -4,6 +4,10 @@ Marta was planned as an element locating tool for Watir tests. But now Marta is 
 
 Also Marta is providing a little more stability when locating elements on the page.
 
+## Refactoring notification.
+
+Version 0.41245 (that one) is the version with new structure of data storing. Marta will try to convert old pajeobject json files to the new format automatically. But manual redefining is the safest way.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -64,28 +68,45 @@ your_page.your_element.click
 ## FAQ
 **Q: What if some attributes of elements will be changed?**
 
-*A: First of all at the defining stage you can exclude dynamic attributes. Also Marta has special Black Magic algorithm that will try to find the most similar element anyway.*
-
-*NOTE: Exclude attributes with empty values as well. In later versions Marta will filter them out automatically.*
+*A: Marta has her special Black Magic algorithm that will try to find the most similar element anyway.*
 
 **Q: What if I can locate element only by dynamic attributes like account_id?**
 
-*A: For example you want to find an element with the dynamic attribute "itemprop"*
+*A: For example you've got an element:*
 
-*First at the stage of page defining create a class variable itemprop = "anything".*
+```html
+<span account_id="(notimportantpart)_2132">Account</span>
+```
 
-![Dynamic attributes - 1](readme_files/itemprop.png)
+*where 2132 is a dynamic value that is not known at the begining of the test.*
+
+*First at the stage of page defining create a class variable account_id = "anything".*
+
+![Dynamic attributes - 1](readme_files/account_id.png)
 
 *After that you can dynamically change it in your code like*
 ```ruby
-your_page.itemprop # will be "anything" by default
-your_page.itemprop = "about"
+your_page.account_id # will be "anything" by default
+your_page.account_id = "2132"
 ```
-*And when defining an element you can use it in value field of itemprop like #{@itemprop}.*
+*At the stage of element defining you should be sure that your_page.account_id has your right value, just the same as in account_id attribute of your span. Just click on your span and Marta will remember that attribute automatically as an attribute with a dynamic part. Next time it will automatically change dynamic part of an attribute to your_page.account_id value.*
 
-![Dynamic attributes - 2](readme_files/itemprop2.png)
+*If there are two dynamic attributes that are containing the same dynamic part. Like:*
+```html
+<span account_id="(notimportantpart)_2132" value="2132">Account</span>
+```
+*You can use variable with name containing both. Like:*
+```ruby
+your_page.account_id_and_value #=> whatever was set by default at the page defining stage.
+your_page.account_id_and_value = "2132"
+```
+*Marta will understand it.*
 
-*See couple examples in example_project (Ruby checkbox, item1 and 2 radio buttons)*
+*You can see an example of it in exapmle_project. Page variable id_and_value_for_radio is related to attributes id and value of the radio buttons*
+
+**Q: And what about dynamic text?**
+
+*The same story. Your page variable name should include 'text'*
 
 **Q: I want to turn learning mode on\off in the code. How?**
 
@@ -142,6 +163,8 @@ TestPage.open_page("smthing.com") # Will navigate you to http://smthing.com
 *Predefined url way:*
 
 *At the step of the page defining set variable url = smthing.com*
+![Url way - 1](readme_files/urlway.png)
+*And in the code:*
 ```ruby
 dance_with
 test_page = TestPage.open_page # Will navigate you to http://smthing.com
@@ -151,6 +174,8 @@ test_page.url #=> "smthing.com"
 *The most flexible way:*
 
 *At the step of the page defining you set path = testpath*
+![Path way - 1](readme_files/pathway.png)
+*And in the code:*
 ```ruby
 dance_with base_url: "smthing.com"
 test_page = TestPage.open_page # Navigating you to http://smthing.com/testpath
@@ -177,9 +202,9 @@ test_page.method_edit("magic_button")
 
 *A: You can set tolerancy parameter. Larger = longer*
 ```ruby
-dance_with tolerancy: 1024# is the default value
+dance_with tolerancy: 100000# is the default value
 ```
-*That logic will be changed to more understandable soon. I hope.*
+*The amount = 100000 means that Marta will look for element 3 times (with different settings) trying up to 100000 xpaths each iteration. She will generate all possible combinations at first. When she's getting closer to the limit she's starting to try more random xpaths*
 
 **Q: Marta is trying to find the lost element after pretty long time. Why?**
 
@@ -213,9 +238,7 @@ engine.element(id: 'will_be_located_without_Marta')
 
 **Q: How can I find an invisible element? Or hardly clickable element with 1px size?**
 
-*A: At the stage of element defining you can see a button "Find by HTML". That button will open html code of your page in a special blue form. Find the html code of your element and click on it.*
-
-![HTML](readme_files/html.png)
+*A: At the stage of element defining you can open devtools. Just find the element you want to find and click Import from Devtools button*
 
 **Q: How can I find not just an element but a Watir::Radio for example?**
 
@@ -292,16 +315,16 @@ g_page.search "I am in love with selenium."
 
 **Q: What about an example?**
 
-*A: It is placed in example_project folder. All elements are defined already (except one that is not in use by default). For a tour do*
+*A: It is placed in example_project folder. All elements are defined already. For a tour do*
 
     $ cd example_project
     $ ./tests_with_learning.sh
 
-*Take a look at elements defining (especially when variable #{r_selection} is used). Try to redefine elements. Also take a look at the ruby code. There are some comments.*
+*Take a look at elements defining. Try to redefine elements. Also take a look at the ruby code. There are some comments.*
 
 **Q: What else?**
 
-*A: Nothing. Marta is under development. Her version is 0.37396. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
+*A: Nothing. Marta is under development. Her version is 0.41245. All the necessary features are working already but there are tons of things that should be done. And I am not a professional developer.*
 
 ## Internal Design
 

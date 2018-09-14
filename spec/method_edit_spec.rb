@@ -12,6 +12,7 @@ describe Marta::SmartPage do
             file = File.read(donor_name)
             temp_hash = JSON.parse(file)
             @data['meths'].merge!(temp_hash['meths'])
+            @data['vars'] = temp_hash['vars']
             @data
           end
         end
@@ -31,10 +32,10 @@ describe Marta::SmartPage do
       marta_fire(:json_2_class, @full_name, true)
       @class = Json2Class.new
       def @class.marta_magic_finder(*args)
-        'Magic'
+        ['Magic', args]
       end
       def @class.marta_simple_finder(*args)
-        'Wand'
+        ['Wand', args]
       end
     end
 
@@ -54,19 +55,19 @@ describe Marta::SmartPage do
     end
 
     it 'method edit without exact' do
-      expect(@class.send(:method_edit, 'new_method')).to eq 'Magic'
+      expect(@class.send(:method_edit, 'new_method')[0]).to eq 'Magic'
       expect((defined? @class.new_method).nil?).to eq(false)
-      expect(@class.new_method).to eq 'Magic'
+      expect(@class.new_method[0]).to eq 'Magic'
       expect((defined? @class.new_method_exact).nil?).to eq(false)
-      expect(@class.new_method_exact).to eq 'Wand'
+      expect(@class.new_method_exact[0]).to eq 'Wand'
     end
 
     it 'method edit with exact' do
-      expect(@class.send(:method_edit, 'more_method_exact')).to eq 'Wand'
+      expect(@class.send(:method_edit, 'more_method_exact')[0]).to eq 'Wand'
       expect((defined? @class.more_method).nil?).to eq(false)
-      expect(@class.more_method).to eq 'Magic'
+      expect(@class.more_method[0]).to eq 'Magic'
       expect((defined? @class.more_method_exact).nil?).to eq(false)
-      expect(@class.more_method_exact).to eq 'Wand'
+      expect(@class.more_method_exact[0]).to eq 'Wand'
     end
   end
 end

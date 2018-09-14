@@ -4,17 +4,15 @@ require 'spec_helper'
 describe "Magic Finder" do
 
   before(:all) do
-    @xpath = "//HTML/BODY/H1[contains(@class,'element')]"\
-            "[contains(@class,'to')][contains(@class,'find')][@id='element1']"
     @page_three_url = "file://#{Dir.pwd}" +
               "/spec/test_data_folder/page_three.html"
     @xpath = "//*/BODY/H1[contains(@class,'element')][contains(@class,'find')]"
     @xpath_without_granny =
-      "//*/BODY/H1[contains(@class,'element')][contains(@class,'find')]"
+      "//BODY/H1[contains(@class,'element')][contains(@class,'find')]"
     @xpath_without_pappy =
-      "//*//*/H1[contains(@class,'element')][contains(@class,'find')]"
+      "//*/H1[contains(@class,'element')][contains(@class,'find')]"
     @xpath_with_self =
-      "//*//*//H1[contains(@class,'element')][contains(@class,'find')]"
+      "//H1[contains(@class,'element')][contains(@class,'find')]"
 
     class Helper
       def newclass(what)
@@ -23,7 +21,7 @@ describe "Magic Finder" do
         file = File.read(donor_name)
         temp_hash = JSON.parse(file)
         meth = temp_hash['meths'][what]
-        Marta::BlackMagic::MagicFinder.new(meth, 1024,
+        Marta::BlackMagic::MagicFinder.new(meth, 10000, what,
           Marta::SmartPage.new('Dummy', ({"vars" => {},"meths" => {}}), false))
       end
     end

@@ -1,6 +1,9 @@
 require 'marta/x_path'
 require 'marta/simple_element_finder'
 require 'marta/options_and_paths'
+require 'marta/element_information'
+require 'marta/page_arithmetic'
+require 'marta/read_write'
 
 module Marta
 
@@ -26,11 +29,13 @@ module Marta
     # @note It is believed that no user will use it
     class MagicFinder < BasicFinder
 
-      include OptionsAndPaths
+      include OptionsAndPaths, PageArithmetic, ElementInformation, ReadWrite
 
-      def initialize(meth, tolerancy, requestor)
+      def initialize(meth, tolerancy, name, requestor)
         @tolerancy = tolerancy
         @engine = requestor.engine
+        @name = name
+        @requestor = requestor
         super(meth, requestor)
       end
 
@@ -44,22 +49,63 @@ module Marta
         end
       end
 
+      # When black magic is finding some collection it is not only returning
+      # it. It is silently generating changes to a json file
+      def return_collection
+        result = prefind_collection
+        to_save = @meth
+        result.each do |item|
+          meth_data = method_structure true
+          meth_data['positive'] = get_attributes item, @requestor
+          to_save = make_collection(to_save, meth_data)
+        end
+        file_name  = @requestor.instance_variable_get("@class_name").to_s
+        file_data = @requestor.instance_variable_get("@data")
+        file_data['meths'][@name] = to_save
+        file_write(file_name, file_data)
+        result
+      end
+
+      # When black magic is finding some element it is not only returning
+      # it. It is silently writing actual data about the element to json
+      def return_element
+        result = prefind
+        meth_data = method_structure
+        meth_data['positive'] = get_attributes result, @requestor
+        to_save = forget_unstable(@meth, meth_data)
+        file_name  = @requestor.instance_variable_get("@class_name").to_s
+        file_data = @requestor.instance_variable_get("@data")
+        file_data['meths'][@name] = to_save
+        file_write(file_name, file_data)
+        subtype_of prefind
+      end
+
       # Main method. It finds an element
       def find
         if !forced_xpath?
           element = prefind_with_waiting
-          warn_and_search element
+          if !element.exists?
+            warn_and_search element
+            if collection?
+              return_collection
+            else
+              return_element
+            end
+          end
         end
         super
       end
 
       # Marta is producing warning when element was not found normally
       def warn_and_search(element)
-        if !element.exists?
-          warn "Element #{@xpath} was not found. And Marta uses a black"\
-               " magic to find it. Redefine it as soon as possible"
-          actual_searching(element)
-        end
+        warn "ATTENTION: Element "\
+             "#{@requestor.instance_variable_get("@class_name")}.#{@name}"\
+             " was not found by locator = #{@xpath}."
+        warn "And Marta uses a black"\
+             " magic to find it. If she finds something"\
+             " Marta redefines it without warning."
+        actual_searching(element)
+        warn "Xpath suggested by Marta  = #{@xpath}"
       end
 
       # Marta can form special xpath guess for element finding attempt
@@ -67,10 +113,10 @@ module Marta
         xpath_factory = XPathFactory.new(@meth, @requestor)
         xpath_factory.granny = granny
         xpath_factory.pappy = pappy
-        if xpath_factory.create_xpath.count <= unknowns
+        if xpath_factory.array_of_hashes.count <= unknowns
           raise "Marta did her best. But she found nothing"
         else
-          xpath_factory.generate_xpaths(unknowns)
+          xpath_factory.generate_xpaths(unknowns, @tolerancy)
         end
       end
 
@@ -142,7 +188,7 @@ module Marta
         granny, pappy, i = true, true, 1
         while !result.exists?
           array_of_xpaths = form_complex_xpath(i, granny, pappy)
-          if array_of_xpaths.count >= @tolerancy
+          if XPathFactory.new(@meth, @requestor).analyze(i, @tolerancy)[0] < i
             # One more step.
             # We will try to exclude grandparent element data at first.
             # Then we will try to exclude parent.
@@ -162,8 +208,8 @@ module Marta
     end
 
     # Marta can find something when data is incorrect (by Black magick)
-    def marta_magic_finder(meth)
-      finder = MagicFinder.new(meth, tolerancy_value, self)
+    def marta_magic_finder(meth, name = "unknown")
+      finder = MagicFinder.new(meth, tolerancy_value, name, self)
       finder.find
     end
   end

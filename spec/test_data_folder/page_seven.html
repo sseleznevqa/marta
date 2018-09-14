@@ -7,14 +7,13 @@
     <div style='position: absolute; bottom: 90px; right: 90px; height: 30px; width: 70px; z-index: 1000; background-color: black;'></div>
     <label> Visibleone</label>
     <script>
-      setTimeout(function() { clickById('marta_show_html'); }, 1000);
-      setTimeout(function() { clickByXpath('//span[1]'); }, 3000);
+      //Emulating marta app
+      setTimeout(function() { document.getElementById('marta_show_html').setAttribute('tag','LABEL'); }, 1000);
+      setTimeout(function() { document.getElementById('marta_show_html').setAttribute('index',1); }, 2000);
+      setTimeout(function() { clickById('marta_show_html'); }, 3000);
       setTimeout(function() { clickById('marta_confirm'); }, 5000);
       function clickById(id){
         document.getElementById(id).click()
-      }
-      function clickByXpath(path) {
-        document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
       };
     </script>
   </body>

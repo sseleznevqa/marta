@@ -1,20 +1,23 @@
 {
+  "vars": {
+  },
   "meths": {
-    "github_link": {
+    "unknown": {
       "options": {
         "collection": false
       },
       "positive": {
         "self": {
           "tag": [
-            "A"
+            "I"
           ],
           "text": [
-            "GITHUB link"
+
           ],
           "attributes": {
-            "href": [
-              "https://github.com/sseleznevqa/marta"
+            "notclass": [
+              "aa",
+              "zz"
             ]
           }
         },
@@ -72,9 +75,5 @@
         }
       }
     }
-  },
-  "vars": {
-    "path": "",
-    "url": ""
   }
 }

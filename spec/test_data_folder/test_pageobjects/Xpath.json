@@ -1,1 +1,89 @@
-{"meths":{"hello_world":{"granny":{},"options":{"collection":false,"not_granny":"LOL","granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"not_self":{"class":["xx"],"id":"elementz","retrieved_by_marta_text":"Bye"},"self":{"class":["#{@element}","to","find"],"id":"element1","retrieved_by_marta_text":"Hello World!"}}},"vars":{}}
+{
+  "meths": {
+    "hello_world": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+            "Hello World!"
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "class": [
+              "#{@element_class}",
+              "to",
+              "find"
+            ],
+            "id": [
+              "element1"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+            "Bye"
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+            "class": [
+              "xx"
+            ],
+            "id": [
+              "elementz"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "LOL"
+          ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  },
+  "vars": {
+  }
+}

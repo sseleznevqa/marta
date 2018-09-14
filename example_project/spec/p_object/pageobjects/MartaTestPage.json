@@ -1,182 +1,765 @@
 {
-  "vars": {
-    "path": "test",
-    "r_select": "notdefined",
-    "url": ""
-  },
   "meths": {
     "numbers": {
       "options": {
-        "collection": true,
-        "self": "LI",
-        "not_self": null,
-        "pappy": "UL",
-        "not_pappy": null,
-        "granny": "FORM",
-        "not_granny": null
+        "collection": true
       },
-      "not_self": null,
-      "not_pappy": null,
-      "not_granny": null,
-      "self": {
-        "class": [
-          "collection"
-        ]
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "LI"
+          ],
+          "attributes": {
+            "class": [
+              "collection"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "UL"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "FORM"
+          ],
+          "attributes": {
+          }
+        }
       },
-      "pappy": {
-      },
-      "granny": {
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "some_field": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "BODY",
-        "pappy": "FORM",
-        "self": "INPUT"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "tag": [
+            "INPUT"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+            "class": [
+              "some"
+            ],
+            "placeholder": [
+              "utka"
+            ],
+            "type": [
+              "text"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "FORM"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "class": [
-          "some"
-        ],
-        "placeholder": "utka",
-        "type": "text"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "dynamic_radio": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "FORM",
-        "pappy": "DIV",
-        "self": "INPUT"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "tag": [
+            "INPUT"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+            "id": [
+              "choice1"
+            ],
+            "name": [
+              "contact"
+            ],
+            "type": [
+              "radio"
+            ],
+            "value": [
+              "1"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "DIV"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "FORM"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "id": "choice#{@r_select}",
-        "name": "contact",
-        "type": "radio",
-        "value": "#{@r_select}"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "dropbox": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "BODY",
-        "pappy": "FORM",
-        "self": "SELECT"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "tag": [
+            "SELECT"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+            "custom": [
+              "custom"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "FORM"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "custom": "custom",
-        "retrieved_by_marta_text": "\n        "
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "dummy_checkbox": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "FORM",
-        "pappy": "DIV",
-        "self": "INPUT"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "tag": [
+            "INPUT"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+            "name": [
+              "checkbox"
+            ],
+            "type": [
+              "checkbox"
+            ],
+            "value": [
+              "checkbox"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "DIV"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "FORM"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "name": "checkbox",
-        "type": "checkbox",
-        "value": "checkbox"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "confirmation_message": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "HTML",
-        "pappy": "BODY",
-        "self": "H1"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "text": [
+            "1st button was clicked"
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "id": [
+              "Title"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "id": "Title",
-        "retrieved_by_marta_text": "1st button was clicked"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "second_button": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "BODY",
-        "pappy": "FORM",
-        "self": "BUTTON"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "tag": [
+            "BUTTON"
+          ],
+          "text": [
+            "Second button"
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "tag": [
+            "FORM"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "retrieved_by_marta_text": "Second button"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "title": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "HTML",
-        "pappy": "BODY",
-        "self": "H1"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "text": [
+            "Test page"
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "id": [
+              "Title"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "id": "Title",
-        "retrieved_by_marta_text": "Test page"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "first_button": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "BODY",
-        "pappy": "FORM",
-        "self": "INPUT"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "tag": [
+            "INPUT"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+            "onclick": [
+              "document.getElementById(\"Title\").innerHTML",
+              "=",
+              "\"1st",
+              "button",
+              "was",
+              "clicked\""
+            ],
+            "type": [
+              "button"
+            ],
+            "value": [
+              "First",
+              "button"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "FORM"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "type": "button",
-        "value": "First button"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     },
     "the_iframe": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "HTML",
-        "pappy": "BODY",
-        "self": "IFRAME"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "tag": [
+            "IFRAME"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+            "height": [
+              "300"
+            ],
+            "src": [
+              "iframe.html"
+            ],
+            "width": [
+              "300"
+            ]
+          }
+        },
+        "pappy": {
+          "tag": [
+            "BODY"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "tag": [
+            "HTML"
+          ],
+          "text": [
+
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "height": "300",
-        "src": "/welcome",
-        "width": "300"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     }
+  },
+  "vars": {
+    "id_and_value_for_radio": "notdefined",
+    "path": "index.html",
+    "url": ""
   }
 }

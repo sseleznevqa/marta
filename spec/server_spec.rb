@@ -64,4 +64,5 @@ describe Marta::Server::MartaServer do
       http.request(req)}}.to raise_error Errno::ECONNREFUSED
   end
 
+
 end

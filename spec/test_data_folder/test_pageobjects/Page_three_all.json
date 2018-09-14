@@ -1,16 +1,1056 @@
-{"meths":{
-  "raise_raise":{"granny":{},"options":{"collection":false,"granny":"a","pappy":"b","self":"c"},"pappy":{},"self":{"class":["d","e","f","g","h","i","j","k","l","m","n","o","p","q","r"],"id":"x"}},
-  "iframe":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"IFRAME"},"pappy":{},"self":{"id":"iframe"}},
-  "correct":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","to","find"],"id":"element1"}},
-  "correct_collection":{"granny":{},"options":{"collection":true,"granny":"HTML","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","to","find"],"id":"element1"}},
-  "xpath":{"options":{"collection":false,"xpath":"//h1"}},
-  "xpath_collection":{"options":{"collection":true,"xpath":"//h1"}},
-  "broken":{"granny":{},"options":{"collection":false,"granny":"UNKNOWN","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","UNKNOWN","find"],"id":"UNKNOWN"}},
-  "broken_collection":{"granny":{},"options":{"collection":true,"granny":"UNKNOWN","pappy":"BODY","self":"H1"},"pappy":{},"self":{"class":["element","UNKNOWN","find"],"id":"UNKNOWN"}},
-  "nots_collection":{"granny":{},"options":{"collection":true,"granny":"*","pappy":"*","self":"SPAN","not_pappy":"DIV"},"pappy":{},"self":{"class":["1"]}},
-  "broken_nots_collection":{"granny":{},"options":{"collection":true,"granny":"*","pappy":"*","self":"SPAN"},"pappy":{},"self":{"class":["2"]},"not_self":{"class":["1"]}},
-  "nots_span":{"granny":{},"options":{"collection":false,"granny":"*","pappy":"DIV","self":"SPAN"},"pappy":{},"self":{"class":["1"]},"not_self":{"id":"span2"}},
-  "broken_nots_span":{"granny":{},"options":{"collection":false,"granny":"*","pappy":"DIV","self":"SPAN"},"pappy":{},"self":{"class":["1", "2"]},"not_self":{"retrieved_by_marta_text":"span1"}},
-  "smart":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"B"},"pappy":{},"self":{"id":"id"}},
-  "smart_class":{"granny":{},"options":{"collection":false,"granny":"HTML","pappy":"BODY","self":"I"},"pappy":{},"self":{"class":["aa", "zz"]}}
-},"vars":{"new_var":"!"}}
+{
+  "meths": {
+    "raise_raise": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "c"
+          ],
+          "attributes": {
+            "class": [
+              "d",
+              "e",
+              "f",
+              "g",
+              "h",
+              "i",
+              "j",
+              "k",
+              "l",
+              "m",
+              "n",
+              "o",
+              "p",
+              "q",
+              "r"
+            ],
+            "id": [
+              "x"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "b"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "a"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "iframe": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "IFRAME"
+          ],
+          "attributes": {
+            "id": [
+              "iframe"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "correct": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "to",
+              "find"
+            ],
+            "id": [
+              "element1"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "correct_collection": {
+      "options": {
+        "collection": true
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "to",
+              "find"
+            ],
+            "id": [
+              "element1"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "xpath": {
+      "options": {
+        "collection": false,
+        "xpath": "//h1"
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "xpath_collection": {
+      "options": {
+        "xpath": "//h1",
+        "collection": true
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "broken": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "UNKNOWN",
+              "find"
+            ],
+            "id": [
+              "UNKNOWN"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "UNKNOWN"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "broken_collection": {
+      "options": {
+        "collection": true
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "UNKNOWN",
+              "find"
+            ],
+            "id": [
+              "UNKNOWN"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "UNKNOWN"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "nots_collection": {
+      "options": {
+        "collection": true
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "SPAN"
+          ],
+          "attributes": {
+            "class": [
+              "1"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "DIV"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "broken_nots_collection": {
+      "options": {
+        "collection": true
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "SPAN"
+          ],
+          "attributes": {
+            "class": [
+              "2"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+            "class": [
+              "1"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "nots_span": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "SPAN"
+          ],
+          "attributes": {
+            "class": [
+              "1"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "DIV"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+            "id": [
+              "span2"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "broken_nots_span": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "SPAN"
+          ],
+          "attributes": {
+            "class": [
+              "1",
+              "2"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "DIV"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+            "span1"
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "smart": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "B"
+          ],
+          "attributes": {
+            "id": [
+              "id"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    },
+    "smart_class": {
+      "options": {
+        "collection": false
+      },
+      "positive": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+            "I"
+          ],
+          "attributes": {
+            "class": [
+              "aa",
+              "zz"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
+      },
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  },
+  "vars": {
+    "new_var": "!"
+  }
+}

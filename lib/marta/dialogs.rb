@@ -4,6 +4,7 @@ require 'marta/lightning'
 require 'marta/injector'
 require 'marta/public_methods'
 require 'marta/page_arithmetic'
+require 'marta/element_information'
 
 module Marta
 
@@ -23,7 +24,7 @@ module Marta
     class MethodSpeaker
 
       include XPath, Lightning, Injector, PublicMethods, SimpleElementFinder,
-              PageArithmetic
+              PageArithmetic, ElementInformation
 
       def initialize(method_name, requestor)
         @class_name = requestor.class_name
@@ -83,8 +84,7 @@ module Marta
       def attrs_plus_result
         if !attrs_exists?
           @attrs = @result
-        elsif !@attrs['options']['collection'] or
-                                          !@result['options']['collection']
+        elsif !@result['options']['collection']
           @attrs = @result
         else
           @attrs = make_collection(@attrs, @result)
@@ -93,7 +93,17 @@ module Marta
 
       # Asking: "What are you looking for?"
       def ask_for_elements
-        ask 'element', "Found #{@found} elements for #{@title}", @attrs
+        answer = ask 'element', "Found #{@found} elements for #{@title}", @attrs
+        return answer.class == Hash ? answer_to_hash(answer) : answer
+      end
+
+      # Creating new fashioned hash out of data
+      def answer_to_hash(answer)
+        result = method_structure
+        result['options']['collection'] =  answer['collection']
+        what = answer['exclude'] ? 'negative' : 'positive'
+        result[what] = get_attributes(answer['element'])
+        result
       end
 
       # Creating data to save when it is a basically defined element
@@ -173,8 +183,46 @@ module Marta
     def user_method_dialogs(method_name)
       dialog_master = MethodSpeaker.new(method_name, self)
       data = dialog_master.dialog
+      data['meths'][method_name] =
+                    dynamise_method(data['vars'], data['meths'][method_name])
       file_write(self.class_name.to_s, data)
       data
+    end
+
+    # Massive gsub for attribute
+    def dynamise(variable_name, what)
+      what.each do |entry|
+        entry.each do |value|
+          value.gsub!(self.instance_variable_get("@#{variable_name}"),
+             '#{@' + variable_name + '}')
+        end
+      end
+    end
+
+    # Marta will search for page variables in attributes of element in order
+    # to create dynamic element by itself. It must be splited. And moved.
+    def dynamise_method(vars, method)
+      vars.each_pair do |variable_name, variable|
+        if variable_name.include?('text')
+          dynamise variable_name, [method['positive']['self']['text'],
+                                   method['positive']['pappy']['text'],
+                                   method['positive']['granny']['text'],
+                                   method['negative']['self']['text'],
+                                   method['negative']['pappy']['text'],
+                                   method['negative']['granny']['text']]
+        else
+          [method['positive'], method['negative']].each do |method|
+            method.each_pair do |level, content|
+              content['attributes'].each_pair do |attribute_name, values|
+                if variable_name.include?(attribute_name)
+                  dynamise variable_name, [values]
+                end
+              end
+            end
+          end
+        end
+      end
+      method
     end
   end
 end

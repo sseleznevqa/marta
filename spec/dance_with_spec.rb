@@ -127,7 +127,7 @@ describe Marta::SmartPage do
     dance_with(tolerancy: 777, folder: @folder, browser: 'crocodile',
                learn: false, base_url: 'Hello', cold_timeout: 11, port: 10013)
     dance_with clear: true
-    expect(marta_fire(:tolerancy_value)).to eq 1024
+    expect(marta_fire(:tolerancy_value)).to eq 100000
     expect(marta_fire(:engine).class).to eq Watir::Browser
     expect(marta_fire(:learn_status)).to be false
     expect(marta_fire(:pageobjects_folder)).to eq 'Marta_s_pageobjects'

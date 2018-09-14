@@ -1,27 +1,84 @@
 {
   "meths": {
     "hello_world": {
-      "granny": {
-      },
       "options": {
-        "collection": false,
-        "granny": "HTML",
-        "pappy": "BODY",
-        "self": "H1"
+        "collection": false
       },
-      "pappy": {
+      "positive": {
+        "self": {
+          "text": [
+            "Hello World!"
+          ],
+          "tag": [
+            "H1"
+          ],
+          "attributes": {
+            "class": [
+              "element",
+              "to",
+              "find"
+            ],
+            "id": [
+              "element1"
+            ]
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+            "BODY"
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+            "HTML"
+          ],
+          "attributes": {
+          }
+        }
       },
-      "self": {
-        "class": [
-          "element",
-          "to",
-          "find"
-        ],
-        "id": "element1",
-        "retrieved_by_marta_text": "Hello World!"
+      "negative": {
+        "self": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "pappy": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        },
+        "granny": {
+          "text": [
+
+          ],
+          "tag": [
+
+          ],
+          "attributes": {
+          }
+        }
       }
     }
   },
   "vars": {
+    "the_var": "come"
   }
 }

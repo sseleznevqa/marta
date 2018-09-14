@@ -68,18 +68,6 @@ module Marta
     end
 
     #
-    # Test servlet. For example
-    #
-    # @note It is believed that no user will use it
-    class TestServlet < WEBrick::HTTPServlet::AbstractServlet
-      def do_GET (request, response)
-        response.status = 200
-        response.content_type = "text/html"
-        response.body = File.read(gem_libdir + "/data/test.html")
-      end
-    end
-
-    #
     # Server control and logic is in the class.
     #
     # @note It is believed that no user will use it
@@ -112,7 +100,6 @@ module Marta
                    AccessLog: WEBrick::Log.new(File.open(File::NULL, 'w')))
         the_server.mount "/dialog", DialogServlet
         the_server.mount "/welcome", WelcomeServlet
-        the_server.mount "/test", TestServlet
         the_server.mount_proc('/q') {|req, resp| the_server.shutdown;  exit;}
         the_server.start
       end
@@ -138,11 +125,6 @@ module Marta
         end
       rescue Timeout::Error
         false
-      end
-
-      # There is a possibility to get the port of the server outside
-      def current_port
-        @port
       end
 
       # We are killing the server sometimes
