@@ -13,5 +13,8 @@
        "all_frames": true,
        "js":      ["content.js"]
    }],
+   "browser_action": {
+      "default_title": "Marta",
+      "default_popup": "popup.html"},
   "manifest_version": 2
 }
