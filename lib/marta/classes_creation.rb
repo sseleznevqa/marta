@@ -14,6 +14,8 @@ module Marta
 
     # We are asking user about unknown classes
     def page_edit(const, data=Hash.new)
+      #
+      binding.pry
       data['vars'] = inject('page', const, data['vars'])
       json_2_class(file_write(const.to_s, data))
       data['vars']

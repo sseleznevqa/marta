@@ -1,0 +1,364 @@
+@keyframes marta_found {
+  0%   {border: 4px dashed #6495ED;}
+  20%  {border: 4px dashed #FF7F50; transform: scale(1.1);}
+  40%  {border: 4px dashed #8FBC8F; transform: scale(1.2);}
+  60% {border: 4px dashed #FFA500; transform: scale(1.3);}
+  80% {border: 4px dashed #DDA0DD; transform: scale(1.2);}
+  100% {border: 4px dashed #6495ED; transform: scale(1.1);}
+}
+
+div[martaclass=marta_div] * {
+  animation : none;
+  animation-delay : 0;
+  animation-direction : normal;
+  animation-duration : 0;
+  animation-fill-mode : none;
+  animation-iteration-count : 1;
+  animation-name : none;
+  animation-play-state : running;
+  animation-timing-function : ease;
+  backface-visibility : visible;
+  background : 0;
+  background-attachment : scroll;
+  background-clip : border-box;
+  background-color : transparent;
+  background-image : none;
+  background-origin : padding-box;
+  background-position : 0 0;
+  background-position-x : 0;
+  background-position-y : 0;
+  background-repeat : repeat;
+  background-size : auto auto;
+  border : 0;
+  border-style : none;
+  border-width : medium;
+  border-color : inherit;
+  border-bottom : 0;
+  border-bottom-color : inherit;
+  border-bottom-left-radius : 0;
+  border-bottom-right-radius : 0;
+  border-bottom-style : none;
+  border-bottom-width : medium;
+  border-collapse : separate;
+  border-image : none;
+  border-left : 0;
+  border-left-color : inherit;
+  border-left-style : none;
+  border-left-width : medium;
+  border-radius : 0;
+  border-right : 0;
+  border-right-color : inherit;
+  border-right-style : none;
+  border-right-width : medium;
+  border-spacing : 0;
+  border-top : 0;
+  border-top-color : inherit;
+  border-top-left-radius : 0;
+  border-top-right-radius : 0;
+  border-top-style : none;
+  border-top-width : medium;
+  bottom : auto;
+  box-shadow : none;
+  box-sizing : content-box;
+  caption-side : top;
+  clear : none;
+  clip : auto;
+  color : black;
+  columns : auto;
+  column-count : auto;
+  column-fill : balance;
+  column-gap : normal;
+  column-rule : medium none currentColor;
+  column-rule-color : currentColor;
+  column-rule-style : none;
+  column-rule-width : none;
+  column-span : 1;
+  column-width : auto;
+  content : normal;
+  counter-increment : none;
+  counter-reset : none;
+  cursor : auto;
+  direction : ltr;
+  empty-cells : show;
+  float : none;
+  font : normal;
+  font-family : sans-serif;
+  font-size : medium;
+  font-style : normal;
+  font-variant : normal;
+  font-weight : normal;
+  height : auto;
+  hyphens : none;
+  left : auto;
+  letter-spacing : normal;
+  line-height : normal;
+  list-style : none;
+  list-style-image : none;
+  list-style-position : outside;
+  list-style-type : disc;
+  margin : 0;
+  margin-bottom : 0;
+  margin-left : 0;
+  margin-right : 0;
+  margin-top : 0;
+  max-height : none;
+  max-width : none;
+  min-height : 0;
+  min-width : 0;
+  opacity : 1;
+  orphans : 0;
+  outline : 0;
+  outline-color : invert;
+  outline-style : none;
+  outline-width : medium;
+  overflow : auto;
+  overflow-x : visible;
+  overflow-y : visible;
+  padding : 0;
+  padding-bottom : 0;
+  padding-left : 0;
+  padding-right : 0;
+  padding-top : 0;
+  page-break-after : auto;
+  page-break-before : auto;
+  page-break-inside : auto;
+  perspective : none;
+  perspective-origin : 50% 50%;
+  right : auto;
+  tab-size : 8;
+  table-layout : auto;
+  text-align : auto;
+  text-align-last : auto;
+  text-decoration : none;
+  text-decoration-color : inherit;
+  text-decoration-line : none;
+  text-decoration-style : solid;
+  text-indent : 0;
+  text-shadow : none;
+  text-transform : none;
+  top : auto;
+  transform : none;
+  transform-style : flat;
+  transition : none;
+  transition-delay : 0s;
+  transition-duration : 0s;
+  transition-property : none;
+  transition-timing-function : ease;
+  unicode-bidi : normal;
+  vertical-align : baseline;
+  visibility : visible;
+  white-space : normal;
+  widows : 0;
+  width : auto;
+  word-spacing : normal;
+
+}
+div[martaclass=marta_div] {
+    border: 2px solid black;
+    outline: 2px solid #bbbbbb;
+    background-color: lightgray;
+    position : relative;
+    z-index : 2147483647;
+    padding: 0;
+    margin: 0px 0px 0px 0px;
+    overflow-y: scroll;
+    max-height: 100%;
+}
+
+div div[martastyle=header] {
+    background: linear-gradient(to right, blue , lightblue);
+    padding: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    color: white;
+    display: flex;
+}
+
+div[martastyle=icons_holder] {
+  margin-left: auto;
+}
+
+input[martastyle=icon_button] {
+    color: black;
+    background-color: lightgrey;
+    border: 1px solid black;
+    visibility: visible;
+    width: 30px;
+    height: 26px;
+    text-align: center;
+}
+
+div[martaclass=marta_div][martastyle=hidden] *:not([martastyle=icon_button]) {
+    visibility: hidden;
+}
+
+div[martaclass=marta_div][martastyle=hidden]{
+  height: 0px;
+  outline: none;
+  border: none;
+  overflow-y: initial;
+}
+
+h2#marta_main_title {
+    font-size: 20px;
+}
+
+div[martastyle=hint] {
+    background-color: #F6F5D7;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    z-index: 1;
+    display: table;
+    margin: 0 auto;
+}
+
+div[martastyle=at_large] {
+  position:fixed;
+  padding:0;
+  margin:0;
+  top:0;
+  left:0;
+  opacity: 0;
+  background: black;
+  height: 100%;
+  width: 100%;
+  pointer-events: visible;
+  display: block;
+  z-index: 2147483646;
+}
+
+div[martastyle=off] {
+  height: 0%;
+  width: 0%;
+}
+
+div[martastyle=html_content]{
+  text-align: center;
+}
+
+div[martastyle=html_content] div {
+  background-color: #D7F6F5;
+  text-align: center;
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  width: 90%;
+}
+
+div[martastyle=html_content] div span {
+  display: block;
+  position: relative;
+  margin-left: 30px;
+  text-align: left;
+  cursor: pointer;
+  word-wrap:break-word;
+}
+
+div[martaclass=marta_div] b {
+    color: red;
+}
+
+div[martastyle=buttons_holder] {
+    margin-top: 10px;
+    text-align: center;
+}
+
+input[martastyle=action_button], input[martastyle=confirm_button],
+input[martastyle=cancel_button] {
+    border-style: solid;
+    border-width: 1px;
+    background: linear-gradient(lightgrey , grey);
+    border-radius: 3px;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+input[martastyle=action_button]:hover {
+    background: linear-gradient(lightblue , blue);
+    border-color: blue;
+}
+
+input[martastyle=confirm_button]:hover {
+    background: linear-gradient(lightgreen , green);
+    border-color: green;
+}
+
+input[martastyle=cancel_button]:hover {
+    background: linear-gradient(pink , red);
+    border-color: red;
+}
+
+div[martastyle=field_line] {
+  margin-left: 10px;
+}
+
+div[martastyle=table_headers] {
+  margin-left: 10px;
+  display: flex;
+}
+
+input[martaclass=marta_smthing][type=text] {
+    width: 50%;
+    padding: 6px 8px;
+    font-size: 14px;
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+
+input[type=text][martastyle=name_field] {
+    width: 20%;
+}
+
+div[martastyle=options_holder] {
+    margin-left: 10px;
+    display: table;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+input[martastyle=name_field]:disabled, input[martastyle=value_field]:disabled{
+    background: linear-gradient(to right, lightgrey , white);
+}
+
+input[type=text][martastyle=not_value_field] {
+  width: 40%;
+}
+
+input[type=text][martastyle=not_field] {
+  width: 10%;
+  color:red;
+  background-color: darkblue;
+}
+
+input[martaclass=marta_smthing][type=checkbox] {
+    -webkit-appearance: none;
+    background-color: white;
+    border: 3px solid white;
+    padding: 6px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+}
+
+input[martaclass=marta_smthing][type=checkbox]:checked {
+    background-color: darkgrey;
+    border: 3px solid white;
+    color: #99a1a7;
+}
+
+[martaclass=foundbymarta]
+  {animation: marta_found 6s infinite;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}

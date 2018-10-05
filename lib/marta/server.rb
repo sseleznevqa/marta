@@ -1,5 +1,6 @@
 require 'webrick'
 require 'marta/options_and_paths'
+require 'markaby'
 
 module Marta
 
@@ -67,6 +68,85 @@ module Marta
       end
     end
 
+    class FormServlet < WEBrick::HTTPServlet::AbstractServlet
+
+      @@data = {title:"Welcome!!!",
+                subtitle:"If you can see this label most probably Marta is working.",
+                hints:["I hope."],
+                links:[{title: "GITHUB link", href:"https://github.com/sseleznevqa/marta"}],
+                vars:{}, # {"var" => "value"},
+                checks:{collection: nil, dontlook: nil},
+                buttons: []} # [{title:"", onclck:"", type:""}]}
+
+      def self.data=(value)
+        @@data = value
+      end
+
+      def self.data
+        @@data
+      end
+
+      def form
+        answer = Markaby::Builder.new
+        answer.html do
+          head { title @@data[:title] }
+          body do
+            h1 @@data[:title]
+            h2 @@data[:subtitle]
+            @@data[:hints].each do |hint|
+              h3 hint
+            end
+            @@data[:links].each do |link|
+              a link[:title], href: link[:href]
+            end
+            form(id: "marta_main_dialog_form") do
+              div do # variables
+                @@data[:vars].each_pair do |name, value|
+                  input value: name, type: 'text'
+                  input value: value, type: 'text'
+                end
+              end # variables div
+              div do # checkboxes
+                @@data[:checks].each_pair do |name, check|
+                  if !check.nil?
+                    label {input value: check, type: 'checkbox'}
+                  end
+                end
+              end # checkboxes div
+              div do # buttons
+                @@data[:buttons].each do |button|
+                  input value: button[:title],
+                        type: button[:type],
+                        onclick: button[:onclick]
+                end
+              end # buttons div
+            end # form
+          end # body
+        end # html
+        return answer.to_s
+      end
+
+      def content
+        answer = Markaby::Builder.new
+        answer.html do
+          head { title "Welcome!!!" }
+          body do
+            h1 "Welcome!!!"
+            h2 "If you can see this label most probably Marta is working."
+            h3 "I hope."
+            a "GITHUB link", href: 'https://github.com/sseleznevqa/marta'
+          end
+        end
+        return answer.to_s
+      end
+
+      def do_GET (request, response)
+        response.status = 200
+        response.content_type = "text/html"
+        response.body = form
+      end
+    end
+
     #
     # Server control and logic is in the class.
     #
@@ -99,7 +179,7 @@ module Marta
                    Logger: WEBrick::Log.new(File.open(File::NULL, 'w')),
                    AccessLog: WEBrick::Log.new(File.open(File::NULL, 'w')))
         the_server.mount "/dialog", DialogServlet
-        the_server.mount "/welcome", WelcomeServlet
+        the_server.mount "/welcome", FormServlet
         the_server.mount_proc('/q') {|req, resp| the_server.shutdown;  exit;}
         the_server.start
       end
