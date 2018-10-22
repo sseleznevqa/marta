@@ -68,6 +68,23 @@ module Marta
       end
     end
 
+    class TimeServlet < WEBrick::HTTPServlet::AbstractServlet
+      @@data = Time.now.to_s
+      def self.data=(value)
+        @@data = value
+      end
+
+      def self.data
+        @@data
+      end
+
+      def do_GET (request, response)
+        response.status = 200
+        response.content_type = "text/html"
+        response.body = @@data
+      end
+    end
+
     class FormServlet < WEBrick::HTTPServlet::AbstractServlet
 
       @@data = {title:"Welcome!!!",
@@ -80,6 +97,7 @@ module Marta
 
       def self.data=(value)
         @@data = value
+        TimeServlet.data = Time.now.to_s
       end
 
       def self.data
@@ -180,6 +198,7 @@ module Marta
                    AccessLog: WEBrick::Log.new(File.open(File::NULL, 'w')))
         the_server.mount "/dialog", DialogServlet
         the_server.mount "/welcome", FormServlet
+        the_server.mount "/updated", TimeServlet
         the_server.mount_proc('/q') {|req, resp| the_server.shutdown;  exit;}
         the_server.start
       end
